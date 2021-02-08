@@ -1,4 +1,9 @@
-## tf-aws-account
+# tf-aws-account
+
+[![latest release](https://img.shields.io/github/v/release/tedilabs/tf-aws-account?style=flat-square)](https://github.com/tedilabs/tf-aws-account/releases/latest)
+[![build status](https://img.shields.io/github/workflow/status/tedilabs/tf-aws-account/workflow?label=build&logo=github&style=flat-square)](https://github.com/tedilabs/tf-aws-account/actions?query=workflow%3Atest)
+
+Terraform module which creates Account and IAM related resources on AWS.
 
 
 ## Self Promotion
