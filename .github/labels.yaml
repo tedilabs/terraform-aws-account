@@ -1,0 +1,42 @@
+# Warning
+- color: "ee0701"
+  description: "Categorize bug reports."
+  name: ":warning: bug"
+- color: "ee0701"
+  description: "Categorize vulnerability reports."
+  name: ":warning: vunerability"
+
+# Highlight
+- color: "0e8a16"
+  description: "Good for newcomers."
+  name: ":fire: good first issue"
+- color: "0e8a16"
+  description: "Extra attention is needed."
+  name: ":fire: help wanted"
+
+# Cancel
+- color: "b60205"
+  description: "This issue or pull request already exists."
+  name: ":pray: duplicate"
+- color: "b60205"
+  description: "This will not be worked on."
+  name: ":pray: wontfix"
+
+# Size
+- color: "cfd3d7"
+  description: "Small size issue or PR."
+  name: "size/S"
+- color: "cfd3d7"
+  description: "Medium size issue or PR."
+  name: "size/M"
+- color: "cfd3d7"
+  description: "Large size issue or PR."
+  name: "size/L"
+
+# User Type
+- color: "ffffff"
+  description: "This is related to user-level features."
+  name: ":ghost: feature"
+- color: "ffffff"
+  description: "This is related to engineering tasks."
+  name: ":robot: engineering"

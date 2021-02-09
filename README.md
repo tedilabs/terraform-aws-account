@@ -8,7 +8,7 @@ Terraform module which creates Account and IAM related resources on AWS.
 
 ## Self Promotion
 
-Like brewfile? Follow the repository on [GitHub](https://github.com/tedilabs/tf-aws-account). And if you're feeling especially charitable, follow [posquit0](https://www.posquit0.com) on [GitHub](https://github.com/posquit0).
+Like this project? Follow the repository on [GitHub](https://github.com/tedilabs/tf-aws-account). And if you're feeling especially charitable, follow **[posquit0](https://github.com/posquit0)** on GitHub.
 
 
 ## License
