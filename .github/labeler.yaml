@@ -1,0 +1,13 @@
+version: 1
+labels:
+- label: ":robot: engineering"
+  files:
+  - ".github/.*"
+
+- label: "size/S"
+  size-below: 31
+- label: "size/M"
+  size-above: 30
+  size-below: 101
+- label: "size/L"
+  size-above: 100
