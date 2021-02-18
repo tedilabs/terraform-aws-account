@@ -2,5 +2,6 @@ repos:
 - repo: git://github.com/antonbabenko/pre-commit-terraform
   rev: v1.45.0
   hooks:
+  - id: terraform_validate
   - id: terraform_docs
     args: ["--args=--sort-by-required"]
