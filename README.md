@@ -1,7 +1,7 @@
 # tf-aws-account
 
-[![latest release](https://img.shields.io/github/v/release/tedilabs/tf-aws-account?style=flat-square)](https://github.com/tedilabs/tf-aws-account/releases/latest)
-[![build status](https://img.shields.io/github/workflow/status/tedilabs/tf-aws-account/workflow?label=build&logo=github&style=flat-square)](https://github.com/tedilabs/tf-aws-account/actions?query=workflow%3Atest)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+![GitHub](https://img.shields.io/github/license/tedilabs/tf-aws-account?color=blue&style=flat-square)
 
 Terraform module which creates Account and IAM related resources on AWS.
 
