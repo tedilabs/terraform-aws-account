@@ -24,9 +24,9 @@ This module creates following resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| name | Desired name for the IAM group. | `string` | n/a | yes |
 | assumable\_roles | List of IAM roles ARNs which can be assumed by the group. | `list(string)` | `[]` | no |
 | inline\_policies | Map of inline IAM policies to attach to IAM group. (`name` => `policy`). | `map(string)` | `{}` | no |
-| name | Desired name for the IAM group. | `string` | n/a | yes |
 | path | Desired path for the IAM group. | `string` | `"/"` | no |
 | policies | List of IAM policies ARNs to attach to IAM group. | `list(string)` | `[]` | no |
 

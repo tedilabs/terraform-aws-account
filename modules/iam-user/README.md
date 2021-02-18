@@ -36,6 +36,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| name | Desired name for the IAM user. | `string` | n/a | yes |
 | access\_key\_enabled | Whether to activate IAM access key. | `bool` | `true` | no |
 | assumable\_roles | List of IAM roles ARNs which can be assumed by the user. | `list(string)` | `[]` | no |
 | create\_access\_key | Whether to create IAM access key. | `bool` | `false` | no |
@@ -43,7 +44,6 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | force\_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force\_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | `bool` | `false` | no |
 | groups | A list of IAM Groups to add the user to. | `list(string)` | `[]` | no |
 | inline\_policies | Map of inline IAM policies to attach to IAM user. (`name` => `policy`). | `map(string)` | `{}` | no |
-| name | Desired name for the IAM user. | `string` | n/a | yes |
 | password\_length | The length of the generated password | `number` | `20` | no |
 | password\_reset\_required | Whether the user should be forced to reset the generated password on first login. | `bool` | `true` | no |
 | path | Desired path for the IAM user. | `string` | `"/"` | no |

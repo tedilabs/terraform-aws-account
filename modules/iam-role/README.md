@@ -33,12 +33,12 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| name | Desired name for the IAM role. | `string` | n/a | yes |
 | description | The description of the role. | `string` | `""` | no |
 | force\_detach\_policies | Specifies to force detaching any policies the role has before destroying it. | `bool` | `false` | no |
 | inline\_policies | Map of inline IAM policies to attach to IAM role. (`name` => `policy`). | `map(string)` | `{}` | no |
 | instance\_profile\_enabled | Controls if Instance Profile should be created. | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200. | `number` | `3600` | no |
-| name | Desired name for the IAM role. | `string` | n/a | yes |
 | path | Desired path for the IAM role. | `string` | `"/"` | no |
 | permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the role. | `string` | `""` | no |
 | policies | List of IAM policies ARNs to attach to IAM role. | `list(string)` | `[]` | no |

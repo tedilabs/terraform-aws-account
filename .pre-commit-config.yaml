@@ -3,3 +3,4 @@ repos:
   rev: v1.45.0
   hooks:
   - id: terraform_docs
+    args: ["--args=--sort-by-required"]
