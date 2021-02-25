@@ -1,8 +1,8 @@
 locals {
   groups = {
     "self-service-password" = {
-      enabled = var.self_service_password_enabled
-      name    = var.self_service_password_name
+      enabled         = var.self_service_password_enabled
+      name            = var.self_service_password_name
       assumable_roles = []
       inline_policies = {
         "change-password" = data.aws_iam_policy_document.change_password.json
@@ -10,8 +10,9 @@ locals {
     }
   }
   enabled_groups = {
-    for id, group in local.groups:
-      id => group if group.enabled
+    for id, group in local.groups :
+    id => group
+    if group.enabled
   }
 }
 

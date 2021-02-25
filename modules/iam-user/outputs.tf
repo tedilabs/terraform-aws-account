@@ -25,7 +25,7 @@ output "pgp_key" {
 
 output "key_fingerprint" {
   description = "The fingerprint of the PGP key used to encrypt the password."
-  value       = element(
+  value = element(
     concat(aws_iam_user_login_profile.this.*.key_fingerprint, [""]),
     0,
   )
@@ -34,7 +34,7 @@ output "key_fingerprint" {
 # NOTE: terraform output encrypted_password | base64 --decode | keybase pgp decrypt
 output "encrypted_password" {
   description = "The encrypted password, base64 encoded."
-  value       = element(
+  value = element(
     concat(aws_iam_user_login_profile.this.*.encrypted_password, [""]),
     0,
   )
