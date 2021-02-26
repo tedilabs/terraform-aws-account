@@ -30,15 +30,15 @@ output "inline_policies" {
 
 output "instance_profile_name" {
   description = "IAM Instance Profile name."
-  value       = element(concat(aws_iam_instance_profile.this.*.name, [""]), 0)
+  value       = try(aws_iam_instance_profile.this.*.name[0], null)
 }
 
 output "instance_profile_arn" {
   description = "The ARN assigned by AWS for the Instance Profile."
-  value       = element(concat(aws_iam_instance_profile.this.*.arn, [""]), 0)
+  value       = try(aws_iam_instance_profile.this.*.arn[0], null)
 }
 
 output "instance_profile_unique_id" {
   description = "The unique ID assigned by AWS for the Instance Profile."
-  value       = element(concat(aws_iam_instance_profile.this.*.unique_id, [""]), 0)
+  value       = try(aws_iam_instance_profile.this.*.unique_id[0], null)
 }
