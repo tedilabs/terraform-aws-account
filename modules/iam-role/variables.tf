@@ -45,6 +45,18 @@ variable "trusted_services" {
   default     = []
 }
 
+variable "mfa_required" {
+  description = "Whether MFA should be required to assume the role."
+  type        = bool
+  default     = false
+}
+
+variable "mfa_ttl" {
+  description = "Max age of valid MFA (in seconds) for roles which require MFA."
+  type        = number
+  default     = 24 * 60 * 60
+}
+
 variable "policies" {
   description = "List of IAM policies ARNs to attach to IAM role."
   type        = list(string)

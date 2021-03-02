@@ -18,6 +18,16 @@ output "description" {
   value       = aws_iam_role.this.description
 }
 
+output "mfa_required" {
+  description = "Whether MFA should be required to assume the role."
+  value       = var.mfa_required
+}
+
+output "mfa_ttl" {
+  description = "Max age of valid MFA (in seconds) for roles which require MFA."
+  value       = var.mfa_ttl
+}
+
 output "policies" {
   description = "List of ARNs of IAM policies which are atached to IAM role."
   value       = var.policies

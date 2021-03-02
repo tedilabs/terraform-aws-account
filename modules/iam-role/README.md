@@ -39,6 +39,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | inline\_policies | Map of inline IAM policies to attach to IAM role. (`name` => `policy`). | `map(string)` | `{}` | no |
 | instance\_profile\_enabled | Controls if Instance Profile should be created. | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200. | `number` | `3600` | no |
+| mfa\_required | Whether MFA should be required to assume the role. | `bool` | `false` | no |
+| mfa\_ttl | Max age of valid MFA (in seconds) for roles which require MFA. | `number` | `86400` | no |
 | path | Desired path for the IAM role. | `string` | `"/"` | no |
 | permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the role. | `string` | `""` | no |
 | policies | List of IAM policies ARNs to attach to IAM role. | `list(string)` | `[]` | no |
@@ -56,6 +58,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | instance\_profile\_arn | The ARN assigned by AWS for the Instance Profile. |
 | instance\_profile\_name | IAM Instance Profile name. |
 | instance\_profile\_unique\_id | The unique ID assigned by AWS for the Instance Profile. |
+| mfa\_required | Whether MFA should be required to assume the role. |
+| mfa\_ttl | Max age of valid MFA (in seconds) for roles which require MFA. |
 | name | IAM Role name. |
 | policies | List of ARNs of IAM policies which are atached to IAM role. |
 | unique\_id | The unique ID assigned by AWS. |

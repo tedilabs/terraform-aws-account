@@ -36,6 +36,26 @@ data "aws_iam_policy_document" "assume_role" {
       type        = "Service"
       identifiers = var.trusted_services
     }
+
+    dynamic "condition" {
+      for_each = var.mfa_required ? ["go"] : []
+
+      content {
+        test     = "Bool"
+        variable = "aws:MultiFactorAuthPresent"
+        values   = [tostring(var.mfa_required)]
+      }
+    }
+
+    dynamic "condition" {
+      for_each = var.mfa_required ? ["go"] : []
+
+      content {
+        test     = "NumericLessThan"
+        variable = "aws:MultiFactorAuthAge"
+        values   = [var.mfa_ttl]
+      }
+    }
   }
 }
 
