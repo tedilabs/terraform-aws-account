@@ -46,6 +46,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | path | Desired path for the IAM role. | `string` | `"/"` | no |
 | permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the role. | `string` | `""` | no |
 | policies | List of IAM policies ARNs to attach to IAM role. | `list(string)` | `[]` | no |
+| source\_ip\_blacklist | A list of source IP addresses or CIDRs denied to assume IAM role from. | `list(string)` | `[]` | no |
+| source\_ip\_whitelist | A list of source IP addresses or CIDRs allowed to assume IAM role from. | `list(string)` | `[]` | no |
 | tags | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 | trusted\_iam\_entities | A list of ARNs of AWS IAM entities who can assume the role. | `list(string)` | `[]` | no |
 | trusted\_saml\_endpoint | AWS Services that can assume the role. | `string` | `"https://signin.aws.amazon.com/saml"` | no |
@@ -68,6 +70,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | mfa\_ttl | Max age of valid MFA (in seconds) for roles which require MFA. |
 | name | IAM Role name. |
 | policies | List of ARNs of IAM policies which are atached to IAM role. |
+| source\_ip\_blacklist | A list of source IP addresses or CIDRs denied to assume IAM role from. |
+| source\_ip\_whitelist | A list of source IP addresses or CIDRs allowed to assume IAM role from. |
 | unique\_id | The unique ID assigned by AWS. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

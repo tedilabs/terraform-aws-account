@@ -93,6 +93,18 @@ variable "expiration_date" {
   }
 }
 
+variable "source_ip_whitelist" {
+  description = "A list of source IP addresses or CIDRs allowed to assume IAM role from."
+  type        = list(string)
+  default     = []
+}
+
+variable "source_ip_blacklist" {
+  description = "A list of source IP addresses or CIDRs denied to assume IAM role from."
+  type        = list(string)
+  default     = []
+}
+
 variable "policies" {
   description = "List of IAM policies ARNs to attach to IAM role."
   type        = list(string)
