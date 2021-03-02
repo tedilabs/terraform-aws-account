@@ -28,6 +28,16 @@ output "mfa_ttl" {
   value       = var.mfa_ttl
 }
 
+output "effective_date" {
+  description = "Allow to assume IAM role only after this date and time."
+  value       = var.effective_date
+}
+
+output "expiration_date" {
+  description = "Allow to assume IAM role only before this date and time."
+  value       = var.expiration_date
+}
+
 output "policies" {
   description = "List of ARNs of IAM policies which are atached to IAM role."
   value       = var.policies

@@ -69,6 +69,30 @@ variable "mfa_ttl" {
   default     = 24 * 60 * 60
 }
 
+variable "effective_date" {
+  description = "Allow to assume IAM role only after a specific date and time."
+  type        = string
+  default     = null
+
+  validation {
+    # Fail if the variable is not a valid timestamp
+    condition     = var.effective_date == null || can(formatdate("", var.effective_date))
+    error_message = "Require a valid RFC 3339 timestamp."
+  }
+}
+
+variable "expiration_date" {
+  description = "Allow to assume IAM role only before a specific date and time."
+  type        = string
+  default     = null
+
+  validation {
+    # Fail if the variable is not a valid timestamp
+    condition     = var.expiration_date == null || can(formatdate("", var.expiration_date))
+    error_message = "Require a valid RFC 3339 timestamp."
+  }
+}
+
 variable "policies" {
   description = "List of IAM policies ARNs to attach to IAM role."
   type        = list(string)

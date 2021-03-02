@@ -35,6 +35,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 |------|-------------|------|---------|:--------:|
 | name | Desired name for the IAM role. | `string` | n/a | yes |
 | description | The description of the role. | `string` | `""` | no |
+| effective\_date | Allow to assume IAM role only after a specific date and time. | `string` | `null` | no |
+| expiration\_date | Allow to assume IAM role only before a specific date and time. | `string` | `null` | no |
 | force\_detach\_policies | Specifies to force detaching any policies the role has before destroying it. | `bool` | `false` | no |
 | inline\_policies | Map of inline IAM policies to attach to IAM role. (`name` => `policy`). | `map(string)` | `{}` | no |
 | instance\_profile\_enabled | Controls if Instance Profile should be created. | `bool` | `false` | no |
@@ -56,6 +58,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 |------|-------------|
 | arn | The ARN assigned by AWS for this role. |
 | description | The description of the role. |
+| effective\_date | Allow to assume IAM role only after this date and time. |
+| expiration\_date | Allow to assume IAM role only before this date and time. |
 | inline\_policies | List of names of inline IAM polices which are attached to IAM role. |
 | instance\_profile\_arn | The ARN assigned by AWS for the Instance Profile. |
 | instance\_profile\_name | IAM Instance Profile name. |
