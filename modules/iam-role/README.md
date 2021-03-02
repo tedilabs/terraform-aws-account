@@ -45,7 +45,9 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the role. | `string` | `""` | no |
 | policies | List of IAM policies ARNs to attach to IAM role. | `list(string)` | `[]` | no |
 | tags | A map of tags to add to all resources. | `map(string)` | `{}` | no |
-| trusted\_iam\_entities | ARNs of AWS IAM entities who can assume the role. | `list(string)` | `[]` | no |
+| trusted\_iam\_entities | A list of ARNs of AWS IAM entities who can assume the role. | `list(string)` | `[]` | no |
+| trusted\_saml\_endpoint | AWS Services that can assume the role. | `string` | `"https://signin.aws.amazon.com/saml"` | no |
+| trusted\_saml\_providers | A list of ARNs of SAML identity providers in AWS IAM. | `list(string)` | `[]` | no |
 | trusted\_services | AWS Services that can assume the role. | `list(string)` | `[]` | no |
 
 ## Outputs

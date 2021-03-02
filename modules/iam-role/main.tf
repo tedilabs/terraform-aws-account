@@ -57,6 +57,27 @@ data "aws_iam_policy_document" "assume_role" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = length(var.trusted_saml_providers) > 0 ? ["go"] : []
+
+    content {
+      effect = "Allow"
+
+      actions = ["sts:AssumeRoleWithSAML"]
+
+      principals {
+        type        = "Federated"
+        identifiers = var.trusted_saml_providers
+      }
+
+      condition {
+        test     = "StringEquals"
+        variable = "SAML:aud"
+        values   = [var.trusted_saml_endpoint]
+      }
+    }
+  }
 }
 
 

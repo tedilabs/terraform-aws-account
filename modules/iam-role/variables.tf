@@ -34,7 +34,7 @@ variable "permissions_boundary" {
 }
 
 variable "trusted_iam_entities" {
-  description = "ARNs of AWS IAM entities who can assume the role."
+  description = "A list of ARNs of AWS IAM entities who can assume the role."
   type        = list(string)
   default     = []
 }
@@ -43,6 +43,18 @@ variable "trusted_services" {
   description = "AWS Services that can assume the role."
   type        = list(string)
   default     = []
+}
+
+variable "trusted_saml_providers" {
+  description = "A list of ARNs of SAML identity providers in AWS IAM."
+  type        = list(string)
+  default     = []
+}
+
+variable "trusted_saml_endpoint" {
+  description = "AWS Services that can assume the role."
+  type        = string
+  default     = "https://signin.aws.amazon.com/saml"
 }
 
 variable "mfa_required" {
