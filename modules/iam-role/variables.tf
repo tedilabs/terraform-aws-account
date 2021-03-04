@@ -45,16 +45,54 @@ variable "trusted_services" {
   default     = []
 }
 
+variable "trusted_oidc_providers" {
+  description = "A list of OIDC identity providers. Supported types are `amazon`, `aws-cognito`, `aws-iam`, `facebook`, `google`. `type` is required. `url` is required only when `type` is `aws-iam`."
+  type        = list(map(string))
+  default     = []
+
+  validation {
+    condition = alltrue([
+      for provider in var.trusted_oidc_providers :
+      contains(["amazon", "aws-cognito", "aws-iam", "facebook", "google"], provider.type)
+    ])
+    error_message = "Type of provider must be either `amazon`, `aws-cognito`, `aws-iam`, `facebook`, or `google`."
+  }
+}
+
 variable "trusted_saml_providers" {
   description = "A list of ARNs of SAML identity providers in AWS IAM."
   type        = list(string)
   default     = []
 }
 
-variable "trusted_saml_endpoint" {
-  description = "AWS Services that can assume the role."
-  type        = string
-  default     = "https://signin.aws.amazon.com/saml"
+variable "trusted_oidc_conditions" {
+  description = "Required conditions to assume the role for OIDC providers."
+  type = list(object({
+    key       = string
+    condition = string
+    values    = list(string)
+  }))
+  default = []
+}
+
+variable "trusted_saml_conditions" {
+  description = "Required conditions to assume the role for SAML providers."
+  type = list(object({
+    key       = string
+    condition = string
+    values    = list(string)
+  }))
+  default = []
+}
+
+variable "conditions" {
+  description = "Required conditions to assume the role."
+  type = list(object({
+    key       = string
+    condition = string
+    values    = list(string)
+  }))
+  default = []
 }
 
 variable "mfa_required" {

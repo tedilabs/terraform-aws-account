@@ -21,19 +21,20 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
-| aws | >= 3.27 |
+| aws | >= 3.30 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.27 |
+| aws | >= 3.30 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | name | Desired name for the IAM role. | `string` | n/a | yes |
+| conditions | Required conditions to assume the role. | <pre>list(object({<br>    key       = string<br>    condition = string<br>    values    = list(string)<br>  }))</pre> | `[]` | no |
 | description | The description of the role. | `string` | `""` | no |
 | effective\_date | Allow to assume IAM role only after a specific date and time. | `string` | `null` | no |
 | expiration\_date | Allow to assume IAM role only before a specific date and time. | `string` | `null` | no |
@@ -50,7 +51,9 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | source\_ip\_whitelist | A list of source IP addresses or CIDRs allowed to assume IAM role from. | `list(string)` | `[]` | no |
 | tags | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 | trusted\_iam\_entities | A list of ARNs of AWS IAM entities who can assume the role. | `list(string)` | `[]` | no |
-| trusted\_saml\_endpoint | AWS Services that can assume the role. | `string` | `"https://signin.aws.amazon.com/saml"` | no |
+| trusted\_oidc\_conditions | Required conditions to assume the role for OIDC providers. | <pre>list(object({<br>    key       = string<br>    condition = string<br>    values    = list(string)<br>  }))</pre> | `[]` | no |
+| trusted\_oidc\_providers | A list of OIDC identity providers. Supported types are `amazon`, `aws-cognito`, `aws-iam`, `facebook`, `google`. `type` is required. `url` is required only when `type` is `aws-iam`. | `list(map(string))` | `[]` | no |
+| trusted\_saml\_conditions | Required conditions to assume the role for SAML providers. | <pre>list(object({<br>    key       = string<br>    condition = string<br>    values    = list(string)<br>  }))</pre> | `[]` | no |
 | trusted\_saml\_providers | A list of ARNs of SAML identity providers in AWS IAM. | `list(string)` | `[]` | no |
 | trusted\_services | AWS Services that can assume the role. | `list(string)` | `[]` | no |
 
