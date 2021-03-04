@@ -24,13 +24,13 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
-| aws | >= 3.27 |
+| aws | >= 3.30 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.27 |
+| aws | >= 3.30 |
 
 ## Inputs
 

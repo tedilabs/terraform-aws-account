@@ -12,13 +12,13 @@ This module creates following resources.
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
-| aws | >= 3.27 |
+| aws | >= 3.30 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.27 |
+| aws | >= 3.30 |
 
 ## Inputs
 
