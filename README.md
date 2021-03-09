@@ -1,7 +1,8 @@
 # terraform-aws-account
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tedilabs/terraform-aws-account?color=blue&sort=semver&style=flat-square)
 ![GitHub](https://img.shields.io/github/license/tedilabs/terraform-aws-account?color=blue&style=flat-square)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=flat-square)](https://github.com/pre-commit/pre-commit)
 
 Terraform module which creates Account and IAM related resources on AWS.
 
