@@ -72,3 +72,18 @@ output "instance_profile_unique_id" {
   description = "The unique ID assigned by AWS for the Instance Profile."
   value       = try(aws_iam_instance_profile.this.*.unique_id[0], null)
 }
+
+
+###################################################
+# Resource Group
+###################################################
+
+output "resource_group_enabled" {
+  description = "Whether Resource Group is enabled."
+  value       = var.resource_group_enabled
+}
+
+output "resource_group_name" {
+  description = "The name of Resource Group."
+  value       = try(aws_resourcegroups_group.this.*.name[0], null)
+}

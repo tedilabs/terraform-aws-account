@@ -44,9 +44,13 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200. | `number` | `3600` | no |
 | mfa\_required | Whether MFA should be required to assume the role. | `bool` | `false` | no |
 | mfa\_ttl | Max age of valid MFA (in seconds) for roles which require MFA. | `number` | `86400` | no |
+| module\_tags\_enabled | Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | path | Desired path for the IAM role. | `string` | `"/"` | no |
 | permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the role. | `string` | `""` | no |
 | policies | List of IAM policies ARNs to attach to IAM role. | `list(string)` | `[]` | no |
+| resource\_group\_description | The description of Resource Group. | `string` | `"Managed by Terraform."` | no |
+| resource\_group\_enabled | Whether to create Resource Group to find and group AWS resources which are created by this module. | `bool` | `true` | no |
+| resource\_group\_name | The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. | `string` | `""` | no |
 | source\_ip\_blacklist | A list of source IP addresses or CIDRs denied to assume IAM role from. | `list(string)` | `[]` | no |
 | source\_ip\_whitelist | A list of source IP addresses or CIDRs allowed to assume IAM role from. | `list(string)` | `[]` | no |
 | tags | A map of tags to add to all resources. | `map(string)` | `{}` | no |
@@ -73,6 +77,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | mfa\_ttl | Max age of valid MFA (in seconds) for roles which require MFA. |
 | name | IAM Role name. |
 | policies | List of ARNs of IAM policies which are atached to IAM role. |
+| resource\_group\_enabled | Whether Resource Group is enabled. |
+| resource\_group\_name | The name of Resource Group. |
 | source\_ip\_blacklist | A list of source IP addresses or CIDRs denied to assume IAM role from. |
 | source\_ip\_whitelist | A list of source IP addresses or CIDRs allowed to assume IAM role from. |
 | unique\_id | The unique ID assigned by AWS. |

@@ -44,12 +44,16 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | force\_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force\_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | `bool` | `false` | no |
 | groups | A list of IAM Groups to add the user to. | `list(string)` | `[]` | no |
 | inline\_policies | Map of inline IAM policies to attach to IAM user. (`name` => `policy`). | `map(string)` | `{}` | no |
+| module\_tags\_enabled | Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | password\_length | The length of the generated password | `number` | `20` | no |
 | password\_reset\_required | Whether the user should be forced to reset the generated password on first login. | `bool` | `true` | no |
 | path | Desired path for the IAM user. | `string` | `"/"` | no |
 | permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the user. | `string` | `""` | no |
 | pgp\_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | `string` | `""` | no |
 | policies | List of IAM policies ARNs to attach to IAM user. | `list(string)` | `[]` | no |
+| resource\_group\_description | The description of Resource Group. | `string` | `"Managed by Terraform."` | no |
+| resource\_group\_enabled | Whether to create Resource Group to find and group AWS resources which are created by this module. | `bool` | `true` | no |
+| resource\_group\_name | The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. | `string` | `""` | no |
 | ssh\_public\_key | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format. | `string` | `""` | no |
 | ssh\_public\_key\_enabled | Whether to activate the SSH public key. | `bool` | `true` | no |
 | ssh\_public\_key\_encoding | Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM. | `string` | `"SSH"` | no |
@@ -72,6 +76,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | name | The user's name. |
 | pgp\_key | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted). |
 | policies | List of ARNs of IAM policies which are atached to IAM user. |
+| resource\_group\_enabled | Whether Resource Group is enabled. |
+| resource\_group\_name | The name of Resource Group. |
 | ses\_smtp\_password | The secret access key converted into an SES SMTP password. |
 | ssh\_public\_key\_fingerprint | The MD5 message digest of the SSH public key. |
 | ssh\_public\_key\_id | The unique identifier for the SSH public key. |
