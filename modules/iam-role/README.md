@@ -21,13 +21,13 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
-| aws | >= 3.30 |
+| aws | >= 3.34 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.30 |
+| aws | >= 3.34 |
 
 ## Inputs
 
@@ -77,8 +77,6 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | mfa\_ttl | Max age of valid MFA (in seconds) for roles which require MFA. |
 | name | IAM Role name. |
 | policies | List of ARNs of IAM policies which are atached to IAM role. |
-| resource\_group\_enabled | Whether Resource Group is enabled. |
-| resource\_group\_name | The name of Resource Group. |
 | source\_ip\_blacklist | A list of source IP addresses or CIDRs denied to assume IAM role from. |
 | source\_ip\_whitelist | A list of source IP addresses or CIDRs allowed to assume IAM role from. |
 | unique\_id | The unique ID assigned by AWS. |

@@ -79,18 +79,3 @@ output "inline_policies" {
   description = "List of names of inline IAM polices which are attached to IAM user."
   value       = keys(var.inline_policies)
 }
-
-
-###################################################
-# Resource Group
-###################################################
-
-output "resource_group_enabled" {
-  description = "Whether Resource Group is enabled."
-  value       = var.resource_group_enabled
-}
-
-output "resource_group_name" {
-  description = "The name of Resource Group."
-  value       = try(aws_resourcegroups_group.this.*.name[0], null)
-}

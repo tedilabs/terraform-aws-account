@@ -15,7 +15,7 @@ locals {
 }
 
 resource "aws_iam_role" "this" {
-  name                  = var.name
+  name                  = local.metadata.name
   path                  = var.path
   description           = var.description
   max_session_duration  = var.max_session_duration
@@ -81,6 +81,14 @@ resource "aws_iam_instance_profile" "this" {
   count = var.instance_profile_enabled ? 1 : 0
 
   role = aws_iam_role.this.name
-  name = var.name
+  name = local.metadata.name
   path = var.path
+
+  tags = merge(
+    {
+      "Name" = local.metadata.name
+    },
+    local.module_tags,
+    var.tags,
+  )
 }

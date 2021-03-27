@@ -24,13 +24,13 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
-| aws | >= 3.30 |
+| aws | >= 3.34 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.30 |
+| aws | >= 3.34 |
 
 ## Inputs
 
@@ -76,8 +76,6 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | name | The user's name. |
 | pgp\_key | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted). |
 | policies | List of ARNs of IAM policies which are atached to IAM user. |
-| resource\_group\_enabled | Whether Resource Group is enabled. |
-| resource\_group\_name | The name of Resource Group. |
 | ses\_smtp\_password | The secret access key converted into an SES SMTP password. |
 | ssh\_public\_key\_fingerprint | The MD5 message digest of the SSH public key. |
 | ssh\_public\_key\_id | The unique identifier for the SSH public key. |
