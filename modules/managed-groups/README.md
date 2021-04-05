@@ -24,6 +24,8 @@ This module creates following resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| self\_service\_mfa\_enabled | Whether to create IAM group for the self service mfa. | `bool` | `false` | no |
+| self\_service\_mfa\_name | Desired IAM group name for the self service mfa. Default name is `self-service-mfa`. | `string` | `""` | no |
 | self\_service\_password\_enabled | Whether to create IAM group for the self service password. | `bool` | `false` | no |
 | self\_service\_password\_name | Desired IAM group name for the self service password. Default name is `self-service-password`. | `string` | `""` | no |
 
