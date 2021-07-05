@@ -11,6 +11,10 @@ locals {
     "vpc/vpcs-per-region"              = "L-F678F1CE"
     # EC2
     "ec2/eips-per-region" = "L-0263D0A3"
+    # SSO
+    "sso/permission-sets-total"              = "L-B44C7A29"
+    "sso/permission-sets-per-aws-account"    = "L-89954265"
+    "sso/aws-accounts-or-applications-total" = "L-0299121C"
     # Resource Groups
     "resource-groups/resource-groups-per-account" = "L-2BAA18A0"
   }
