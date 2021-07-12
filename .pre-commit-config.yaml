@@ -5,4 +5,4 @@ repos:
   - id: terraform_fmt
   - id: terraform_validate
   - id: terraform_docs
-    args: ["--args=--sort-by-required"]
+    args: ["--args=--sort-by required"]
