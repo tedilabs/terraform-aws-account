@@ -3,7 +3,7 @@ locals {
     package = "terraform-aws-account"
     version = trimspace(file("${path.module}/../../VERSION"))
     module  = basename(path.module)
-    name    = "${var.account_id}/${var.permission_set}"
+    name    = "${var.account_id}/${data.aws_ssoadmin_permission_set.this.name}"
   }
 }
 
@@ -11,7 +11,7 @@ data "aws_ssoadmin_instances" "this" {}
 
 data "aws_ssoadmin_permission_set" "this" {
   instance_arn = local.sso_instance_arn
-  name         = var.permission_set
+  arn          = var.permission_set_arn
 }
 
 data "aws_identitystore_group" "this" {
@@ -54,7 +54,7 @@ resource "aws_ssoadmin_account_assignment" "groups" {
   target_type = "AWS_ACCOUNT"
   target_id   = var.account_id
 
-  permission_set_arn = data.aws_ssoadmin_permission_set.this.arn
+  permission_set_arn = var.permission_set_arn
 
   principal_type = "GROUP"
   principal_id   = data.aws_identitystore_group.this[each.key].group_id
@@ -68,7 +68,7 @@ resource "aws_ssoadmin_account_assignment" "users" {
   target_type = "AWS_ACCOUNT"
   target_id   = var.account_id
 
-  permission_set_arn = data.aws_ssoadmin_permission_set.this.arn
+  permission_set_arn = var.permission_set_arn
 
   principal_type = "USER"
   principal_id   = data.aws_identitystore_user.this[each.key].user_id

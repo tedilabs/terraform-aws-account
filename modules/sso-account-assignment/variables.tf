@@ -3,8 +3,8 @@ variable "account_id" {
   type        = string
 }
 
-variable "permission_set" {
-  description = "The Name of the Permission Set that the admin wants to grant the principal access to."
+variable "permission_set_arn" {
+  description = "The ARN of the Permission Set that the admin wants to grant the principal access to."
   type        = string
 }
 

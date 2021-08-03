@@ -9,13 +9,8 @@ output "account_id" {
 }
 
 output "permission_set" {
-  description = "The Nmae of the Permission Set"
-  value       = var.permission_set
-}
-
-output "permission_set_arn" {
-  description = "The Amazon Resource Name (ARN) of the Permission Set."
-  value       = data.aws_ssoadmin_permission_set.this.arn
+  description = "The Amazon Resource Name (ARN) of the Permission Set"
+  value       = var.permission_set_arn
 }
 
 output "instance_arn" {
