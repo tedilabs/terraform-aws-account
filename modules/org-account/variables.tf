@@ -26,6 +26,12 @@ variable "preconfigured_adminitrator_role_name" {
   default     = null
 }
 
+variable "delegated_services" {
+  description = "List of service principals of the AWS service for which you want to make the member account a delegated administrator."
+  type        = list(string)
+  default     = []
+}
+
 variable "policies" {
   description = "List of IDs of the policies to be attached to the Account."
   type        = list(string)

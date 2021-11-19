@@ -33,6 +33,17 @@ output "preconfigured_adminitrator_role_name" {
   value       = var.preconfigured_adminitrator_role_name
 }
 
+output "delegated_services" {
+  description = "The method how this account joined to the organization."
+  value = {
+    for name, service in aws_organizations_delegated_administrator.this :
+    name => {
+      name       = name
+      enabled_at = service.delegation_enabled_date
+    }
+  }
+}
+
 output "created_by" {
   description = "The method how this account joined to the organization."
   value       = aws_organizations_account.this.joined_method
