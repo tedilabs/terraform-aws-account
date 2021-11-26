@@ -28,3 +28,21 @@ variable "password_policy" {
     password_reuse_prevention      = 0
   }
 }
+
+variable "billing_contact" {
+  description = "Billing Contact for the AWS Account."
+  type        = map(string)
+  default     = null
+}
+
+variable "operation_contact" {
+  description = "Operation Contact for the AWS Account."
+  type        = map(string)
+  default     = null
+}
+
+variable "security_contact" {
+  description = "Security Contact for the AWS Account."
+  type        = map(string)
+  default     = null
+}
