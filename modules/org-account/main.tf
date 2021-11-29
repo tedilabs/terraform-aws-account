@@ -38,7 +38,10 @@ resource "aws_organizations_account" "this" {
 
   # There is no AWS Organizations API for reading role_name
   lifecycle {
-    ignore_changes = [role_name]
+    ignore_changes = [
+      iam_user_access_to_billing,
+      role_name,
+    ]
   }
 }
 
