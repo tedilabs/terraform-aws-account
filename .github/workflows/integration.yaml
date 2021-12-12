@@ -1,0 +1,67 @@
+name: Integration
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - '!.github/**'
+  pull_request: {}
+
+concurrency:
+  group: integration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changed-terraform-modules:
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.changed-tf-modules.outputs.matrix }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Get Changed Files
+      id: changed-files
+      uses: jitterbit/get-changed-files@v1
+      with:
+        format: json
+
+    - name: Filter changed terraform module directories
+      id: changed-tf-modules
+      run: |
+        dirs=$(echo '${{ steps.changed-files.outputs.all }}' | jq '[.[] | match("modules/[^/]+").string] | unique')
+        echo ::set-output name=matrix::$dirs
+
+
+  terraform:
+    needs: changed-terraform-modules
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        path: ${{ fromJson(needs.changed-terraform-modules.outputs.matrix) }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set-up terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform fmt
+      id: fmt
+      working-directory: ${{ matrix.path }}
+      run: terraform fmt -check
+      continue-on-error: true
+
+    - name: Terraform Validate
+      id: validate
+      working-directory: ${{ matrix.path }}
+      run: |
+        terraform init -backend=false
+        terraform validate -no-color
