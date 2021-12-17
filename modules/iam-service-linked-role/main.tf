@@ -19,12 +19,11 @@ resource "aws_iam_service_linked_role" "this" {
   custom_suffix    = var.custom_suffix
   description      = var.description
 
-  # INFO: To be supported
-  # tags = merge(
-  #   {
-  #     "Name" = local.metadata.name
-  #   },
-  #   local.module_tags,
-  #   var.tags,
-  # )
+  tags = merge(
+    {
+      "Name" = local.metadata.name
+    },
+    local.module_tags,
+    var.tags,
+  )
 }
