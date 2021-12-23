@@ -4,8 +4,6 @@ on:
   push:
     branches:
     - main
-    paths:
-    - '!.github/**'
   pull_request: {}
 
 concurrency:
@@ -39,7 +37,8 @@ jobs:
 
 
   terraform:
-    needs: changed-terraform-modules
+    needs:
+    - changed-terraform-modules
     runs-on: ubuntu-latest
 
     strategy:
@@ -54,14 +53,27 @@ jobs:
       uses: hashicorp/setup-terraform@v1
 
     - name: Terraform fmt
-      id: fmt
+      id: terraform-fmt
       working-directory: ${{ matrix.path }}
       run: terraform fmt -check
       continue-on-error: true
 
     - name: Terraform Validate
-      id: validate
+      id: terraform-validate
       working-directory: ${{ matrix.path }}
       run: |
         terraform init -backend=false
         terraform validate -no-color
+
+
+  yaml:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Lint YAML Files
+      id: yaml-lint
+      run: |
+        yamllint .
