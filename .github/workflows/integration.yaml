@@ -11,11 +11,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  changed-terraform-modules:
+  changed:
     runs-on: ubuntu-latest
 
     outputs:
-      matrix: ${{ steps.changed-tf-modules.outputs.matrix }}
+      terraform_modules_changed: ${{ steps.filter-terraform-modules.outputs.changed }}
+      terraform_modules_files: ${{ steps.filter-terraform-modules.outputs.files }}
+      terraform_modules_dirs: ${{ steps.filter-terraform-modules.outputs.dirs }}
 
     steps:
     - name: Checkout
@@ -25,25 +27,31 @@ jobs:
 
     - name: Get Changed Files
       id: changed-files
-      uses: jitterbit/get-changed-files@v1
+      uses: dorny/paths-filter@v2
       with:
-        format: json
+        list-files: json
+        filters: |
+          modules:
+          - 'modules/**'
 
-    - name: Filter changed terraform module directories
-      id: changed-tf-modules
+    - name: Filter changed files to outputs
+      id: filter-terraform-modules
       run: |
-        dirs=$(echo '${{ steps.changed-files.outputs.all }}' | jq '[.[] | match("modules/[^/]+").string] | unique')
-        echo ::set-output name=matrix::$dirs
+        dirs=$(echo '${{ steps.changed-files.outputs.modules_files }}' | jq '[.[] | match("modules/[^/]+").string] | unique')
+        echo ::set-output name=changed::${{ steps.changed-files.outputs.modules }}
+        echo ::set-output name=files::${{ steps.changed-files.outputs.modules_files }}
+        echo ::set-output name=dirs::$dirs
 
 
   terraform:
     needs:
-    - changed-terraform-modules
+    - changed
+    if: ${{ needs.changed.outputs.terraform_modules_changed != 'false' }}
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        path: ${{ fromJson(needs.changed-terraform-modules.outputs.matrix) }}
+        path: ${{ fromJson(needs.changed.outputs.terraform_modules_dirs) }}
 
     steps:
     - name: Checkout
