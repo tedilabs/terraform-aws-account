@@ -1,12 +1,14 @@
 name: Sync labels
+
 on:
   push:
     branches:
     - main
     paths:
     - .github/labels.yaml
+
 jobs:
-  build:
+  sync-labels:
     runs-on: ubuntu-latest
 
     steps:
