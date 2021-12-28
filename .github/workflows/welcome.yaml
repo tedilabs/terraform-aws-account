@@ -14,6 +14,14 @@ jobs:
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: |
-          Thank you very much for your first issue to this project. It is much appreciated.
+          ### :wave: Welcome! Looks like this is your first issue.
+
+          Hey, thanks for your contribution! Please give us a bit of time to review it. 😄
+
+          **Be sure to follow the issue template!**
         pr-message: |
-          Thank you very much for your first pull request to this project. It is much appreciated.
+          ### :wave: Welcome! Looks like this is your first pull request.
+
+          Hey, thanks for your contribution! Please give us a bit of time to review it. 😄
+
+          **Please check out our contributing guidelines.**
