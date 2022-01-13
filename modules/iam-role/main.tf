@@ -22,7 +22,7 @@ resource "aws_iam_role" "this" {
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.permissions_boundary
 
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.trusted_entities.json
 
   tags = merge(
     {
@@ -35,16 +35,37 @@ resource "aws_iam_role" "this" {
 
 
 ###################################################
-# IAM Policy for AssumeRole
+# IAM Policy for Trusted Entities
 ###################################################
 
-data "aws_iam_policy_document" "assume_role" {
+data "aws_iam_policy_document" "trusted_entities" {
   source_policy_documents = concat(
     values(data.aws_iam_policy_document.trusted_iam_entities)[*].json,
     values(data.aws_iam_policy_document.trusted_services)[*].json,
     values(data.aws_iam_policy_document.trusted_oidc_providers)[*].json,
     values(data.aws_iam_policy_document.trusted_saml_providers)[*].json,
   )
+}
+
+
+###################################################
+# IAM Policy for AssumeRole
+###################################################
+
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect    = "Allow"
+    actions   = ["sts:AssumeRole"]
+    resources = var.assumable_roles
+  }
+}
+
+resource "aws_iam_role_policy" "assume_role" {
+  count = length(var.assumable_roles) > 0 ? 1 : 0
+
+  role   = aws_iam_role.this.id
+  name   = "assume-role"
+  policy = data.aws_iam_policy_document.assume_role.json
 }
 
 
