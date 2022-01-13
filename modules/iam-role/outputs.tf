@@ -49,7 +49,7 @@ output "source_ip_blacklist" {
 }
 
 output "assumable_roles" {
-  description = "List of ARNs of IAM roles which members of IAM role  can assume."
+  description = "List of ARNs of IAM roles which members of IAM role can assume."
   value       = var.assumable_roles
 }
 
