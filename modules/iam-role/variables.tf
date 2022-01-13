@@ -143,6 +143,12 @@ variable "source_ip_blacklist" {
   default     = []
 }
 
+variable "assumable_roles" {
+  description = "List of IAM roles ARNs which can be assumed by the role."
+  type        = list(string)
+  default     = []
+}
+
 variable "policies" {
   description = "List of IAM policies ARNs to attach to IAM role."
   type        = list(string)
