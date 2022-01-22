@@ -9,6 +9,12 @@ locals {
     "vpc/subnets-per-vpc"              = "L-407747CB"
     "vpc/internet-gateways-per-region" = "L-A4707A72"
     "vpc/vpcs-per-region"              = "L-F678F1CE"
+    # VPC IPAM (IP Address Manager)
+    "vpc-ipam/ipams-per-region" = "L-F8B4A9E6"
+    "vpc-ipam/scopes-per-ipam"  = "L-F493CFD2"
+    "vpc-ipam/pools-per-scope"  = "L-7319AFC3"
+    "vpc-ipam/cidrs-per-pool"   = "L-0BC051D6"
+    "vpc-ipam/pool-depth"       = "L-047C0565"
     # EC2
     "ec2/eips-per-region" = "L-0263D0A3"
     # SES
