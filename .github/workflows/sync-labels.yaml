@@ -18,7 +18,7 @@ jobs:
     - name: Sync labels
       uses: crazy-max/ghaction-github-labeler@v3
       with:
-        github-otken: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         yaml-file: .github/labels.yaml
         skip-delete: false
         dry-run: false
