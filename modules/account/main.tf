@@ -14,7 +14,7 @@ resource "aws_iam_account_alias" "this" {
 # Password Policy for AWS Account and IAM Users
 ###################################################
 
-resource "aws_iam_account_password_policy" "this" {
+resource "aws_iam_account_password_policy" "test" {
   minimum_password_length        = var.password_policy.minimum_password_length
   require_numbers                = var.password_policy.require_numbers
   require_symbols                = var.password_policy.require_symbols
