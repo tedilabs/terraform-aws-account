@@ -34,7 +34,7 @@ resource "aws_iam_account_password_policy" "this" {
 resource "aws_account_alternate_contact" "billing" {
   count = var.billing_contact != null ? 1 : 0
 
-  alternate_contact_type = "BILLING"
+  alternate_contact_type = "BILLING1"
 
   name          = var.billing_contact.name
   title         = try(var.billing_contact.title, "Billing Manager")
