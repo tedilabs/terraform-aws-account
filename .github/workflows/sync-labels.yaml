@@ -6,6 +6,7 @@ on:
     - main
     paths:
     - .github/labels.yaml
+  workflow_dispatch: {}
 
 jobs:
   sync-labels:
