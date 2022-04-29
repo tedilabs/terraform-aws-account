@@ -17,6 +17,10 @@ locals {
     "vpc-ipam/pool-depth"       = "L-047C0565"
     # EC2
     "ec2/eips-per-region" = "L-0263D0A3"
+    # Route53
+    "route53/health-checks-per-region"   = "L-ACB674F3"
+    "route53/hosted-zones-per-region"    = "L-4EA4796A"
+    "route53/delegation-sets-per-region" = "L-A72C7724"
     # SES
     "ses/sending-emails-per-day" = "L-804C8AE8"
     # SSO
