@@ -26,7 +26,7 @@ output "pgp_key" {
 # NOTE: terraform output encrypted_password | base64 --decode | keybase pgp decrypt
 output "console_access" {
   description = "The information of the AWS console access and password for the user."
-  value       = {
+  value = {
     enabled            = try(var.console_access.enabled, true)
     encrypted_password = one(aws_iam_user_login_profile.this.*.encrypted_password)
   }
@@ -35,7 +35,7 @@ output "console_access" {
 # NOTE: terraform output encrypted_secret_access_key | base64 --decode | keybase pgp decrypt
 output "access_keys" {
   description = "The list of IAM Access Keys for the user."
-  value       = [
+  value = [
     for access_key in aws_iam_access_key.this : {
       id                          = access_key.id
       encrypted_secret_access_key = access_key.encrypted_secret
@@ -48,7 +48,7 @@ output "access_keys" {
 
 output "ssh_keys" {
   description = "The list of SSH public keys for the user."
-  value       = [
+  value = [
     for ssh_key in aws_iam_user_ssh_key.this : {
       id = ssh_key.ssh_public_key_id
 
@@ -58,6 +58,19 @@ output "ssh_keys" {
       enabled     = ssh_key.status == "Active"
     }
   ]
+}
+
+output "service_credentials" {
+  description = "The list of service specific credentials for the user."
+  value = {
+    for service, credential in aws_iam_service_specific_credential.this :
+    service => {
+      id       = credential.service_specific_credential_id
+      username = credential.service_user_name
+      password = credential.service_password
+      enabled  = credential.status == "Active"
+    }
+  }
 }
 
 output "assumable_roles" {
