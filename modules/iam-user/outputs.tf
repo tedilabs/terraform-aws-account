@@ -23,46 +23,41 @@ output "pgp_key" {
   value       = var.pgp_key
 }
 
-output "key_fingerprint" {
-  description = "The fingerprint of the PGP key used to encrypt the password."
-  value       = try(aws_iam_user_login_profile.this.*.key_fingerprint[0], null)
-}
-
 # NOTE: terraform output encrypted_password | base64 --decode | keybase pgp decrypt
-output "encrypted_password" {
-  description = "The encrypted password, base64 encoded."
-  value       = try(aws_iam_user_login_profile.this.*.encrypted_password[0], null)
-}
-
-output "access_key_id" {
-  description = "The access key ID."
-  value       = try(aws_iam_access_key.this.*.id[0], null)
+output "console_access" {
+  description = "The information of the AWS console access and password for the user."
+  value       = {
+    enabled            = try(var.console_access.enabled, true)
+    encrypted_password = one(aws_iam_user_login_profile.this.*.encrypted_password)
+  }
 }
 
 # NOTE: terraform output encrypted_secret_access_key | base64 --decode | keybase pgp decrypt
-output "encrypted_secret_access_key" {
-  description = "The encrypted secret, base64 encoded."
-  value       = try(aws_iam_access_key.this.*.encrypted_secret[0], null)
+output "access_keys" {
+  description = "The list of IAM Access Keys for the user."
+  value       = [
+    for access_key in aws_iam_access_key.this : {
+      id                          = access_key.id
+      encrypted_secret_access_key = access_key.encrypted_secret
+      encrypted_ses_smtp_password = access_key.encrypted_ses_smtp_password_v4
+      created_at                  = access_key.create_date
+      enabled                     = access_key.status == "Active"
+    }
+  ]
 }
 
-output "ses_smtp_password" {
-  description = "The secret access key converted into an SES SMTP password."
-  value       = try(aws_iam_access_key.this.*.ses_smtp_password_v4[0], null)
-}
+output "ssh_keys" {
+  description = "The list of SSH public keys for the user."
+  value       = [
+    for ssh_key in aws_iam_user_ssh_key.this : {
+      id = ssh_key.ssh_public_key_id
 
-output "access_key_status" {
-  description = "Active or Inactive. Keys are initially active, but can be made inactive by other means."
-  value       = try(aws_iam_access_key.this.*.status[0], null)
-}
-
-output "ssh_public_key_id" {
-  description = "The unique identifier for the SSH public key."
-  value       = try(aws_iam_user_ssh_key.this.*.ssh_public_key_id[0], null)
-}
-
-output "ssh_public_key_fingerprint" {
-  description = "The MD5 message digest of the SSH public key."
-  value       = try(aws_iam_user_ssh_key.this.*.fingerprint[0], null)
+      encoding    = ssh_key.encoding
+      public_key  = ssh_key.public_key
+      fingerprint = ssh_key.fingerprint
+      enabled     = ssh_key.status == "Active"
+    }
+  ]
 }
 
 output "assumable_roles" {
