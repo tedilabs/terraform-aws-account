@@ -32,6 +32,12 @@ resource "aws_iam_access_key" "this" {
   pgp_key = var.pgp_key
 
   status = try(var.access_keys[count.index].enabled, true) ? "Active" : "Inactive"
+
+  lifecycle {
+    ignore_changes = [
+      pgp_key,
+    ]
+  }
 }
 
 
