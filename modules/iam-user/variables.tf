@@ -64,6 +64,16 @@ variable "ssh_keys" {
   default     = []
 }
 
+variable "service_credentials" {
+  description = <<EOF
+  (Optional) A list of service specific credentials to associate with the IAM user. Each value of `service_credentials` block as defined below.
+    (Required) `service` - The name of the AWS service that is to be associated with the credentials. The service you specify here is the only service that can be accessed using these credentials.
+    (Optional) `enabled` - Whether to activate the service specific credential.
+  EOF
+  type        = any
+  default     = []
+}
+
 variable "assumable_roles" {
   description = "(Optional) List of IAM roles ARNs which can be assumed by the user."
   type        = list(string)

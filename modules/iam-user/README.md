@@ -4,11 +4,12 @@ This module creates following resources.
 
 - `aws_iam_user`
 - `aws_iam_user_group_membership`
+- `aws_iam_user_policy` (optional)
+- `aws_iam_user_policy_attachment` (optional)
 - `aws_iam_user_login_profile` (optional)
 - `aws_iam_access_key` (optional)
 - `aws_iam_user_ssh_key` (optional)
-- `aws_iam_user_policy` (optional)
-- `aws_iam_user_policy_attachment` (optional)
+- `aws_iam_service_specific_credential` (optional)
 
 ## Notes
 

@@ -45,9 +45,26 @@ resource "aws_iam_user_ssh_key" "this" {
     md5(ssh_key.public_key) => ssh_key
   }
 
-  username   = aws_iam_user.this.name
+  username = aws_iam_user.this.name
 
   public_key = each.value.public_key
   encoding   = try(each.value.encoding, "SSH")
   status     = try(each.value.enabled, true) ? "Active" : "Inactive"
+}
+
+
+###################################################
+# Service Specified Credentials for IAM User
+###################################################
+
+resource "aws_iam_service_specific_credential" "this" {
+  for_each = {
+    for credential in var.service_credentials :
+    credential.service => credential
+  }
+
+  user_name = aws_iam_user.this.name
+
+  service_name = each.key
+  status       = try(each.value.enabled, true) ? "Active" : "Inactive"
 }
