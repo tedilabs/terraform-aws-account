@@ -1,10 +1,11 @@
 variable "name" {
-  description = "The name for the AWS account. Used for the account alias."
+  description = "(Required) The name for the AWS account. Used for the account alias."
   type        = string
+  nullable    = false
 }
 
 variable "password_policy" {
-  description = "Password Policy for the AWS account."
+  description = "(Optional) Password Policy for the AWS account."
   type = object({
     minimum_password_length        = number
     require_numbers                = bool
@@ -27,22 +28,30 @@ variable "password_policy" {
     max_password_age               = 0
     password_reuse_prevention      = 0
   }
+  nullable = false
 }
 
 variable "billing_contact" {
-  description = "Billing Contact for the AWS Account."
+  description = "(Optional) Billing Contact for the AWS Account."
   type        = map(string)
   default     = null
 }
 
 variable "operation_contact" {
-  description = "Operation Contact for the AWS Account."
+  description = "(Optional) Operation Contact for the AWS Account."
   type        = map(string)
   default     = null
 }
 
 variable "security_contact" {
-  description = "Security Contact for the AWS Account."
+  description = "(Optional) Security Contact for the AWS Account."
   type        = map(string)
   default     = null
+}
+
+variable "s3_public_access_enabled" {
+  description = "(Optional) Whether to enable S3 account-level Public Access Block configuration. Block the public access to S3 bucket if the value is `false`."
+  type        = bool
+  default     = false
+  nullable    = false
 }
