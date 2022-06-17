@@ -47,3 +47,8 @@ output "security_contact" {
     phone = aws_account_alternate_contact.security[0].phone_number
   }, null)
 }
+
+output "s3_public_access_enabled" {
+  description = "Whether to enable S3 account-level Public Access Block configuration."
+  value       = var.s3_public_access_enabled
+}

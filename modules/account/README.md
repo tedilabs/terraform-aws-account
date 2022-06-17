@@ -5,6 +5,7 @@ This module creates following resources.
 - `aws_iam_account_alias`
 - `aws_iam_account_password_policy`
 - `aws_account_alternate_contact` (optional)
+- `aws_s3_account_public_access_block`
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
