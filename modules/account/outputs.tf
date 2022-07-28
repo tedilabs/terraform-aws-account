@@ -48,7 +48,12 @@ output "security_contact" {
   }, null)
 }
 
-output "s3_public_access_enabled" {
-  description = "Whether to enable S3 account-level Public Access Block configuration."
-  value       = var.s3_public_access_enabled
+output "s3" {
+  description = <<EOF
+  The account-level configurations of S3 service.
+    `public_access_enabled` - Whether to enable S3 account-level Public Access Block configuration.
+  EOF
+  value = {
+    public_access_enabled = var.s3_public_access_enabled
+  }
 }
