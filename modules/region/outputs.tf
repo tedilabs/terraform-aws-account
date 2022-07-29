@@ -57,3 +57,15 @@ output "service_quotas" {
     }
   }
 }
+
+output "vpc" {
+  description = <<EOF
+  The region-level configurations of VPC.
+  EOF
+  value = {
+    availability_zone_groups = {
+      for name, group in aws_ec2_availability_zone_group.this :
+      name => group.opt_in_status == "opted-in"
+    }
+  }
+}
