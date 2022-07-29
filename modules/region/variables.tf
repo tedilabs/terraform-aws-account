@@ -34,8 +34,15 @@ variable "service_quotas_request" {
 }
 
 variable "service_quotas_code_translation_enabled" {
-  description = "Whether to use translated quota code for readability."
+  description = "(Optional) Whether to use translated quota code for readability."
   type        = bool
   default     = false
+  nullable    = false
+}
+
+variable "vpc_availability_zone_groups" {
+  description = "(Optional) The configurations to manage Availability Zone Groups for the current AWS region. The key is the name of Availability Zone Group, the value is a boolean value to enable the group. In this time, disabling Availability Zone Group is not supported on AWS."
+  type        = map(bool)
+  default     = {}
   nullable    = false
 }
