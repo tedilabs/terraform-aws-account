@@ -14,7 +14,7 @@ output "instance_arn" {
 }
 
 output "session_duration" {
-  description = "The length of time that the application user sessions are valid in the ISO-8601 standard."
+  description = "The length of time that the application user sessions are valid in seconds."
   value       = aws_ssoadmin_permission_set.this.session_duration
 }
 
