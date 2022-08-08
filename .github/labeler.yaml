@@ -23,8 +23,8 @@
 ":floppy_disk: org-organizational-unit":
 - modules/org-organizational-unit/**/*
 
-":floppy_disk: service-quota-requests":
-- modules/service-quota-requests/**/*
+":floppy_disk: region":
+- modules/region/**/*
 
 ":floppy_disk: sso-account-assignments":
 - modules/sso-account-assignments/**/*
