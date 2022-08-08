@@ -18,6 +18,20 @@ data "aws_ssoadmin_instances" "this" {}
 
 locals {
   sso_instance_arn = tolist(data.aws_ssoadmin_instances.this.arns)[0]
+
+  session_duration = {
+    "H" = floor(var.session_duration / 3600)
+    "M" = floor((var.session_duration % 3600) / 60)
+    "S" = floor((var.session_duration % 3600) % 60)
+  }
+  session_duration_iso_8601 = join("", [
+    "PT",
+    join("", [
+      for unit, n in local.session_duration :
+      "${n}${unit}"
+      if n > 0
+    ])
+  ])
 }
 
 
@@ -26,7 +40,8 @@ resource "aws_ssoadmin_permission_set" "this" {
   description  = var.description
   instance_arn = local.sso_instance_arn
 
-  session_duration = var.session_duration
+  session_duration = local.session_duration_iso_8601
+  relay_state      = var.relay_state
 
   tags = merge(
     {
