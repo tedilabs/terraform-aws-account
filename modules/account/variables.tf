@@ -49,6 +49,27 @@ variable "security_contact" {
   default     = null
 }
 
+variable "ec2_spot_datafeed_subscription_enabled" {
+  description = "(Optional) Indicates whether to enable Spot Data Feed Subscription to S3 Bucket. Defaults to `false`."
+  type        = bool
+  default     = false
+  nullable    = false
+}
+
+variable "ec2_spot_datafeed_subscription_s3_bucket" {
+  description = "(Optional) The name of the S3 bucket to deliver Spot Data Feed to."
+  type        = string
+  default     = ""
+  nullable    = false
+}
+
+variable "ec2_spot_datafeed_subscription_s3_prefix" {
+  description = "(Optional) The path of directory inside S3 bucket to place spot pricing data."
+  type        = string
+  default     = ""
+  nullable    = false
+}
+
 variable "s3_public_access_enabled" {
   description = "(Optional) Whether to enable S3 account-level Public Access Block configuration. Block the public access to S3 bucket if the value is `false`."
   type        = bool
