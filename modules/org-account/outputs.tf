@@ -34,14 +34,8 @@ output "preconfigured_adminitrator_role_name" {
 }
 
 output "delegated_services" {
-  description = "The method how this account joined to the organization."
-  value = {
-    for name, service in aws_organizations_delegated_administrator.this :
-    name => {
-      name       = name
-      enabled_at = service.delegation_enabled_date
-    }
-  }
+  description = "A list of service principals of the AWS service which the member account is a delegated administrator."
+  value       = var.delegated_services
 }
 
 output "created_by" {
