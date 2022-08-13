@@ -3,8 +3,9 @@
 This module creates following resources.
 
 - `aws_organizations_account`
-- `aws_organizations_delegated_administrator` (optional)
 - `aws_organizations_policy_attachment` (optional)
+- `aws_organizations_delegated_administrator` (optional)
+- `aws_macie2_organization_admin_account` (optional)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

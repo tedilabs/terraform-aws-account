@@ -45,13 +45,6 @@ resource "aws_organizations_account" "this" {
   }
 }
 
-resource "aws_organizations_delegated_administrator" "this" {
-  for_each = toset(var.delegated_services)
-
-  account_id        = aws_organizations_account.this.id
-  service_principal = each.key
-}
-
 
 ###################################################
 # AWS Managed Policies
