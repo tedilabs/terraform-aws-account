@@ -48,6 +48,22 @@ output "security_contact" {
   }, null)
 }
 
+output "ec2" {
+  description = <<EOF
+  The account-level configurations of EC2 service.
+    `spot_datafeed_subscription` - To help you understand the charges for your Spot instances, Amazon EC2 provides a data feed that describes your Spot instance usage and pricing. This data feed is sent to an Amazon S3 bucket that you specify when you subscribe to the data feed.
+  EOF
+  value = {
+    spot_datafeed_subscription = {
+      enabled = var.ec2_spot_datafeed_subscription_enabled
+      s3 = {
+        bucket = one(aws_spot_datafeed_subscription.this[*].bucket)
+        prefix = one(aws_spot_datafeed_subscription.this[*].prefix)
+      }
+    }
+  }
+}
+
 output "s3" {
   description = <<EOF
   The account-level configurations of S3 service.
