@@ -31,6 +31,7 @@ No modules.
 |------|------|
 | [aws_ebs_default_kms_key.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_default_kms_key) | resource |
 | [aws_ebs_encryption_by_default.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_encryption_by_default) | resource |
+| [aws_ec2_availability_zone_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_availability_zone_group) | resource |
 | [aws_ec2_serial_console_access.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_serial_console_access) | resource |
 | [aws_servicequotas_service_quota.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/servicequotas_service_quota) | resource |
 | [aws_region.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
@@ -42,8 +43,9 @@ No modules.
 | <a name="input_ebs_default_encryption_enabled"></a> [ebs\_default\_encryption\_enabled](#input\_ebs\_default\_encryption\_enabled) | (Optional) Whether or not default EBS encryption is enabled. | `bool` | `false` | no |
 | <a name="input_ebs_default_encryption_kms_key"></a> [ebs\_default\_encryption\_kms\_key](#input\_ebs\_default\_encryption\_kms\_key) | (Optional) The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume. | `string` | `null` | no |
 | <a name="input_ec2_serial_console_enabled"></a> [ec2\_serial\_console\_enabled](#input\_ec2\_serial\_console\_enabled) | (Optional) Whether serial console access is enabled for the current AWS region. | `bool` | `false` | no |
-| <a name="input_service_quotas_code_translation_enabled"></a> [service\_quotas\_code\_translation\_enabled](#input\_service\_quotas\_code\_translation\_enabled) | Whether to use translated quota code for readability. | `bool` | `false` | no |
+| <a name="input_service_quotas_code_translation_enabled"></a> [service\_quotas\_code\_translation\_enabled](#input\_service\_quotas\_code\_translation\_enabled) | (Optional) Whether to use translated quota code for readability. | `bool` | `false` | no |
 | <a name="input_service_quotas_request"></a> [service\_quotas\_request](#input\_service\_quotas\_request) | (Optional) A map of service quotas to request. The key is `<service-code>/<quota-code>` and the value is a desired value to request. | `map(number)` | `{}` | no |
+| <a name="input_vpc_availability_zone_groups"></a> [vpc\_availability\_zone\_groups](#input\_vpc\_availability\_zone\_groups) | (Optional) The configurations to manage Availability Zone Groups for the current AWS region. The key is the name of Availability Zone Group, the value is a boolean value to enable the group. In this time, disabling Availability Zone Group is not supported on AWS. | `map(bool)` | `{}` | no |
 
 ## Outputs
 
@@ -56,4 +58,5 @@ No modules.
 | <a name="output_id"></a> [id](#output\_id) | The ID of the current region. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the current region. |
 | <a name="output_service_quotas"></a> [service\_quotas](#output\_service\_quotas) | The region-level configurations of Service Quotas. |
+| <a name="output_vpc"></a> [vpc](#output\_vpc) | The region-level configurations of VPC. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
