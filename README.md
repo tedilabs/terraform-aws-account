@@ -7,6 +7,28 @@
 Terraform module which creates Account and IAM related resources on AWS.
 
 
+## Target AWS Services
+
+Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-account) were written to manage the following AWS Services with Terraform.
+
+- **AWS Account**
+  - Account Settings
+  - Region Settings
+- **AWS IAM**
+  - User
+  - Group
+  - Role
+  - Service-linked Role
+  - Policy
+- **AWS IAM Identity Center (AWS SSO)**
+  - Account Assignment
+  - Permission Set
+- **AWS Organization**
+  - Organization
+  - Organization Unit
+  - Account
+
+
 ## Other Terraform Modules from Tedilabs
 
 Enjoying [terraform-aws-account](https://github.com/tedilabs/terraform-aws-account)? Check out some of our other modules:
