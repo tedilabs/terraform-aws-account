@@ -34,6 +34,7 @@ locals {
   quota_codes = {
     # VPC
     "vpc/rules-per-nacl"               = "L-2AEEBF1A"
+    "vpc/rules-per-security-group"     = "L-0EA8095F"
     "vpc/security-groups-per-eni"      = "L-2AFB9258"
     "vpc/nat-gateways-per-az"          = "L-FE5A380F"
     "vpc/subnets-per-vpc"              = "L-407747CB"
