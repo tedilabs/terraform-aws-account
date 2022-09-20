@@ -30,10 +30,13 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_fms_admin_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/fms_admin_account) | resource |
+| [aws_macie2_organization_admin_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/macie2_organization_admin_account) | resource |
 | [aws_organizations_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account) | resource |
 | [aws_organizations_delegated_administrator.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_delegated_administrator) | resource |
 | [aws_organizations_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_policy_attachment) | resource |
 | [aws_resourcegroups_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/resourcegroups_group) | resource |
+| [aws_securityhub_organization_admin_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/securityhub_organization_admin_account) | resource |
 | [aws_organizations_organization.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/organizations_organization) | data source |
 
 ## Inputs
@@ -42,7 +45,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_email"></a> [email](#input\_email) | The email address of the owner to assign to the new member account. This email address must not already be associated with another AWS account. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | A friendly name for the member account. | `string` | n/a | yes |
-| <a name="input_delegated_services"></a> [delegated\_services](#input\_delegated\_services) | List of service principals of the AWS service for which you want to make the member account a delegated administrator. | `list(string)` | `[]` | no |
+| <a name="input_delegated_services"></a> [delegated\_services](#input\_delegated\_services) | A list of service principals of the AWS service for which you want to make the member account a delegated administrator. | `set(string)` | `[]` | no |
 | <a name="input_iam_user_access_to_billing_allowed"></a> [iam\_user\_access\_to\_billing\_allowed](#input\_iam\_user\_access\_to\_billing\_allowed) | If true, the new account enables IAM users to access account billing information if they have the required permissions. If false, then only the root user of the new account can access account billing information. | `bool` | `false` | no |
 | <a name="input_module_tags_enabled"></a> [module\_tags\_enabled](#input\_module\_tags\_enabled) | Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | <a name="input_parent_id"></a> [parent\_id](#input\_parent\_id) | Parent Organizational Unit ID or Root ID for the account. Defaults to the Organization default Root ID. A configuration must be present for this argument to perform drift detection. | `string` | `null` | no |
@@ -60,7 +63,7 @@ No modules.
 | <a name="output_arn"></a> [arn](#output\_arn) | The Amazon Resource Name (ARN) of this account. |
 | <a name="output_created_at"></a> [created\_at](#output\_created\_at) | The datetime which this account joined to the organization. |
 | <a name="output_created_by"></a> [created\_by](#output\_created\_by) | The method how this account joined to the organization. |
-| <a name="output_delegated_services"></a> [delegated\_services](#output\_delegated\_services) | The method how this account joined to the organization. |
+| <a name="output_delegated_services"></a> [delegated\_services](#output\_delegated\_services) | A list of service principals of the AWS service which the member account is a delegated administrator. |
 | <a name="output_email"></a> [email](#output\_email) | The email address of this account. |
 | <a name="output_iam_user_access_to_billing_allowed"></a> [iam\_user\_access\_to\_billing\_allowed](#output\_iam\_user\_access\_to\_billing\_allowed) | Whether accessing account billing information by IAM User is allowed. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of this account. |
