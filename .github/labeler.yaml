@@ -23,6 +23,9 @@
 ":floppy_disk: org-organizational-unit":
 - modules/org-organizational-unit/**/*
 
+":floppy_disk: ram-share":
+- modules/ram-share/**/*
+
 ":floppy_disk: region":
 - modules/region/**/*
 
