@@ -5,8 +5,14 @@
 ":floppy_disk: iam-group":
 - modules/iam-group/**/*
 
+":floppy_disk: iam-oidc-identity-provider":
+- modules/iam-oidc-identity-provider/**/*
+
 ":floppy_disk: iam-role":
 - modules/iam-role/**/*
+
+":floppy_disk: iam-saml-identity-provider":
+- modules/iam-saml-identity-provider/**/*
 
 ":floppy_disk: iam-user":
 - modules/iam-user/**/*
