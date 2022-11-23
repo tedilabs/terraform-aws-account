@@ -9,14 +9,14 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.45 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.22 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.23.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.40.0 |
 
 ## Modules
 
@@ -37,10 +37,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_account_id"></a> [account\_id](#input\_account\_id) | The identifier of an AWS account which the assignment willb e created. Typically a 10-12 digit string. | `string` | n/a | yes |
-| <a name="input_permission_set_arn"></a> [permission\_set\_arn](#input\_permission\_set\_arn) | The ARN of the Permission Set that the admin wants to grant the principal access to. | `string` | n/a | yes |
-| <a name="input_groups"></a> [groups](#input\_groups) | List of names of Group entities who can access to the Permission Set. | `list(string)` | `[]` | no |
-| <a name="input_users"></a> [users](#input\_users) | List of names of User entities who can access to the Permission Set. | `list(string)` | `[]` | no |
+| <a name="input_account_id"></a> [account\_id](#input\_account\_id) | (Required) The identifier of an AWS account which the assignment willb e created. Typically a 10-12 digit string. | `string` | n/a | yes |
+| <a name="input_permission_set_arn"></a> [permission\_set\_arn](#input\_permission\_set\_arn) | (Required) The ARN of the Permission Set that the admin wants to grant the principal access to. | `string` | n/a | yes |
+| <a name="input_groups"></a> [groups](#input\_groups) | (Optional) List of names of Group entities who can access to the Permission Set. | `list(string)` | `[]` | no |
+| <a name="input_users"></a> [users](#input\_users) | (Optional) List of names of User entities who can access to the Permission Set. | `list(string)` | `[]` | no |
 
 ## Outputs
 
