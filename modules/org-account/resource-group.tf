@@ -7,37 +7,24 @@ locals {
       replace(local.metadata.name, "/[^a-zA-Z0-9_\\.-]/", "-"),
     ])
   )
-  resource_group_filters = [
-    for key, value in local.module_tags : {
-      "Key"    = key
-      "Values" = [value]
-    }
-  ]
-  resource_group_query = <<-JSON
-  {
-    "ResourceTypeFilters": [
-      "AWS::AllSupported"
-    ],
-    "TagFilters": ${jsonencode(local.resource_group_filters)}
-  }
-  JSON
 }
 
-resource "aws_resourcegroups_group" "this" {
+
+module "resource_group" {
+  source  = "tedilabs/misc/aws//modules/resource-group"
+  version = "~> 0.10.0"
+
   count = (var.resource_group_enabled && var.module_tags_enabled) ? 1 : 0
 
   name        = local.resource_group_name
   description = var.resource_group_description
 
-  resource_query {
-    type  = "TAG_FILTERS_1_0"
-    query = local.resource_group_query
+  query = {
+    resource_tags = local.module_tags
   }
 
+  module_tags_enabled = false
   tags = merge(
-    {
-      "Name" = local.resource_group_name
-    },
     local.module_tags,
     var.tags,
   )
