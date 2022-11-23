@@ -1,3 +1,8 @@
+output "id" {
+  description = "The ID of this provider."
+  value       = aws_iam_openid_connect_provider.this.id
+}
+
 output "arn" {
   description = "The ARN assigned by AWS for this provider."
   value       = aws_iam_openid_connect_provider.this.arn
