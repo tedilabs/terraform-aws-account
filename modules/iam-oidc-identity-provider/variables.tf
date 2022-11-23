@@ -1,6 +1,11 @@
 variable "url" {
-  description = "(Required) The URL of the identity provider. Correspond to the `iss` claim."
+  description = "(Required) The secure OpenID Connect URL for authentication requests. Correspond to the `iss` claim. Maximum 255 characters. URL must begin with `https://`."
   type        = string
+
+  validation {
+    condition     = startswith(var.url, "https://")
+    error_message = "The value of `url` must bigin with `https://`."
+  }
 }
 
 variable "audiences" {
