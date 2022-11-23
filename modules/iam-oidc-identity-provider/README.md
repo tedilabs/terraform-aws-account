@@ -54,6 +54,7 @@ This module creates following resources.
 |------|-------------|
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS for this provider. |
 | <a name="output_audiences"></a> [audiences](#output\_audiences) | A list of audiences (also known as client IDs) for the IAM OIDC provider. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of this provider. |
 | <a name="output_thumbprints"></a> [thumbprints](#output\_thumbprints) | A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). |
 | <a name="output_url"></a> [url](#output\_url) | The URL of the identity provider. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
