@@ -20,6 +20,8 @@ Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-
   - Role
   - Service-linked Role
   - Policy
+  - OpenID Connect Identity Provider
+  - SAML Identity Provider
 - **AWS IAM Identity Center (AWS SSO)**
   - Account Assignment
   - Permission Set
@@ -27,6 +29,14 @@ Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-
   - Organization
   - Organization Unit
   - Account
+
+
+## Examples
+
+### IAM
+
+- [OIDC Identity Providers](./examples/iam-oidc-identity-providers)
+- [SAML Identity Providers](./examples/iam-saml-identity-providers)
 
 
 ## Other Terraform Modules from Tedilabs
