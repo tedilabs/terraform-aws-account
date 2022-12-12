@@ -2,46 +2,42 @@ data "aws_caller_identity" "this" {}
 data "aws_partition" "this" {}
 
 locals {
-  oidc_provider_urls = {
-    "google"      = "accounts.google.com"
-    "facebook"    = "graph.facebook.com"
-    "amazon"      = "www.amazon.com"
-    "aws-cognito" = "cognito-identity.amazonaws.com"
-  }
+  oidc_provider_common_urls = [
+    "accounts.google.com",
+    "cognito-identity.amazonaws.com",
+    "graph.facebook.com",
+    "www.amazon.com",
+  ]
   oidc_arn_prefix = "arn:${data.aws_partition.this.partition}:iam::${data.aws_caller_identity.this.account_id}:oidc-provider/"
 }
 
 data "aws_iam_policy_document" "trusted_oidc_providers" {
   for_each = {
-    for idx, provider in var.trusted_oidc_providers :
-    idx + 1 => provider
+    for provider in var.trusted_oidc_providers :
+    provider.name => provider
   }
 
   statement {
-    sid     = "TrustedOidcProviders${each.key}"
+    sid     = "TrustedOIDC${each.key}"
     effect  = "Allow"
     actions = ["sts:AssumeRoleWithWebIdentity"]
 
     principals {
       type = "Federated"
       identifiers = [
-        each.value.type != "aws-iam"
-        ? local.oidc_provider_urls[each.value.type]
+        contains(local.oidc_provider_common_urls, each.value.url)
+        ? each.value.url
         : "${local.oidc_arn_prefix}${each.value.url}"
       ]
     }
 
     dynamic "condition" {
-      for_each = var.trusted_oidc_conditions
+      for_each = each.value.conditions
 
       content {
-        variable = (
-          each.value.type != "aws-iam"
-          ? "${local.oidc_provider_urls[each.value.type]}:${condition.value.key}"
-          : "${each.value.url}:${condition.value.key}"
-        )
-        test   = condition.value.condition
-        values = condition.value.values
+        variable = "${each.value.url}:${condition.value.key}"
+        test     = condition.value.condition
+        values   = condition.value.values
       }
     }
 

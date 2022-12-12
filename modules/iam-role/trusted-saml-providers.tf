@@ -1,20 +1,21 @@
 data "aws_iam_policy_document" "trusted_saml_providers" {
-  for_each = toset(
-    length(var.trusted_saml_providers) > 0 ? ["this"] : []
-  )
+  for_each = {
+    for provider in var.trusted_saml_providers :
+    provider.name => provider
+  }
 
   statement {
-    sid     = "TrustedSamlProviders"
+    sid     = "TrustedSAML${each.key}"
     effect  = "Allow"
     actions = ["sts:AssumeRoleWithSAML"]
 
     principals {
       type        = "Federated"
-      identifiers = var.trusted_saml_providers
+      identifiers = [each.value.arn]
     }
 
     dynamic "condition" {
-      for_each = var.trusted_saml_conditions
+      for_each = each.value.conditions
 
       content {
         variable = "saml:${condition.value.key}"
