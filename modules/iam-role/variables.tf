@@ -57,6 +57,9 @@ variable "trusted_oidc_providers" {
     (Required) `name` - The name of the OIDC identity provider.
     (Required) `url` - The URL of the OIDC identity provider. If the provider is not common, the corresponding IAM OIDC Provider should be created before. Supported common OIDC providers are `accounts.google.com`, `cognito-identity.amazonaws.com`, `graph.facebook.com`, `www.amazon.com`.
     (Optional) `conditions` - A list of required conditions to assume the role via OIDC providers.
+      (Required) `key` - The OIDC key to match a condition for when a policy is in effect.
+      (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.
+      (Optional) `values` - A list of allowed values of OIDC key to match a condition with condition operator.
   EOF
   type = list(object({
     name = string
@@ -77,6 +80,9 @@ variable "trusted_saml_providers" {
     (Required) `name` - The name of the SAML identity provider.
     (Required) `arn` - The ARN of the SAML identity provider.
     (Optional) `conditions` - A list of required conditions to assume the role via SAML providers.
+      (Required) `key` - The SAML key to match a condition for when a policy is in effect.
+      (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.
+      (Optional) `values` - A list of allowed values of SAML key to match a condition with condition operator.
   EOF
   type = list(object({
     name = string
