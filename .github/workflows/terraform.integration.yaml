@@ -1,0 +1,104 @@
+name: Integration (Terraform)
+
+on:
+  push:
+    branches:
+    - main
+  pull_request: {}
+
+concurrency:
+  group: terraform-integration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changed:
+    name: Filter Changed Files and Directories
+    runs-on: ubuntu-latest
+
+    outputs:
+      changed: ${{ steps.set-outputs.outputs.changed }}
+      modified: ${{ steps.set-outputs.outputs.modified }}
+      changed_files: ${{ steps.set-outputs.outputs.changed_files }}
+      modified_files: ${{ steps.set-outputs.outputs.modified_files }}
+      changed_directories: ${{ steps.set-outputs.outputs.changed_directories }}
+      modified_directories: ${{ steps.set-outputs.outputs.modified_directories }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Get Changed Files
+      id: changed-files
+      uses: tj-actions/changed-files@v35
+      with:
+        files: |
+          modules/**
+        json: true
+
+    - name: Get Changed Directories
+      id: changed-directories
+      uses: tj-actions/changed-files@v35
+      with:
+        files: |
+          modules/**
+          examples/**
+        dir_names: "true"
+        dir_names_max_depth: 2
+        json: true
+
+    - name: Set outputs
+      id: set-outputs
+      run: |
+        echo "changed=${{ steps.changed-directories.outputs.any_changed }}" >> $GITHUB_OUTPUT
+        echo "modified=${{ steps.changed-directories.outputs.any_modified }}" >> $GITHUB_OUTPUT
+
+        echo "changed_files=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_OUTPUT
+        echo "modified_files=${{ steps.changed-files.outputs.all_modified_files }}" >> $GITHUB_OUTPUT
+
+        echo "changed_directories=${{ steps.changed-directories.outputs.all_changed_files }}" >> $GITHUB_OUTPUT
+        echo "modified_directories=${{ steps.changed-directories.outputs.all_modified_files }}" >> $GITHUB_OUTPUT
+
+
+  terraform:
+    name: Lint (terraform)
+    needs:
+    - changed
+    if: ${{ needs.changed.outputs.modified == 'true' }}
+    uses: tedilabs/.github/.github/workflows/terraform.terraform.yaml@main
+
+    strategy:
+      matrix:
+        path: ${{ fromJson(needs.changed.outputs.modified_directories) }}
+
+    with:
+      terraform_target_dir: ${{ matrix.path }}
+      terraform_version: latest
+      terraform_host: app.terraform.io
+    secrets:
+      terraform_token: ${{ secrets.TERRAFORM_TOKEN }}
+
+
+  tflint:
+    name: Lint (tflint)
+    needs:
+    - changed
+    if: ${{ needs.changed.outputs.modified == 'true' }}
+    uses: tedilabs/.github/.github/workflows/terraform.tflint.yaml@main
+
+    strategy:
+      matrix:
+        path: ${{ fromJson(needs.changed.outputs.modified_directories) }}
+
+    with:
+      tflint_version: latest
+      tflint_config_file: .tflint.hcl
+      tflint_target_dir: ${{ matrix.path }}
+      tflint_recursive_enabled: false
+      tflint_terraform_init_enabled: true
+      terraform_version: latest
+      terraform_host: app.terraform.io
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      terraform_token: ${{ secrets.TERRAFORM_TOKEN }}
