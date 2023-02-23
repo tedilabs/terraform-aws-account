@@ -28,7 +28,7 @@ output "console_access" {
   description = "The information of the AWS console access and password for the user."
   value = {
     enabled            = try(var.console_access.enabled, true)
-    encrypted_password = one(aws_iam_user_login_profile.this.*.encrypted_password)
+    encrypted_password = one(aws_iam_user_login_profile.this[*].encrypted_password)
   }
 }
 
