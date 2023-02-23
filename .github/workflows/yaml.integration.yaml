@@ -1,0 +1,58 @@
+name: Integration (YAML)
+
+on:
+  push:
+    branches:
+    - main
+  pull_request: {}
+
+concurrency:
+  group: yaml-integration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changed:
+    name: Filter Changed Files and Directories
+    runs-on: ubuntu-latest
+
+    outputs:
+      changed: ${{ steps.set-outputs.outputs.changed }}
+      modified: ${{ steps.set-outputs.outputs.modified }}
+      changed_files: ${{ steps.set-outputs.outputs.changed_files }}
+      modified_files: ${{ steps.set-outputs.outputs.modified_files }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Get Changed Files
+      id: changed-files
+      uses: tj-actions/changed-files@v35
+      with:
+        files: |
+          **/*.yaml
+          **/*.yml
+        json: true
+
+    - name: Set outputs
+      id: set-outputs
+      run: |
+        echo "changed=${{ steps.changed-files.outputs.any_changed }}" >> $GITHUB_OUTPUT
+        echo "modified=${{ steps.changed-files.outputs.any_modified }}" >> $GITHUB_OUTPUT
+
+        echo "changed_files=${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_OUTPUT
+        echo "modified_files=${{ steps.changed-files.outputs.all_modified_files }}" >> $GITHUB_OUTPUT
+
+  lint:
+    name: Lint (yamllint)
+    needs:
+    - changed
+    if: ${{ needs.changed.outputs.modified == 'true' }}
+    uses: tedilabs/.github/.github/workflows/yaml.yamllint.yaml@main
+
+    with:
+      yamllint_version: latest
+      yamllint_config_file: .yamllint.yaml
+      yamllint_target_dir: ./
