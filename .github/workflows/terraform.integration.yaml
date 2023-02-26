@@ -35,6 +35,7 @@ jobs:
       with:
         files: |
           modules/**
+          examples/**
         json: true
 
     - name: Get Changed Directories
