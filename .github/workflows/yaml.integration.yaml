@@ -56,3 +56,5 @@ jobs:
       yamllint_version: latest
       yamllint_config_file: .yamllint.yaml
       yamllint_target_dir: ./
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}

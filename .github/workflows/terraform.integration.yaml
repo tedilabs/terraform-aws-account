@@ -78,6 +78,8 @@ jobs:
       terraform_version: latest
       terraform_host: app.terraform.io
     secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+      token: ${{ secrets.GITHUB_TOKEN }}
       terraform_token: ${{ secrets.TERRAFORM_TOKEN }}
 
 
@@ -101,5 +103,6 @@ jobs:
       terraform_version: latest
       terraform_host: app.terraform.io
     secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
       token: ${{ secrets.GITHUB_TOKEN }}
       terraform_token: ${{ secrets.TERRAFORM_TOKEN }}
