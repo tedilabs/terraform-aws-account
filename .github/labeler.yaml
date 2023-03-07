@@ -35,6 +35,9 @@
 ":floppy_disk: region":
 - modules/region/**/*
 
+":floppy_disk: sso-access-control-attributes":
+- modules/sso-access-control-attributes/**/*
+
 ":floppy_disk: sso-account-assignments":
 - modules/sso-account-assignments/**/*
 
