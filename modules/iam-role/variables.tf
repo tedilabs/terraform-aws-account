@@ -37,6 +37,22 @@ variable "permissions_boundary" {
   default     = null
 }
 
+variable "trusted_session_tagging" {
+  description = <<EOF
+  (Optional) A configurations of session tags in AWS STS. `trusted_session_tagging` block as defined below.
+    (Optional) `enabled` - Indicate whether you want to enable session tagging. Defaults to `true`.
+    (Optional) `allowed_tags` - A map of tag key/values pairs to limit the tag keys and values that can be used as session tags.
+    (Optional) `allowed_transitive_tag_keys` - A set of tag keys to limit the maximum set of transitive tags.
+  EOF
+  type = object({
+    enabled                     = optional(bool, true)
+    allowed_tags                = optional(map(set(string)), {})
+    allowed_transitive_tag_keys = optional(set(string), [])
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "trusted_iam_entities" {
   description = "A list of ARNs of AWS IAM entities who can assume the role."
   type        = list(string)
