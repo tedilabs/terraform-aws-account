@@ -67,8 +67,7 @@ module "role" {
 
   trusted_oidc_providers = [
     {
-      name = "github"
-      url  = "token.actions.githubusercontent.com"
+      url = "token.actions.githubusercontent.com"
       conditions = [
         {
           key       = "aud"
