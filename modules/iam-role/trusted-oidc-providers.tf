@@ -88,4 +88,43 @@ data "aws_iam_policy_document" "trusted_oidc_providers" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_session_tagging.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedTagSession${each.key}"
+      effect  = "Allow"
+      actions = ["sts:TagSession"]
+
+      principals {
+        type = "Federated"
+        identifiers = [
+          contains(local.oidc_provider_common_urls, each.value.url)
+          ? each.value.url
+          : "${local.oidc_provider_arn_prefix}${each.value.url}"
+        ]
+      }
+
+      dynamic "condition" {
+        for_each = var.trusted_session_tagging.allowed_tags
+
+        content {
+          test     = "StringLike"
+          variable = "aws:RequestTag/${condition.key}"
+          values   = condition.value.values
+        }
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_session_tagging.allowed_transitive_tag_keys) > 0 ? ["go"] : []
+
+        content {
+          test     = "ForAllValues:StringLike"
+          variable = "sts:TransitiveTagKeys"
+          values   = var.trusted_session_tagging.allowed_transitive_tag_keys
+        }
+      }
+    }
+  }
 }
