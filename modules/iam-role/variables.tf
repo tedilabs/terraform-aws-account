@@ -54,7 +54,6 @@ variable "trusted_services" {
 variable "trusted_oidc_providers" {
   description = <<EOF
   (Optional) A list of configurations of OIDC identity providers. Each value of `trusted_oidc_providers` as defined below.
-    (Required) `name` - The name of the OIDC identity provider.
     (Required) `url` - The URL of the OIDC identity provider. If the provider is not common, the corresponding IAM OIDC Provider should be created before. Supported common OIDC providers are `accounts.google.com`, `cognito-identity.amazonaws.com`, `graph.facebook.com`, `www.amazon.com`.
     (Optional) `conditions` - A list of required conditions to assume the role via OIDC providers.
       (Required) `key` - The OIDC key to match a condition for when a policy is in effect.
@@ -62,8 +61,7 @@ variable "trusted_oidc_providers" {
       (Optional) `values` - A list of allowed values of OIDC key to match a condition with condition operator.
   EOF
   type = list(object({
-    name = string
-    url  = string
+    url = string
     conditions = optional(list(object({
       key       = string
       condition = string
@@ -78,7 +76,6 @@ variable "trusted_saml_providers" {
   description = <<EOF
   (Optional) A list of configurations of SAML identity providers. Each value of `trusted_saml_providers` as defined below.
     (Required) `name` - The name of the SAML identity provider.
-    (Required) `arn` - The ARN of the SAML identity provider.
     (Optional) `conditions` - A list of required conditions to assume the role via SAML providers.
       (Required) `key` - The SAML key to match a condition for when a policy is in effect.
       (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.
@@ -86,7 +83,6 @@ variable "trusted_saml_providers" {
   EOF
   type = list(object({
     name = string
-    arn  = string
     conditions = optional(list(object({
       key       = string
       condition = string
