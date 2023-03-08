@@ -98,4 +98,29 @@ data "aws_iam_policy_document" "trusted_services" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_source_identity.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedSourceIdentity"
+      effect  = "Allow"
+      actions = ["sts:SetSourceIdentity"]
+
+      principals {
+        type        = "Service"
+        identifiers = var.trusted_services
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_source_identity.allowed_identities) > 0 ? ["go"] : []
+
+        content {
+          test     = "StringLike"
+          variable = "sts:SourceIdentity"
+          values   = var.trusted_source_identity.allowed_identities
+        }
+      }
+    }
+  }
 }

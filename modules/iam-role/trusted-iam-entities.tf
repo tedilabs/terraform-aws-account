@@ -118,4 +118,29 @@ data "aws_iam_policy_document" "trusted_iam_entities" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_source_identity.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedSourceIdentity"
+      effect  = "Allow"
+      actions = ["sts:SetSourceIdentity"]
+
+      principals {
+        type        = "AWS"
+        identifiers = var.trusted_iam_entities
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_source_identity.allowed_identities) > 0 ? ["go"] : []
+
+        content {
+          test     = "StringLike"
+          variable = "sts:SourceIdentity"
+          values   = var.trusted_source_identity.allowed_identities
+        }
+      }
+    }
+  }
 }

@@ -53,6 +53,20 @@ variable "trusted_session_tagging" {
   nullable = false
 }
 
+variable "trusted_source_identity" {
+  description = <<EOF
+  (Optional) A configurations of source identity in AWS STS. `trusted_source_identity` block as defined below.
+    (Optional) `enabled` - Indicate whether you want to enable source identity configuration. Defaults to `true`.
+    (Optional) `allowed_identities` - A set of identities to limit the maximum set of source identities.
+  EOF
+  type = object({
+    enabled            = optional(bool, true)
+    allowed_identities = optional(set(string), [])
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "trusted_iam_entities" {
   description = "A list of ARNs of AWS IAM entities who can assume the role."
   type        = list(string)
