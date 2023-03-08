@@ -1,6 +1,3 @@
-data "aws_caller_identity" "this" {}
-data "aws_partition" "this" {}
-
 locals {
   oidc_provider_common_urls = [
     "accounts.google.com",
@@ -8,13 +5,13 @@ locals {
     "graph.facebook.com",
     "www.amazon.com",
   ]
-  oidc_arn_prefix = "arn:${data.aws_partition.this.partition}:iam::${data.aws_caller_identity.this.account_id}:oidc-provider/"
+  oidc_provider_arn_prefix = "arn:${local.partition}:iam::${local.account_id}:oidc-provider/"
 }
 
 data "aws_iam_policy_document" "trusted_oidc_providers" {
   for_each = {
-    for provider in var.trusted_oidc_providers :
-    provider.name => provider
+    for idx, provider in var.trusted_oidc_providers :
+    idx => provider
   }
 
   statement {
@@ -27,7 +24,7 @@ data "aws_iam_policy_document" "trusted_oidc_providers" {
       identifiers = [
         contains(local.oidc_provider_common_urls, each.value.url)
         ? each.value.url
-        : "${local.oidc_arn_prefix}${each.value.url}"
+        : "${local.oidc_provider_arn_prefix}${each.value.url}"
       ]
     }
 

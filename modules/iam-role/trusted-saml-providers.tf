@@ -1,7 +1,11 @@
+locals {
+  saml_provider_arn_prefix = "arn:${local.partition}:iam::${local.account_id}:saml-provider/"
+}
+
 data "aws_iam_policy_document" "trusted_saml_providers" {
   for_each = {
-    for provider in var.trusted_saml_providers :
-    provider.name => provider
+    for idx, provider in var.trusted_saml_providers :
+    idx => provider
   }
 
   statement {
@@ -11,7 +15,7 @@ data "aws_iam_policy_document" "trusted_saml_providers" {
 
     principals {
       type        = "Federated"
-      identifiers = [each.value.arn]
+      identifiers = ["${local.saml_provider_arn_prefix}${each.value.name}"]
     }
 
     dynamic "condition" {
