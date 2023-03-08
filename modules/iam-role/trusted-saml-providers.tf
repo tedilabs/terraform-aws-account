@@ -113,4 +113,29 @@ data "aws_iam_policy_document" "trusted_saml_providers" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_source_identity.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedSourceIdentity${each.key}"
+      effect  = "Allow"
+      actions = ["sts:SetSourceIdentity"]
+
+      principals {
+        type        = "Federated"
+        identifiers = ["${local.saml_provider_arn_prefix}${each.value.name}"]
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_source_identity.allowed_identities) > 0 ? ["go"] : []
+
+        content {
+          test     = "StringLike"
+          variable = "sts:SourceIdentity"
+          values   = var.trusted_source_identity.allowed_identities
+        }
+      }
+    }
+  }
 }
