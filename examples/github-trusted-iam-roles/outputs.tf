@@ -1,7 +1,9 @@
 output "oidc_providers" {
-  value = module.oidc_provider
+  description = "A list of IAM OIDC Identity Providers."
+  value       = module.oidc_provider
 }
 
 output "roles" {
-  value = module.role
+  description = "A list of IAM Roles."
+  value       = module.role
 }

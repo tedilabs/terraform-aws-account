@@ -1,3 +1,4 @@
 output "saml_providers" {
-  value = module.saml_provider
+  description = "A list of IAM SAML Identity Providers."
+  value       = module.saml_provider
 }
