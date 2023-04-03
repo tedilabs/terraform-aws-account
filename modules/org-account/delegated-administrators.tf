@@ -1,6 +1,7 @@
 locals {
   independent_services = [
     "fms.amazonaws.com",
+    "ipam.amazonaws.com",
     "macie.amazonaws.com",
     "securityhub.amazonaws.com",
   ]
@@ -38,4 +39,10 @@ resource "aws_securityhub_organization_admin_account" "this" {
   count = contains(var.delegated_services, "securityhub.amazonaws.com") ? 1 : 0
 
   admin_account_id = aws_organizations_account.this.id
+}
+
+resource "aws_vpc_ipam_organization_admin_account" "this" {
+  count = contains(var.delegated_services, "ipam.amazonaws.com") ? 1 : 0
+
+  delegated_admin_account_id = aws_organizations_account.this.id
 }
