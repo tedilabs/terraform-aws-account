@@ -65,7 +65,7 @@ module "role" {
   description = try(each.value.description, "Managed by Terraform.")
   path        = try(each.value.path, "/")
 
-  trusted_oidc_providers = [
+  trusted_oidc_provider_policies = [
     {
       url = "token.actions.githubusercontent.com"
       conditions = [

@@ -40,10 +40,10 @@ resource "aws_iam_role" "this" {
 
 data "aws_iam_policy_document" "trusted_entities" {
   source_policy_documents = concat(
-    values(data.aws_iam_policy_document.trusted_iam_entities)[*].json,
-    values(data.aws_iam_policy_document.trusted_services)[*].json,
-    values(data.aws_iam_policy_document.trusted_oidc_providers)[*].json,
-    values(data.aws_iam_policy_document.trusted_saml_providers)[*].json,
+    values(data.aws_iam_policy_document.trusted_iam_entity_policies)[*].json,
+    values(data.aws_iam_policy_document.trusted_service_policies)[*].json,
+    values(data.aws_iam_policy_document.trusted_oidc_provider_policies)[*].json,
+    values(data.aws_iam_policy_document.trusted_saml_provider_policies)[*].json,
   )
 }
 

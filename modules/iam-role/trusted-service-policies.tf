@@ -1,16 +1,17 @@
-data "aws_iam_policy_document" "trusted_iam_entities" {
-  for_each = toset(
-    length(var.trusted_iam_entities) > 0 ? ["this"] : []
-  )
+data "aws_iam_policy_document" "trusted_service_policies" {
+  for_each = {
+    for idx, policy in var.trusted_service_policies :
+    idx => policy
+  }
 
   statement {
-    sid     = "TrustedIamEntities"
+    sid     = "TrustedServices${each.key}"
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
     principals {
-      type        = "AWS"
-      identifiers = var.trusted_iam_entities
+      type        = "Service"
+      identifiers = each.value.services
     }
 
     dynamic "condition" {
@@ -24,62 +25,52 @@ data "aws_iam_policy_document" "trusted_iam_entities" {
     }
 
     dynamic "condition" {
-      for_each = var.mfa_required ? ["go"] : []
+      for_each = each.value.conditions
 
       content {
-        test     = "Bool"
-        variable = "aws:MultiFactorAuthPresent"
-        values   = [tostring(var.mfa_required)]
+        variable = condition.value.key
+        test     = condition.value.condition
+        values   = condition.value.values
       }
     }
 
     dynamic "condition" {
-      for_each = var.mfa_required ? ["go"] : []
-
-      content {
-        test     = "NumericLessThan"
-        variable = "aws:MultiFactorAuthAge"
-        values   = [var.mfa_ttl]
-      }
-    }
-
-    dynamic "condition" {
-      for_each = var.effective_date != null ? ["go"] : []
+      for_each = each.value.effective_date != null ? ["go"] : []
 
       content {
         test     = "DateGreaterThan"
         variable = "aws:CurrentTime"
-        values   = [var.effective_date]
+        values   = [each.value.effective_date]
       }
     }
 
     dynamic "condition" {
-      for_each = var.expiration_date != null ? ["go"] : []
+      for_each = each.value.expiration_date != null ? ["go"] : []
 
       content {
         test     = "DateLessThan"
         variable = "aws:CurrentTime"
-        values   = [var.expiration_date]
+        values   = [each.value.expiration_date]
       }
     }
 
     dynamic "condition" {
-      for_each = length(var.source_ip_whitelist) > 0 ? ["go"] : []
+      for_each = length(each.value.source_ip_whitelist) > 0 ? ["go"] : []
 
       content {
         test     = "IpAddress"
         variable = "aws:SourceIp"
-        values   = var.source_ip_whitelist
+        values   = each.value.source_ip_whitelist
       }
     }
 
     dynamic "condition" {
-      for_each = length(var.source_ip_blacklist) > 0 ? ["go"] : []
+      for_each = length(each.value.source_ip_blacklist) > 0 ? ["go"] : []
 
       content {
         test     = "NotIpAddress"
         variable = "aws:SourceIp"
-        values   = var.source_ip_blacklist
+        values   = each.value.source_ip_blacklist
       }
     }
   }
@@ -88,13 +79,13 @@ data "aws_iam_policy_document" "trusted_iam_entities" {
     for_each = var.trusted_session_tagging.enabled ? ["go"] : []
 
     content {
-      sid     = "TrustedTagSession"
+      sid     = "TrustedTagSessionForServices${each.key}"
       effect  = "Allow"
       actions = ["sts:TagSession"]
 
       principals {
-        type        = "AWS"
-        identifiers = var.trusted_iam_entities
+        type        = "Service"
+        identifiers = each.value.services
       }
 
       dynamic "condition" {
@@ -123,13 +114,13 @@ data "aws_iam_policy_document" "trusted_iam_entities" {
     for_each = var.trusted_source_identity.enabled ? ["go"] : []
 
     content {
-      sid     = "TrustedSourceIdentity"
+      sid     = "TrustedSourceIdentityForServices${each.key}"
       effect  = "Allow"
       actions = ["sts:SetSourceIdentity"]
 
       principals {
-        type        = "AWS"
-        identifiers = var.trusted_iam_entities
+        type        = "Service"
+        identifiers = each.value.services
       }
 
       dynamic "condition" {
