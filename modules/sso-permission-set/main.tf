@@ -78,3 +78,34 @@ resource "aws_ssoadmin_permission_set_inline_policy" "this" {
   permission_set_arn = aws_ssoadmin_permission_set.this.arn
   inline_policy      = var.inline_policy
 }
+
+
+###################################################
+# Permissions Boundary Policy
+###################################################
+
+resource "aws_ssoadmin_permissions_boundary_attachment" "this" {
+  count = var.permissions_boundary != null ? 1 : 0
+
+  instance_arn       = aws_ssoadmin_permission_set.this.instance_arn
+  permission_set_arn = aws_ssoadmin_permission_set.this.arn
+
+  dynamic "permissions_boundary" {
+    for_each = var.permissions_boundary.type == "CUSTOMER_MANAGED" ? [var.permissions_boundary] : []
+
+    content {
+      customer_managed_policy_reference {
+        name = permissions_boundary.value.name
+        path = permissions_boundary.value.path
+      }
+    }
+  }
+
+  dynamic "permissions_boundary" {
+    for_each = var.permissions_boundary.type == "AWS_MANAGED" ? [var.permissions_boundary] : []
+
+    content {
+      managed_policy_arn = permissions_boundary.value.arn
+    }
+  }
+}
