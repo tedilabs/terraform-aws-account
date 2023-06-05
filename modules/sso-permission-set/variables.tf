@@ -45,6 +45,31 @@ variable "inline_policy" {
   default     = null
 }
 
+variable "permissions_boundary" {
+  description = <<EOF
+  (Optional) The configuration for the permissions boundary policy to be attached to the Permission Set. `permissions_boundary` block as defined below.
+    (Required) `type` - The type of the permissions boundary policy. Valid values are `AWS_MANAGED` or `CUSTOMER_MANAGED`.
+    (Optional) `name` - The name of the customer managed permissions boundary policy. Required if `type` is `CUSTOMER_MANAGED`.
+    (Optional) `path` - The path of the customer managed permissions boundary policy. Required if `type` is `CUSTOMER_MANAGED`. Default to `/`.
+    (Optional) `arn` - The ARN of the AWS-managed permissions boundary policy. Required if `type` is `AWS_MANAGED`.
+  EOF
+  type = object({
+    type = string
+    name = optional(string)
+    path = optional(string, "/")
+    arn  = optional(string)
+  })
+  default = null
+
+  validation {
+    condition = (var.permissions_boundary != null
+      ? contains(["AWS_MANAGED", "CUSTOMER_MANAGED"], var.permissions_boundary.type)
+      : true
+    )
+    error_message = "Value of the type should be either `AWS_MANAGED` or `CUSTOMER_MANAGED`."
+  }
+}
+
 variable "tags" {
   description = "(Optional) A map of tags to add to all resources."
   type        = map(string)

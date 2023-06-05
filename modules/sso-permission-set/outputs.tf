@@ -33,6 +33,11 @@ output "inline_policy" {
   value       = var.inline_policy
 }
 
+output "permissions_boundary" {
+  description = "The configuration for the permissions boundary policy of the Permission Set."
+  value       = var.permissions_boundary
+}
+
 output "created_at" {
   description = "The date the Permission Set was created in RFC3339 format."
   value       = aws_ssoadmin_permission_set.this.created_date
