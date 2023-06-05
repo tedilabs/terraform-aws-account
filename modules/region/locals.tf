@@ -43,6 +43,13 @@ locals {
     "fms/protocols-per-protocol-list"                              = "L-1513E67B"
     "fms/tags-per-resource-tags-filter"                            = "L-CDB85E02"
     "fms/rule-groups-per-waf-policy"                               = "L-F8EEB3E5"
+    # IAM
+    "iam/customer-managed-policies-per-account" = "L-E95E4862"
+    "iam/instance-profiles-per-account"         = "L-6E65F664"
+    "iam/managed-policies-per-role"             = "L-0DA4ABF3"
+    "iam/managed-policies-per-user"             = "L-4019AD8B"
+    "iam/roles-per-account"                     = "L-FE177D64"
+    "iam/role-trust-policy-length"              = "L-C07B4B0D"
     # Resource Groups
     "resource-groups/resource-groups-per-account" = "L-2BAA18A0"
     # Route53
