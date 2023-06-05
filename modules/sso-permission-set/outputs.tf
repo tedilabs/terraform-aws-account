@@ -24,8 +24,24 @@ output "relay_state" {
 }
 
 output "managed_policies" {
-  description = "List of ARNs of IAM managed policies which are attached to the Permission Set."
-  value       = var.managed_policies
+  description = "A list of managed policies which are attached to the Permission Set."
+  value = [
+    for policy in var.managed_policies :
+    try(
+      {
+        type = policy.type
+        arn  = aws_ssoadmin_managed_policy_attachment.this[policy.arn].managed_policy_arn
+        name = aws_ssoadmin_managed_policy_attachment.this[policy.arn].managed_policy_name
+        path = trimsuffix(trimprefix(policy.arn, "arn:aws:iam::aws:policy"), aws_ssoadmin_managed_policy_attachment.this[policy.arn].managed_policy_name)
+      },
+      {
+        type = policy.type
+        arn  = null
+        name = policy.name
+        path = policy.path
+      },
+    )
+  ]
 }
 
 output "inline_policy" {

@@ -33,10 +33,45 @@ variable "relay_state" {
 }
 
 variable "managed_policies" {
-  description = "(Optional) List of ARNs of IAM managed policies to be attached to the Permission Set."
-  type        = list(string)
-  default     = []
-  nullable    = false
+  description = <<EOF
+  (Optional) The configuration for managed policies to be attached to the Permission Set. You can assign AWS managed policies, customer managed policies. Each value of `managed_policies` block as defined below.
+    (Required) `type` - The type of the managed policy. Valid values are `AWS_MANAGED` or `CUSTOMER_MANAGED`.
+    (Optional) `name` - The name of the customer managed policy. Required if `type` is `CUSTOMER_MANAGED`.
+    (Optional) `path` - The path of the customer managed policy. Default to `/`.
+    (Optional) `arn` - The ARN of the AWS-managed policy. Required if `type` is `AWS_MANAGED`.
+  EOF
+  type = list(object({
+    type = string
+    name = optional(string)
+    path = optional(string, "/")
+    arn  = optional(string)
+  }))
+  default  = []
+  nullable = false
+
+  validation {
+    condition = alltrue([
+      for policy in var.managed_policies :
+      contains(["AWS_MANAGED", "CUSTOMER_MANAGED"], policy.type)
+    ])
+    error_message = "Value of the type should be either `AWS_MANAGED` or `CUSTOMER_MANAGED`."
+  }
+  validation {
+    condition = alltrue([
+      for policy in var.managed_policies :
+      policy.arn != null
+      if policy.type == "AWS_MANAGED"
+    ])
+    error_message = "`arn` is required if `type` is `AWS_MANAGED`."
+  }
+  validation {
+    condition = alltrue([
+      for policy in var.managed_policies :
+      policy.name != null
+      if policy.type == "CUSTOMER_MANAGED"
+    ])
+    error_message = "`name` is required if `type` is `CUSTOMER_MANAGED`."
+  }
 }
 
 variable "inline_policy" {
@@ -50,7 +85,7 @@ variable "permissions_boundary" {
   (Optional) The configuration for the permissions boundary policy to be attached to the Permission Set. `permissions_boundary` block as defined below.
     (Required) `type` - The type of the permissions boundary policy. Valid values are `AWS_MANAGED` or `CUSTOMER_MANAGED`.
     (Optional) `name` - The name of the customer managed permissions boundary policy. Required if `type` is `CUSTOMER_MANAGED`.
-    (Optional) `path` - The path of the customer managed permissions boundary policy. Required if `type` is `CUSTOMER_MANAGED`. Default to `/`.
+    (Optional) `path` - The path of the customer managed permissions boundary policy. Default to `/`.
     (Optional) `arn` - The ARN of the AWS-managed permissions boundary policy. Required if `type` is `AWS_MANAGED`.
   EOF
   type = object({
@@ -67,6 +102,26 @@ variable "permissions_boundary" {
       : true
     )
     error_message = "Value of the type should be either `AWS_MANAGED` or `CUSTOMER_MANAGED`."
+  }
+  validation {
+    condition = (var.permissions_boundary != null
+      ? alltrue([
+        var.permissions_boundary.type == "AWS_MANAGED",
+        var.permissions_boundary.arn != null
+      ])
+      : true
+    )
+    error_message = "`arn` is required if `type` is `AWS_MANAGED`."
+  }
+  validation {
+    condition = (var.permissions_boundary != null
+      ? alltrue([
+        var.permissions_boundary.type == "CUSTOMER_MANAGED",
+        var.permissions_boundary.name != null
+      ])
+      : true
+    )
+    error_message = "`name` is required if `type` is `CUSTOMER_MANAGED`."
   }
 }
 
