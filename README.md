@@ -6,6 +6,23 @@
 
 Terraform module which creates Account and IAM related resources on AWS.
 
+- [account](./modules/account)
+- [iam-group](./modules/iam-group)
+- [iam-oidc-identity-provider](./modules/iam-oidc-identity-provider)
+- [iam-role](./modules/iam-role)
+- [iam-saml-identity-provider](./modules/iam-saml-identity-provider)
+- [iam-service-linked-role](./modules/iam-service-linked-role)
+- [iam-user](./modules/iam-user)
+- [managed-policies](./modules/managed-policies)
+- [org-account](./modules/org-account)
+- [org-organization](./modules/org-organization)
+- [org-organizational-unit](./modules/org-organizational-unit)
+- [ram-share](./modules/ram-share)
+- [region](./modules/region)
+- [sso-access-control-attributes](./modules/sso-access-control-attributes)
+- [sso-account-assignment](./modules/sso-account-assignment)
+- [sso-permission-set](./modules/sso-permission-set)
+
 
 ## Target AWS Services
 
@@ -23,12 +40,15 @@ Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-
   - OpenID Connect Identity Provider
   - SAML Identity Provider
 - **AWS IAM Identity Center (AWS SSO)**
+  - Access Control Attributes
   - Account Assignment
   - Permission Set
 - **AWS Organization**
   - Organization
   - Organization Unit
   - Account
+- **AWS RAM (Resource Access Manager)**
+  - Share
 
 
 ## Examples
