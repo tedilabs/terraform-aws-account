@@ -1,41 +1,21 @@
 locals {
-  oidc_provider_common_urls = [
-    "accounts.google.com",
-    "cognito-identity.amazonaws.com",
-    "graph.facebook.com",
-    "www.amazon.com",
-  ]
-  oidc_provider_arn_prefix = "arn:${local.partition}:iam::${local.account_id}:oidc-provider/"
+  saml_provider_arn_prefix = "arn:${local.partition}:iam::${local.account_id}:saml-provider/"
 }
 
-data "aws_iam_policy_document" "trusted_oidc_providers" {
+data "aws_iam_policy_document" "trusted_saml_provider_policies" {
   for_each = {
-    for idx, provider in var.trusted_oidc_providers :
-    idx => provider
+    for idx, policy in var.trusted_saml_provider_policies :
+    idx => policy
   }
 
   statement {
-    sid     = "TrustedOIDC${each.key}"
+    sid     = "TrustedSAML${each.key}"
     effect  = "Allow"
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+    actions = ["sts:AssumeRoleWithSAML"]
 
     principals {
-      type = "Federated"
-      identifiers = [
-        contains(local.oidc_provider_common_urls, each.value.url)
-        ? each.value.url
-        : "${local.oidc_provider_arn_prefix}${each.value.url}"
-      ]
-    }
-
-    dynamic "condition" {
-      for_each = each.value.conditions
-
-      content {
-        variable = "${each.value.url}:${condition.value.key}"
-        test     = condition.value.condition
-        values   = condition.value.values
-      }
+      type        = "Federated"
+      identifiers = ["${local.saml_provider_arn_prefix}${each.value.name}"]
     }
 
     dynamic "condition" {
@@ -49,42 +29,52 @@ data "aws_iam_policy_document" "trusted_oidc_providers" {
     }
 
     dynamic "condition" {
-      for_each = var.effective_date != null ? ["go"] : []
+      for_each = each.value.conditions
+
+      content {
+        variable = "saml:${condition.value.key}"
+        test     = condition.value.condition
+        values   = condition.value.values
+      }
+    }
+
+    dynamic "condition" {
+      for_each = each.value.effective_date != null ? ["go"] : []
 
       content {
         test     = "DateGreaterThan"
         variable = "aws:CurrentTime"
-        values   = [var.effective_date]
+        values   = [each.value.effective_date]
       }
     }
 
     dynamic "condition" {
-      for_each = var.expiration_date != null ? ["go"] : []
+      for_each = each.value.expiration_date != null ? ["go"] : []
 
       content {
         test     = "DateLessThan"
         variable = "aws:CurrentTime"
-        values   = [var.expiration_date]
+        values   = [each.value.expiration_date]
       }
     }
 
     dynamic "condition" {
-      for_each = length(var.source_ip_whitelist) > 0 ? ["go"] : []
+      for_each = length(each.value.source_ip_whitelist) > 0 ? ["go"] : []
 
       content {
         test     = "IpAddress"
         variable = "aws:SourceIp"
-        values   = var.source_ip_whitelist
+        values   = each.value.source_ip_whitelist
       }
     }
 
     dynamic "condition" {
-      for_each = length(var.source_ip_blacklist) > 0 ? ["go"] : []
+      for_each = length(each.value.source_ip_blacklist) > 0 ? ["go"] : []
 
       content {
         test     = "NotIpAddress"
         variable = "aws:SourceIp"
-        values   = var.source_ip_blacklist
+        values   = each.value.source_ip_blacklist
       }
     }
   }
@@ -93,17 +83,13 @@ data "aws_iam_policy_document" "trusted_oidc_providers" {
     for_each = var.trusted_session_tagging.enabled ? ["go"] : []
 
     content {
-      sid     = "TrustedTagSession${each.key}"
+      sid     = "TrustedTagSessionSamlProvider${each.key}"
       effect  = "Allow"
       actions = ["sts:TagSession"]
 
       principals {
-        type = "Federated"
-        identifiers = [
-          contains(local.oidc_provider_common_urls, each.value.url)
-          ? each.value.url
-          : "${local.oidc_provider_arn_prefix}${each.value.url}"
-        ]
+        type        = "Federated"
+        identifiers = ["${local.saml_provider_arn_prefix}${each.value.name}"]
       }
 
       dynamic "condition" {
@@ -132,17 +118,13 @@ data "aws_iam_policy_document" "trusted_oidc_providers" {
     for_each = var.trusted_source_identity.enabled ? ["go"] : []
 
     content {
-      sid     = "TrustedSourceIdentity${each.key}"
+      sid     = "TrustedSourceIdentityForSamlProvider${each.key}"
       effect  = "Allow"
       actions = ["sts:SetSourceIdentity"]
 
       principals {
-        type = "Federated"
-        identifiers = [
-          contains(local.oidc_provider_common_urls, each.value.url)
-          ? each.value.url
-          : "${local.oidc_provider_arn_prefix}${each.value.url}"
-        ]
+        type        = "Federated"
+        identifiers = ["${local.saml_provider_arn_prefix}${each.value.name}"]
       }
 
       dynamic "condition" {
