@@ -110,7 +110,7 @@ variable "trusted_iam_entity_policies" {
       can(formatdate("", policy.effective_date))
       if policy.effective_date != null
     ])
-    error_message = "`effective_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`effective_date` should be a valid RFC 3339 timestamp."
   }
   validation {
     condition = alltrue([
@@ -118,7 +118,7 @@ variable "trusted_iam_entity_policies" {
       can(formatdate("", policy.expiration_date))
       if policy.expiration_date != null
     ])
-    error_message = "`expiration_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`expiration_date` should be a valid RFC 3339 timestamp."
   }
 }
 
@@ -157,7 +157,7 @@ variable "trusted_service_policies" {
       can(formatdate("", policy.effective_date))
       if policy.effective_date != null
     ])
-    error_message = "`effective_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`effective_date` should be a valid RFC 3339 timestamp."
   }
   validation {
     condition = alltrue([
@@ -165,7 +165,7 @@ variable "trusted_service_policies" {
       can(formatdate("", policy.expiration_date))
       if policy.expiration_date != null
     ])
-    error_message = "`expiration_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`expiration_date` should be a valid RFC 3339 timestamp."
   }
 }
 
@@ -204,7 +204,7 @@ variable "trusted_oidc_provider_policies" {
       can(formatdate("", policy.effective_date))
       if policy.effective_date != null
     ])
-    error_message = "`effective_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`effective_date` should be a valid RFC 3339 timestamp."
   }
   validation {
     condition = alltrue([
@@ -212,7 +212,7 @@ variable "trusted_oidc_provider_policies" {
       can(formatdate("", policy.expiration_date))
       if policy.expiration_date != null
     ])
-    error_message = "`expiration_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`expiration_date` should be a valid RFC 3339 timestamp."
   }
 }
 
@@ -251,7 +251,7 @@ variable "trusted_saml_provider_policies" {
       can(formatdate("", policy.effective_date))
       if policy.effective_date != null
     ])
-    error_message = "`effective_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`effective_date` should be a valid RFC 3339 timestamp."
   }
   validation {
     condition = alltrue([
@@ -259,7 +259,7 @@ variable "trusted_saml_provider_policies" {
       can(formatdate("", policy.expiration_date))
       if policy.expiration_date != null
     ])
-    error_message = "`expiration_date` should be a valid RFC 3339 timestampolicy."
+    error_message = "`expiration_date` should be a valid RFC 3339 timestamp."
   }
 }
 
