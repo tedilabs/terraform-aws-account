@@ -5,8 +5,11 @@ This module creates following resources.
 - `aws_organizations_account`
 - `aws_organizations_policy_attachment` (optional)
 - `aws_organizations_delegated_administrator` (optional)
-- `aws_macie2_organization_admin_account` (optional)
 - `aws_fms_admin_account` (optional)
+- `aws_guardduty_organization_admin_account` (optional)
+- `aws_macie2_organization_admin_account` (optional)
+- `aws_securityhub_organization_admin_account` (optional)
+- `aws_vpc_ipam_organization_admin_account` (optional)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -33,6 +36,7 @@ This module creates following resources.
 | Name | Type |
 |------|------|
 | [aws_fms_admin_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/fms_admin_account) | resource |
+| [aws_guardduty_organization_admin_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/guardduty_organization_admin_account) | resource |
 | [aws_macie2_organization_admin_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/macie2_organization_admin_account) | resource |
 | [aws_organizations_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account) | resource |
 | [aws_organizations_delegated_administrator.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_delegated_administrator) | resource |
