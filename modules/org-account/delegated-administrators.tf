@@ -2,6 +2,7 @@ locals {
   independent_services = [
     "fms.amazonaws.com",
     "guardduty.amazonaws.com",
+    "inspector2.amazonaws.com",
     "ipam.amazonaws.com",
     "macie.amazonaws.com",
     "securityhub.amazonaws.com",
@@ -34,6 +35,12 @@ resource "aws_guardduty_organization_admin_account" "this" {
   count = contains(var.delegated_services, "guardduty.amazonaws.com") ? 1 : 0
 
   admin_account_id = aws_organizations_account.this.id
+}
+
+resource "aws_inspector2_delegated_admin_account" "this" {
+  count = contains(var.delegated_services, "inspector2.amazonaws.com") ? 1 : 0
+
+  account_id = aws_organizations_account.this.id
 }
 
 resource "aws_macie2_organization_admin_account" "this" {
