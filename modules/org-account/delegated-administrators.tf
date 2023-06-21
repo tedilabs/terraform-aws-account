@@ -15,11 +15,7 @@ locals {
 ###################################################
 
 resource "aws_organizations_delegated_administrator" "this" {
-  for_each = toset([
-    for service in var.delegated_services :
-    service
-    if !contains(local.independent_services, service)
-  ])
+  for_each = setsubtract(var.delegated_services, local.independent_services)
 
   account_id        = aws_organizations_account.this.id
   service_principal = each.key
