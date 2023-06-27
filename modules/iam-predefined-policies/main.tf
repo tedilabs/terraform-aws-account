@@ -14,6 +14,11 @@ locals {
   } : {}
 }
 
+
+###################################################
+# IAM Predefined Policies
+###################################################
+
 resource "aws_iam_policy" "this" {
   for_each = {
     for item in var.enabled_policies :
