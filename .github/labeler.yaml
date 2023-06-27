@@ -8,6 +8,12 @@
 ":floppy_disk: iam-oidc-identity-provider":
 - modules/iam-oidc-identity-provider/**/*
 
+":floppy_disk: iam-policy":
+- modules/iam-policy/**/*
+
+":floppy_disk: iam-predefined-policies":
+- modules/iam-predefined-policies/**/*
+
 ":floppy_disk: iam-role":
 - modules/iam-role/**/*
 
@@ -16,9 +22,6 @@
 
 ":floppy_disk: iam-user":
 - modules/iam-user/**/*
-
-":floppy_disk: managed-policies":
-- modules/managed-policies/**/*
 
 ":floppy_disk: org-account":
 - modules/org-account/**/*
