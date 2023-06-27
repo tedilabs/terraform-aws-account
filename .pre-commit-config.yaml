@@ -1,12 +1,13 @@
 repos:
 - repo: https://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.77.1
+  rev: v1.81.0
   hooks:
   - id: terraform_fmt
     args:
     - --args=-diff
   - id: terraform_validate
     args:
+    - --tf-init-args=-upgrade
     - --hook-config=--retry-once-with-cleanup=true
   - id: terraform_tflint
     args:
@@ -14,7 +15,8 @@ repos:
     files: ^modules/
   - id: terraform_docs
     args: ["--args=--sort-by required"]
+
 - repo: https://github.com/adrienverge/yamllint
-  rev: v1.29.0
+  rev: v1.32.0
   hooks:
   - id: yamllint
