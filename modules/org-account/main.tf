@@ -26,7 +26,7 @@ resource "aws_organizations_account" "this" {
   parent_id = coalesce(var.parent_id, local.organization_root_id)
 
   iam_user_access_to_billing = var.iam_user_access_to_billing_allowed ? "ALLOW" : "DENY"
-  role_name                  = var.preconfigured_adminitrator_role_name
+  role_name                  = var.preconfigured_administrator_role_name
 
   tags = merge(
     {
