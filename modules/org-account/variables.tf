@@ -20,7 +20,7 @@ variable "iam_user_access_to_billing_allowed" {
   default     = false
 }
 
-variable "preconfigured_adminitrator_role_name" {
+variable "preconfigured_administrator_role_name" {
   description = "The name of an IAM role that Organizations automatically preconfigures in the new member account. This role trusts the master account, allowing users in the master account to assume the role, as permitted by the master account administrator. The role has administrator permissions in the new member account."
   type        = string
   default     = null
