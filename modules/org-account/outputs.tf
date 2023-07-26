@@ -28,9 +28,9 @@ output "iam_user_access_to_billing_allowed" {
   value       = var.iam_user_access_to_billing_allowed
 }
 
-output "preconfigured_adminitrator_role_name" {
+output "preconfigured_administrator_role_name" {
   description = "The name of an IAM role that allow users in the master account to assume as administrator."
-  value       = var.preconfigured_adminitrator_role_name
+  value       = var.preconfigured_administrator_role_name
 }
 
 output "delegated_services" {
