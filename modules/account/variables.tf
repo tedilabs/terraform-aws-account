@@ -7,46 +7,54 @@ variable "name" {
 variable "password_policy" {
   description = "(Optional) Password Policy for the AWS account."
   type = object({
-    minimum_password_length        = number
-    require_numbers                = bool
-    require_symbols                = bool
-    require_lowercase_characters   = bool
-    require_uppercase_characters   = bool
-    allow_users_to_change_password = bool
-    hard_expiry                    = bool
-    max_password_age               = number
-    password_reuse_prevention      = number
+    minimum_password_length        = optional(number, 8)
+    require_numbers                = optional(bool, true)
+    require_symbols                = optional(bool, true)
+    require_lowercase_characters   = optional(bool, true)
+    require_uppercase_characters   = optional(bool, true)
+    allow_users_to_change_password = optional(bool, true)
+    hard_expiry                    = optional(bool, false)
+    max_password_age               = optional(number, 0)
+    password_reuse_prevention      = optional(number, 0)
   })
-  default = {
-    minimum_password_length        = 8
-    require_numbers                = true
-    require_symbols                = true
-    require_lowercase_characters   = true
-    require_uppercase_characters   = true
-    allow_users_to_change_password = true
-    hard_expiry                    = false
-    max_password_age               = 0
-    password_reuse_prevention      = 0
-  }
+  default  = {}
   nullable = false
 }
 
 variable "billing_contact" {
   description = "(Optional) Billing Contact for the AWS Account."
-  type        = map(string)
-  default     = null
+  type = object({
+    name  = string
+    title = optional(string, "Billing Manager")
+    email = string
+    phone = string
+  })
+  nullable = true
+  default  = null
 }
 
 variable "operation_contact" {
   description = "(Optional) Operation Contact for the AWS Account."
-  type        = map(string)
-  default     = null
+  type = object({
+    name  = string
+    title = optional(string, "Operation Manager")
+    email = string
+    phone = string
+  })
+  nullable = true
+  default  = null
 }
 
 variable "security_contact" {
   description = "(Optional) Security Contact for the AWS Account."
-  type        = map(string)
-  default     = null
+  type = object({
+    name  = string
+    title = optional(string, "Security Manager")
+    email = string
+    phone = string
+  })
+  nullable = true
+  default  = null
 }
 
 variable "ec2_spot_datafeed_subscription_enabled" {
