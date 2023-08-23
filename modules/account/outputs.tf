@@ -55,7 +55,7 @@ output "ec2" {
   EOF
   value = {
     spot_datafeed_subscription = {
-      enabled = var.ec2_spot_datafeed_subscription_enabled
+      enabled = var.ec2_spot_datafeed_subscription.enabled
       s3 = {
         bucket = one(aws_spot_datafeed_subscription.this[*].bucket)
         prefix = one(aws_spot_datafeed_subscription.this[*].prefix)
