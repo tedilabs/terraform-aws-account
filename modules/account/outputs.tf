@@ -18,6 +18,24 @@ output "password_policy" {
   value       = aws_iam_account_password_policy.this
 }
 
+output "primary_contact" {
+  description = "The primary contact attached to an AWS Account."
+  value = try({
+    name           = aws_account_primary_contact.this[0].full_name
+    company_name   = aws_account_primary_contact.this[0].company_name
+    country_code   = aws_account_primary_contact.this[0].country_code
+    state          = aws_account_primary_contact.this[0].state_or_region
+    city           = aws_account_primary_contact.this[0].city
+    district       = aws_account_primary_contact.this[0].district_or_county
+    address_line_1 = aws_account_primary_contact.this[0].address_line_1
+    address_line_2 = aws_account_primary_contact.this[0].address_line_2
+    address_line_3 = aws_account_primary_contact.this[0].address_line_3
+    postal_code    = aws_account_primary_contact.this[0].postal_code
+    phone          = aws_account_primary_contact.this[0].phone_number
+    website_url    = aws_account_primary_contact.this[0].website_url
+  }, null)
+}
+
 output "billing_contact" {
   description = "The billing contact attached to an AWS Account."
   value = try({
