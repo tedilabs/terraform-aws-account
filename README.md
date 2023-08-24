@@ -54,6 +54,13 @@ Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-
 
 ## Examples
 
+### Account
+
+- [Alias for the AWS Account](./examples/account-alias)
+- [Contacts for the AWS Account](./examples/account-contacts)
+- [Password Policy for the AWS Account](./examples/account-password-policy)
+
+
 ### IAM
 
 - [OIDC Identity Providers](./examples/iam-oidc-identity-providers)
