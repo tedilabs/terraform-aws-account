@@ -1,4 +1,28 @@
 ###################################################
+# Primary Contact
+###################################################
+
+resource "aws_account_primary_contact" "this" {
+  count = var.primary_contact != null ? 1 : 0
+
+  full_name    = var.primary_contact.name
+  company_name = var.primary_contact.company_name
+
+  country_code       = var.primary_contact.country_code
+  state_or_region    = var.primary_contact.state
+  city               = var.primary_contact.city
+  district_or_county = var.primary_contact.district
+  address_line_1     = var.primary_contact.address_line_1
+  address_line_2     = var.primary_contact.address_line_2
+  address_line_3     = var.primary_contact.address_line_3
+  postal_code        = var.primary_contact.postal_code
+
+  phone_number = var.primary_contact.phone
+  website_url  = var.primary_contact.website_url
+}
+
+
+###################################################
 # Alternate Contacts
 ###################################################
 
