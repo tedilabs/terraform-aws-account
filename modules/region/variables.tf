@@ -1,14 +1,15 @@
-variable "ebs_default_encryption_enabled" {
-  description = "(Optional) Whether or not default EBS encryption is enabled."
-  type        = bool
-  default     = false
-  nullable    = false
-}
-
-variable "ebs_default_encryption_kms_key" {
-  description = "(Optional) The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume."
-  type        = string
-  default     = null
+variable "ebs_default_encryption" {
+  description = <<EOF
+  (Optional) The configuration of the EBS default encryption. `ebs_default_encryption` as defined below.
+    (Optional) `enabled` - Whether or not default EBS encryption is enabled.
+    (Optional) `kms_key` - The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume.
+  EOF
+  type = object({
+    enabled = optional(bool, false)
+    kms_key = optional(string)
+  })
+  default  = {}
+  nullable = false
 }
 
 variable "ec2_serial_console_enabled" {

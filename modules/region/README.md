@@ -19,7 +19,7 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.40.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.14.0 |
 
 ## Modules
 
@@ -40,8 +40,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ebs_default_encryption_enabled"></a> [ebs\_default\_encryption\_enabled](#input\_ebs\_default\_encryption\_enabled) | (Optional) Whether or not default EBS encryption is enabled. | `bool` | `false` | no |
-| <a name="input_ebs_default_encryption_kms_key"></a> [ebs\_default\_encryption\_kms\_key](#input\_ebs\_default\_encryption\_kms\_key) | (Optional) The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume. | `string` | `null` | no |
+| <a name="input_ebs_default_encryption"></a> [ebs\_default\_encryption](#input\_ebs\_default\_encryption) | (Optional) The configuration of the EBS default encryption. `ebs_default_encryption` as defined below.<br>    (Optional) `enabled` - Whether or not default EBS encryption is enabled.<br>    (Optional) `kms_key` - The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume. | <pre>object({<br>    enabled = optional(bool, false)<br>    kms_key = optional(string)<br>  })</pre> | `{}` | no |
 | <a name="input_ec2_serial_console_enabled"></a> [ec2\_serial\_console\_enabled](#input\_ec2\_serial\_console\_enabled) | (Optional) Whether serial console access is enabled for the current AWS region. | `bool` | `false` | no |
 | <a name="input_service_quotas_code_translation_enabled"></a> [service\_quotas\_code\_translation\_enabled](#input\_service\_quotas\_code\_translation\_enabled) | (Optional) Whether to use translated quota code for readability. | `bool` | `false` | no |
 | <a name="input_service_quotas_request"></a> [service\_quotas\_request](#input\_service\_quotas\_request) | (Optional) A map of service quotas to request. The key is `<service-code>/<quota-code>` and the value is a desired value to request. | `map(number)` | `{}` | no |
