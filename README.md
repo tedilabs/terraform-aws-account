@@ -48,6 +48,9 @@ Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-
   - Organization
   - Organization Unit
   - Account
+- **AWS Resource Explorer**
+  - Index
+  - View
 - **AWS RAM (Resource Access Manager)**
   - Share
 
