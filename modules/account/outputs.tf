@@ -82,6 +82,19 @@ output "ec2" {
   }
 }
 
+output "sts" {
+  description = <<EOF
+  The account-level configurations of STS service.
+    `global_endpoint_token_version` - The version of the STS global endpoint token.
+  EOF
+  value = {
+    global_endpoint_token_version = {
+      for k, v in local.global_endpoint_token_version :
+      v => k
+    }[aws_iam_security_token_service_preferences.this.global_endpoint_token_version]
+  }
+}
+
 output "s3" {
   description = <<EOF
   The account-level configurations of S3 service.

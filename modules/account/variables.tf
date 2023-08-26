@@ -128,6 +128,23 @@ variable "ec2_spot_datafeed_subscription" {
   nullable = false
 }
 
+variable "sts_global_endpoint_token_version" {
+  description = <<EOF
+  (Optional) The version of the STS global endpoint token. Valid values are `v1` and
+  `v2`. Defaults to `v1`.
+    `v1` - Version 1 Tokens are valid only in AWS Regions that are available by default. These tokens do not work in manually enabled Regions, such as Asia Pacific (Hong Kong).
+    `v2` - Version 2 tokens are valid in all Regions. However, version 2 tokens include more characters and might affect systems where you temporarily store tokens.
+  EOF
+  type        = string
+  default     = "v1"
+  nullable    = false
+
+  validation {
+    condition     = contains(["v1", "v2"], var.sts_global_endpoint_token_version)
+    error_message = "Valid values for `sts_global_endpoint_token_version` are `v1` and `v2`."
+  }
+}
+
 variable "s3_public_access_enabled" {
   description = "(Optional) Whether to enable S3 account-level Public Access Block configuration. Block the public access to S3 bucket if the value is `false`."
   type        = bool
