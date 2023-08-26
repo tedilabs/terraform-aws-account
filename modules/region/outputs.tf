@@ -43,6 +43,30 @@ output "ec2" {
   }
 }
 
+output "resource_explorer" {
+  description = <<EOF
+  The region-level configurations of Resource Explorer service.
+    `enabled` - Whether the Resource Explorer is enabled in the current AWS region.
+    `index_type` - The type of the index.
+    `views` - The list of views.
+  EOF
+  value = {
+    enabled    = length(aws_resourceexplorer2_index.this) > 0
+    index_arn  = one(aws_resourceexplorer2_index.this[*].arn)
+    index_type = one(aws_resourceexplorer2_index.this[*].type)
+    views = {
+      for name, view in aws_resourceexplorer2_view.this :
+      name => {
+        arn                            = view.arn
+        name                           = view.name
+        is_default                     = view.default_view
+        filter_queries                 = view.filters[*].filter_string
+        additional_resource_attributes = view.included_property[*].name
+      }
+    }
+  }
+}
+
 output "service_quotas" {
   description = <<EOF
   The region-level configurations of Service Quotas.
