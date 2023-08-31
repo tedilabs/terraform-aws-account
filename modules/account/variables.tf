@@ -39,17 +39,17 @@ variable "primary_contact" {
   EOF
   type = object({
     name           = string
-    company_name   = optional(string)
+    company_name   = optional(string, "")
     country_code   = string
-    state          = optional(string)
+    state          = optional(string, "")
     city           = string
-    district       = optional(string)
+    district       = optional(string, "")
     address_line_1 = string
-    address_line_2 = optional(string)
-    address_line_3 = optional(string)
+    address_line_2 = optional(string, "")
+    address_line_3 = optional(string, "")
     postal_code    = string
     phone          = string
-    website_url    = optional(string)
+    website_url    = optional(string, "")
   })
   nullable = true
   default  = null
