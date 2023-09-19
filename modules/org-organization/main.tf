@@ -14,6 +14,21 @@ locals {
   } : {}
 }
 
+locals {
+  individual_trusted_accesses = toset([
+    "ram.amazonaws.com",
+  ])
+  organization_managed_trusted_accesses = setsubtract(
+    var.trusted_access_enabled_service_principals,
+    local.individual_trusted_accesses
+  )
+}
+
+
+###################################################
+# Organization
+###################################################
+
 resource "aws_organizations_organization" "this" {
   feature_set = var.all_features_enabled ? "ALL" : "CONSOLIDATED_BILLING"
   enabled_policy_types = compact([
@@ -23,7 +38,7 @@ resource "aws_organizations_organization" "this" {
     var.tag_policy_type_enabled ? "TAG_POLICY" : "",
   ])
 
-  aws_service_access_principals = var.all_features_enabled ? var.trusted_access_enabled_service_principals : []
+  aws_service_access_principals = var.all_features_enabled ? local.organization_managed_trusted_accesses : []
 }
 
 
@@ -36,4 +51,13 @@ resource "aws_organizations_policy_attachment" "this" {
 
   target_id = aws_organizations_organization.this.roots[0].id
   policy_id = each.key
+}
+
+
+###################################################
+# Individual Trusted Accesses
+###################################################
+
+resource "aws_ram_sharing_with_organization" "this" {
+  count = contains(var.trusted_access_enabled_service_principals, "ram.amazonaws.com") ? 1 : 0
 }

@@ -40,7 +40,7 @@ output "tag_policy_type_enabled" {
 
 output "trusted_access_enabled_service_principals" {
   description = "List of AWS service principal names which is integrated with the organization."
-  value       = aws_organizations_organization.this.aws_service_access_principals
+  value       = var.trusted_access_enabled_service_principals
 }
 
 output "accounts" {
