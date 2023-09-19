@@ -4,439 +4,703 @@
     "name": "AWSRAMBlankEndEntityCertificateAPICSRPassthroughIssuanceCertificateAuthority",
     "resource_type": "acm-pca:CertificateAuthority",
     "is_default": false,
-    "created_at": 1648055344.814,
-    "updated_at": 1648055344.814
+    "created_at": 1656619411.663,
+    "updated_at": 1656619411.663
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMBlankEndEntityCertificateAPIPassthroughIssuanceCertificateAuthority",
+    "name": "AWSRAMBlankEndEntityCertificateAPIPassthroughIssuanceCertificateAuthority",
+    "resource_type": "acm-pca:CertificateAuthority",
+    "is_default": false,
+    "created_at": 1668783946.905,
+    "updated_at": 1668783946.905
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionCertificateAuthority",
     "name": "AWSRAMDefaultPermissionCertificateAuthority",
     "resource_type": "acm-pca:CertificateAuthority",
     "is_default": true,
-    "created_at": 1648055330.35,
-    "updated_at": 1648055330.35
+    "created_at": 1656619463.278,
+    "updated_at": 1656619463.278
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMEndEntityClientAuthCertificateIssuanceCertificateAuthority",
     "name": "AWSRAMEndEntityClientAuthCertificateIssuanceCertificateAuthority",
     "resource_type": "acm-pca:CertificateAuthority",
     "is_default": false,
-    "created_at": 1648055345.572,
-    "updated_at": 1648055345.572
+    "created_at": 1656619413.412,
+    "updated_at": 1656619413.412
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMEndEntityServerAuthCertificateIssuanceCertificateAuthority",
     "name": "AWSRAMEndEntityServerAuthCertificateIssuanceCertificateAuthority",
     "resource_type": "acm-pca:CertificateAuthority",
     "is_default": false,
-    "created_at": 1648055346.337,
-    "updated_at": 1648055346.337
+    "created_at": 1656619414.244,
+    "updated_at": 1656619414.244
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMRevokeCertificateCertificateAuthority",
     "name": "AWSRAMRevokeCertificateCertificateAuthority",
     "resource_type": "acm-pca:CertificateAuthority",
     "is_default": false,
-    "created_at": 1648055347.837,
-    "updated_at": 1648055347.837
+    "created_at": 1656619416.747,
+    "updated_at": 1656619416.747
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMSubordinateCACertificatePathLen0IssuanceCertificateAuthority",
     "name": "AWSRAMSubordinateCACertificatePathLen0IssuanceCertificateAuthority",
     "resource_type": "acm-pca:CertificateAuthority",
     "is_default": false,
-    "created_at": 1648055347.088,
-    "updated_at": 1648055347.088
+    "created_at": 1656619414.846,
+    "updated_at": 1656619414.846
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionAppMesh",
     "name": "AWSRAMDefaultPermissionAppMesh",
     "resource_type": "appmesh:Mesh",
     "is_default": true,
-    "created_at": 1648055325.85,
-    "updated_at": 1648055325.85
+    "created_at": 1680017275.91,
+    "updated_at": 1680017275.91
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionAppSyncAllowSourceGraphQLAccess",
+    "name": "AWSRAMPermissionAppSyncAllowSourceGraphQLAccess",
+    "resource_type": "appsync:Apis",
+    "is_default": false,
+    "created_at": 1683045153.876,
+    "updated_at": 1683045153.876
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionAppSyncMergedApiOperationAccess",
+    "name": "AWSRAMPermissionAppSyncMergedApiOperationAccess",
+    "resource_type": "appsync:Apis",
+    "is_default": false,
+    "created_at": 1683045152.769,
+    "updated_at": 1683045152.769
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionAppSyncSourceApiOperationAccess",
+    "name": "AWSRAMPermissionAppSyncSourceApiOperationAccess",
+    "resource_type": "appsync:Apis",
+    "is_default": true,
+    "created_at": 1683045154.649,
+    "updated_at": 1683045154.649
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionMarketplaceCatalogEntityReadOnly",
+    "name": "AWSRAMDefaultPermissionMarketplaceCatalogEntityReadOnly",
+    "resource_type": "aws-marketplace:Entity",
+    "is_default": true,
+    "created_at": 1677521890.983,
+    "updated_at": 1677521890.983
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionMarketplaceCatalogEntityFullAccess",
+    "name": "AWSRAMPermissionMarketplaceCatalogEntityFullAccess",
+    "resource_type": "aws-marketplace:Entity",
+    "is_default": false,
+    "created_at": 1677521904.261,
+    "updated_at": 1677521904.261
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionCodeBuildProject",
     "name": "AWSRAMDefaultPermissionCodeBuildProject",
     "resource_type": "codebuild:Project",
     "is_default": true,
-    "created_at": 1648055318.832,
-    "updated_at": 1648055318.832
+    "created_at": 1656619457.595,
+    "updated_at": 1656619457.595
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionCodeBuildReportGroup",
     "name": "AWSRAMDefaultPermissionCodeBuildReportGroup",
     "resource_type": "codebuild:ReportGroup",
     "is_default": true,
-    "created_at": 1648055319.609,
-    "updated_at": 1648055319.609
+    "created_at": 1656619457.761,
+    "updated_at": 1656619457.761
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionCapacityReservation",
     "name": "AWSRAMDefaultPermissionCapacityReservation",
     "resource_type": "ec2:CapacityReservation",
     "is_default": true,
-    "created_at": 1648055318.034,
-    "updated_at": 1648055318.034
+    "created_at": 1656619457.419,
+    "updated_at": 1656619457.419
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionCoipPool",
     "name": "AWSRAMDefaultPermissionCoipPool",
     "resource_type": "ec2:CoipPool",
     "is_default": true,
-    "created_at": 1648055307.862,
-    "updated_at": 1648055307.862
+    "created_at": 1656619452.75,
+    "updated_at": 1656619452.75
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionDedicatedHost",
     "name": "AWSRAMDefaultPermissionDedicatedHost",
     "resource_type": "ec2:DedicatedHost",
     "is_default": true,
-    "created_at": 1648055320.407,
-    "updated_at": 1648055320.407
+    "created_at": 1656619458.351,
+    "updated_at": 1656619458.351
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionServerManageability",
     "name": "AWSRAMDefaultPermissionServerManageability",
     "resource_type": "ec2:DedicatedHost",
     "is_default": true,
-    "created_at": 1648055321.167,
-    "updated_at": 1648055321.167
+    "created_at": 1656619458.93,
+    "updated_at": 1656619458.93
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionsIpamPool",
     "name": "AWSRAMDefaultPermissionsIpamPool",
     "resource_type": "ec2:IpamPool",
     "is_default": true,
-    "created_at": 1648055338.801,
-    "updated_at": 1648055338.801
+    "created_at": 1656619469.3,
+    "updated_at": 1656619469.3
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionIpamPoolByoipCidrImport",
     "name": "AWSRAMPermissionIpamPoolByoipCidrImport",
     "resource_type": "ec2:IpamPool",
     "is_default": false,
-    "created_at": 1648055348.596,
-    "updated_at": 1648055348.596
+    "created_at": 1656619435.003,
+    "updated_at": 1656619435.003
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionIpamResourceDiscovery",
+    "name": "AWSRAMPermissionIpamResourceDiscovery",
+    "resource_type": "ec2:IpamResourceDiscovery",
+    "is_default": true,
+    "created_at": 1666904525.951,
+    "updated_at": 1666904525.951
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionLocalGateway",
     "name": "AWSRAMDefaultPermissionLocalGateway",
     "resource_type": "ec2:LocalGatewayRouteTable",
     "is_default": true,
-    "created_at": 1648055308.62,
-    "updated_at": 1648055308.62
+    "created_at": 1660150032.685,
+    "updated_at": 1660150032.685
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionsPlacementGroup",
+    "name": "AWSRAMDefaultPermissionsPlacementGroup",
+    "resource_type": "ec2:PlacementGroup",
+    "is_default": true,
+    "created_at": 1656619469.46,
+    "updated_at": 1656619469.46
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionPrefixList",
     "name": "AWSRAMDefaultPermissionPrefixList",
     "resource_type": "ec2:PrefixList",
     "is_default": true,
-    "created_at": 1648055322.695,
-    "updated_at": 1648055322.695
+    "created_at": 1656619460.594,
+    "updated_at": 1656619460.594
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionSubnet",
     "name": "AWSRAMDefaultPermissionSubnet",
     "resource_type": "ec2:Subnet",
     "is_default": true,
-    "created_at": 1648055307.072,
-    "updated_at": 1648055307.072
+    "created_at": 1668109491.38,
+    "updated_at": 1668109491.38
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionTrafficMirror",
     "name": "AWSRAMDefaultPermissionTrafficMirror",
     "resource_type": "ec2:TrafficMirrorTarget",
     "is_default": true,
-    "created_at": 1648055312.573,
-    "updated_at": 1648055312.573
+    "created_at": 1656619454.601,
+    "updated_at": 1656619454.601
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionTransitGateway",
     "name": "AWSRAMDefaultPermissionTransitGateway",
     "resource_type": "ec2:TransitGateway",
     "is_default": true,
-    "created_at": 1648055310.168,
-    "updated_at": 1648055310.168
+    "created_at": 1656619453.29,
+    "updated_at": 1656619453.29
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionTransitGatewayMulticastDomain",
     "name": "AWSRAMDefaultPermissionTransitGatewayMulticastDomain",
     "resource_type": "ec2:TransitGatewayMulticastDomain",
     "is_default": true,
-    "created_at": 1648055310.965,
-    "updated_at": 1648055310.965
+    "created_at": 1656619453.461,
+    "updated_at": 1656619453.461
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionVerifiedAccessGroup",
+    "name": "AWSRAMPermissionVerifiedAccessGroup",
+    "resource_type": "ec2:VerifiedAccessGroup",
+    "is_default": true,
+    "created_at": 1668095846.972,
+    "updated_at": 1668095846.972
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionGlueCatalog",
     "name": "AWSRAMDefaultPermissionGlueCatalog",
     "resource_type": "glue:Catalog",
     "is_default": true,
-    "created_at": 1648055332.687,
-    "updated_at": 1648055332.687
+    "created_at": 1656619466.612,
+    "updated_at": 1656619466.612
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueAllTablesReadWriteForCatalog",
     "name": "AWSRAMPermissionGlueAllTablesReadWriteForCatalog",
     "resource_type": "glue:Catalog",
     "is_default": false,
-    "created_at": 1648055492.026,
-    "updated_at": 1648055492.026
+    "created_at": 1666891196.25,
+    "updated_at": 1666891196.25
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueDatabaseReadWriteForCatalog",
     "name": "AWSRAMPermissionGlueDatabaseReadWriteForCatalog",
     "resource_type": "glue:Catalog",
     "is_default": false,
-    "created_at": 1648055548.93,
-    "updated_at": 1648055548.93
+    "created_at": 1666891220.322,
+    "updated_at": 1666891220.322
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueTableReadWriteForCatalog",
     "name": "AWSRAMPermissionGlueTableReadWriteForCatalog",
     "resource_type": "glue:Catalog",
     "is_default": false,
-    "created_at": 1648055456.469,
-    "updated_at": 1648055456.469
+    "created_at": 1666891170.644,
+    "updated_at": 1666891170.644
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionLFTagGlueDatabaseReadWriteForCatalog",
+    "name": "AWSRAMPermissionLFTagGlueDatabaseReadWriteForCatalog",
+    "resource_type": "glue:Catalog",
+    "is_default": false,
+    "created_at": 1666891357.435,
+    "updated_at": 1666891357.435
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionLFTagGlueTableReadWriteForCatalog",
+    "name": "AWSRAMPermissionLFTagGlueTableReadWriteForCatalog",
+    "resource_type": "glue:Catalog",
+    "is_default": false,
+    "created_at": 1666891297.593,
+    "updated_at": 1666891297.593
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionGlueDatabase",
     "name": "AWSRAMDefaultPermissionGlueDatabase",
     "resource_type": "glue:Database",
     "is_default": true,
-    "created_at": 1648055331.937,
-    "updated_at": 1648055331.937
+    "created_at": 1656619465.912,
+    "updated_at": 1656619465.912
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMLFEnabledGlueAllTablesReadWriteForDatabase",
+    "name": "AWSRAMLFEnabledGlueAllTablesReadWriteForDatabase",
+    "resource_type": "glue:Database",
+    "is_default": false,
+    "created_at": 1687896324.471,
+    "updated_at": 1687896324.471
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMLFEnabledGlueDatabaseReadWrite",
+    "name": "AWSRAMLFEnabledGlueDatabaseReadWrite",
+    "resource_type": "glue:Database",
+    "is_default": false,
+    "created_at": 1687896327.153,
+    "updated_at": 1687896327.153
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueAllTablesReadWriteForDatabase",
     "name": "AWSRAMPermissionGlueAllTablesReadWriteForDatabase",
     "resource_type": "glue:Database",
     "is_default": false,
-    "created_at": 1648055470.612,
-    "updated_at": 1648055470.612
+    "created_at": 1666891183.345,
+    "updated_at": 1666891183.345
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueDatabaseReadWrite",
     "name": "AWSRAMPermissionGlueDatabaseReadWrite",
     "resource_type": "glue:Database",
     "is_default": false,
-    "created_at": 1648055507.195,
-    "updated_at": 1648055507.195
+    "created_at": 1666891208.415,
+    "updated_at": 1666891208.415
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueTableReadWriteForDatabase",
     "name": "AWSRAMPermissionGlueTableReadWriteForDatabase",
     "resource_type": "glue:Database",
     "is_default": false,
-    "created_at": 1648055435.744,
-    "updated_at": 1648055435.744
+    "created_at": 1666891157.062,
+    "updated_at": 1666891157.062
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionLFTagGlueDatabaseReadWrite",
+    "name": "AWSRAMPermissionLFTagGlueDatabaseReadWrite",
+    "resource_type": "glue:Database",
+    "is_default": false,
+    "created_at": 1666891334.138,
+    "updated_at": 1666891334.138
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionLFTagGlueTableReadWriteForDatabase",
+    "name": "AWSRAMPermissionLFTagGlueTableReadWriteForDatabase",
+    "resource_type": "glue:Database",
+    "is_default": false,
+    "created_at": 1666891309.92,
+    "updated_at": 1666891309.92
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionGlueTable",
     "name": "AWSRAMDefaultPermissionGlueTable",
     "resource_type": "glue:Table",
     "is_default": true,
-    "created_at": 1648055331.118,
-    "updated_at": 1648055331.118
+    "created_at": 1656619464.372,
+    "updated_at": 1656619464.372
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMLFEnabledGlueDatabaseReadWriteForTable",
+    "name": "AWSRAMLFEnabledGlueDatabaseReadWriteForTable",
+    "resource_type": "glue:Table",
+    "is_default": false,
+    "created_at": 1687896333.534,
+    "updated_at": 1687896333.534
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMLFEnabledGlueTableReadWrite",
+    "name": "AWSRAMLFEnabledGlueTableReadWrite",
+    "resource_type": "glue:Table",
+    "is_default": false,
+    "created_at": 1687896321.095,
+    "updated_at": 1687896321.095
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueDatabaseReadWriteForTable",
     "name": "AWSRAMPermissionGlueDatabaseReadWriteForTable",
     "resource_type": "glue:Table",
     "is_default": false,
-    "created_at": 1648055531.667,
-    "updated_at": 1648055531.667
+    "created_at": 1656619449.034,
+    "updated_at": 1656619449.034
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionGlueTableReadWrite",
     "name": "AWSRAMPermissionGlueTableReadWrite",
     "resource_type": "glue:Table",
     "is_default": false,
-    "created_at": 1648055416.901,
-    "updated_at": 1648055416.901
+    "created_at": 1656619443.947,
+    "updated_at": 1656619443.947
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionLFTagGlueDatabaseReadWriteForTable",
+    "name": "AWSRAMPermissionLFTagGlueDatabaseReadWriteForTable",
+    "resource_type": "glue:Table",
+    "is_default": false,
+    "created_at": 1666891346.191,
+    "updated_at": 1666891346.191
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionLFTagGlueTableReadWrite",
+    "name": "AWSRAMPermissionLFTagGlueTableReadWrite",
+    "resource_type": "glue:Table",
+    "is_default": false,
+    "created_at": 1666891321.908,
+    "updated_at": 1666891321.908
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionImageBuilderComponent",
     "name": "AWSRAMDefaultPermissionImageBuilderComponent",
     "resource_type": "imagebuilder:Component",
     "is_default": true,
-    "created_at": 1648055324.304,
-    "updated_at": 1648055324.304
+    "created_at": 1656619461.977,
+    "updated_at": 1656619461.977
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionImageBuilderContainerRecipe",
     "name": "AWSRAMDefaultPermissionImageBuilderContainerRecipe",
     "resource_type": "imagebuilder:ContainerRecipe",
     "is_default": true,
-    "created_at": 1648055325.095,
-    "updated_at": 1648055325.095
+    "created_at": 1656619462.126,
+    "updated_at": 1656619462.126
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionImageBuilderImage",
     "name": "AWSRAMDefaultPermissionImageBuilderImage",
     "resource_type": "imagebuilder:Image",
     "is_default": true,
-    "created_at": 1648055323.497,
-    "updated_at": 1648055323.497
+    "created_at": 1656619461.201,
+    "updated_at": 1656619461.201
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionImageBuilderImageRecipe",
     "name": "AWSRAMDefaultPermissionImageBuilderImageRecipe",
     "resource_type": "imagebuilder:ImageRecipe",
     "is_default": true,
-    "created_at": 1648055327.372,
-    "updated_at": 1648055327.372
+    "created_at": 1656619462.832,
+    "updated_at": 1656619462.832
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionLicenseConfiguration",
     "name": "AWSRAMDefaultPermissionLicenseConfiguration",
     "resource_type": "license-manager:LicenseConfiguration",
     "is_default": true,
-    "created_at": 1648055317.237,
-    "updated_at": 1648055317.237
+    "created_at": 1656619457.242,
+    "updated_at": 1656619457.242
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionNetworkFirewallPolicy",
     "name": "AWSRAMDefaultPermissionNetworkFirewallPolicy",
     "resource_type": "network-firewall:FirewallPolicy",
     "is_default": true,
-    "created_at": 1648055333.445,
-    "updated_at": 1648055333.445
+    "created_at": 1656619466.783,
+    "updated_at": 1656619466.783
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionNetworkFirewallStatefulRuleGroup",
     "name": "AWSRAMDefaultPermissionNetworkFirewallStatefulRuleGroup",
     "resource_type": "network-firewall:StatefulRulegroup",
     "is_default": true,
-    "created_at": 1648055334.214,
-    "updated_at": 1648055334.214
+    "created_at": 1692911780.762,
+    "updated_at": 1692911780.762
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionNetworkFirewallStatelessRuleGroup",
     "name": "AWSRAMDefaultPermissionNetworkFirewallStatelessRuleGroup",
     "resource_type": "network-firewall:StatelessRulegroup",
     "is_default": true,
-    "created_at": 1648055334.982,
-    "updated_at": 1648055334.982
+    "created_at": 1656619467.508,
+    "updated_at": 1656619467.508
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionsNetworkManagerCoreNetwork",
+    "name": "AWSRAMDefaultPermissionsNetworkManagerCoreNetwork",
+    "resource_type": "networkmanager:CoreNetwork",
+    "is_default": true,
+    "created_at": 1656619424.683,
+    "updated_at": 1656619424.683
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMTransitGatewayPermissionsNetworkManagerCoreNetwork",
+    "name": "AWSRAMTransitGatewayPermissionsNetworkManagerCoreNetwork",
+    "resource_type": "networkmanager:CoreNetwork",
+    "is_default": false,
+    "created_at": 1656619428.071,
+    "updated_at": 1656619428.071
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMVPCPermissionsNetworkManagerCoreNetwork",
+    "name": "AWSRAMVPCPermissionsNetworkManagerCoreNetwork",
+    "resource_type": "networkmanager:CoreNetwork",
+    "is_default": false,
+    "created_at": 1656619426.477,
+    "updated_at": 1656619426.477
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionOutpostsOutpost",
     "name": "AWSRAMDefaultPermissionOutpostsOutpost",
     "resource_type": "outposts:Outpost",
     "is_default": true,
-    "created_at": 1648055343.262,
-    "updated_at": 1648055343.262
+    "created_at": 1656619418.935,
+    "updated_at": 1656619418.935
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionOutpostsSite",
     "name": "AWSRAMDefaultPermissionOutpostsSite",
     "resource_type": "outposts:Site",
     "is_default": true,
-    "created_at": 1648055344.048,
-    "updated_at": 1648055344.048
+    "created_at": 1656619420.958,
+    "updated_at": 1656619420.958
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionRDSCluster",
     "name": "AWSRAMDefaultPermissionRDSCluster",
     "resource_type": "rds:Cluster",
     "is_default": true,
-    "created_at": 1648055315.731,
-    "updated_at": 1648055315.731
+    "created_at": 1656619456.671,
+    "updated_at": 1656619456.671
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionRefactorSpacesEnvironment",
+    "name": "AWSRAMDefaultPermissionRefactorSpacesEnvironment",
+    "resource_type": "refactor-spaces:Environment",
+    "is_default": true,
+    "created_at": 1656619470.283,
+    "updated_at": 1656619470.283
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionResourceGroup",
     "name": "AWSRAMDefaultPermissionResourceGroup",
     "resource_type": "resource-groups:Group",
     "is_default": true,
-    "created_at": 1648055305.512,
-    "updated_at": 1648055305.512
+    "created_at": 1656619450.914,
+    "updated_at": 1656619450.914
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionResolverFirewallRuleGroup",
     "name": "AWSRAMDefaultPermissionResolverFirewallRuleGroup",
     "resource_type": "route53resolver:FirewallRuleGroup",
     "is_default": true,
-    "created_at": 1648055314.952,
-    "updated_at": 1648055314.952
+    "created_at": 1656619456.095,
+    "updated_at": 1656619456.095
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionResolverQueryLogConfig",
     "name": "AWSRAMDefaultPermissionResolverQueryLogConfig",
     "resource_type": "route53resolver:ResolverQueryLogConfig",
     "is_default": true,
-    "created_at": 1648055314.17,
-    "updated_at": 1648055314.17
+    "created_at": 1656619454.922,
+    "updated_at": 1656619454.922
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionResolverRule",
     "name": "AWSRAMDefaultPermissionResolverRule",
     "resource_type": "route53resolver:ResolverRule",
     "is_default": true,
-    "created_at": 1648055313.407,
-    "updated_at": 1648055313.407
+    "created_at": 1656619454.752,
+    "updated_at": 1656619454.752
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionS3Outposts",
     "name": "AWSRAMDefaultPermissionS3Outposts",
     "resource_type": "s3-outposts:Outpost",
     "is_default": true,
-    "created_at": 1648055292.515,
-    "updated_at": 1648055292.515
+    "created_at": 1682450662.66,
+    "updated_at": 1682450662.66
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionSageMakerFeatureGroupAdmin",
+    "name": "AWSRAMPermissionSageMakerFeatureGroupAdmin",
+    "resource_type": "sagemaker:FeatureGroup",
+    "is_default": false,
+    "created_at": 1681745120.978,
+    "updated_at": 1681745120.978
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionSageMakerFeatureGroupReadOnly",
+    "name": "AWSRAMPermissionSageMakerFeatureGroupReadOnly",
+    "resource_type": "sagemaker:FeatureGroup",
+    "is_default": true,
+    "created_at": 1681745117.344,
+    "updated_at": 1681745117.344
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionSageMakerFeatureGroupReadWrite",
+    "name": "AWSRAMPermissionSageMakerFeatureGroupReadWrite",
+    "resource_type": "sagemaker:FeatureGroup",
+    "is_default": false,
+    "created_at": 1681745119.51,
+    "updated_at": 1681745119.51
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionsSageMakerLineageGroup",
     "name": "AWSRAMDefaultPermissionsSageMakerLineageGroup",
     "resource_type": "sagemaker:LineageGroup",
     "is_default": true,
-    "created_at": 1648055340.283,
-    "updated_at": 1648055340.283
+    "created_at": 1656619469.619,
+    "updated_at": 1656619469.619
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionSageMakerModelCards",
+    "name": "AWSRAMPermissionSageMakerModelCards",
+    "resource_type": "sagemaker:ModelCard",
+    "is_default": true,
+    "created_at": 1688575724.369,
+    "updated_at": 1688575724.369
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionSageMakerModelCardsAllowExport",
+    "name": "AWSRAMPermissionSageMakerModelCardsAllowExport",
+    "resource_type": "sagemaker:ModelCard",
+    "is_default": false,
+    "created_at": 1688575722.729,
+    "updated_at": 1688575722.729
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionSageMakerPipeline",
+    "name": "AWSRAMDefaultPermissionSageMakerPipeline",
+    "resource_type": "sagemaker:Pipeline",
+    "is_default": true,
+    "created_at": 1656619469.883,
+    "updated_at": 1656619469.883
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionSageMakerPipelineAllowExecution",
+    "name": "AWSRAMPermissionSageMakerPipelineAllowExecution",
+    "resource_type": "sagemaker:Pipeline",
+    "is_default": false,
+    "created_at": 1656619429.648,
+    "updated_at": 1656619429.648
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionSageMakerCatalogResourceSearch",
+    "name": "AWSRAMPermissionSageMakerCatalogResourceSearch",
+    "resource_type": "sagemaker:SagemakerCatalog",
+    "is_default": true,
+    "created_at": 1685991467.308,
+    "updated_at": 1685991467.308
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionServiceCatalogAppRegistryApplicationAllowAssociation",
     "name": "AWSRAMPermissionServiceCatalogAppRegistryApplicationAllowAssociation",
     "resource_type": "servicecatalog:Applications",
     "is_default": false,
-    "created_at": 1651517787.819,
-    "updated_at": 1651517787.819
+    "created_at": 1656619432.204,
+    "updated_at": 1656619432.204
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionServiceCatalogAppRegistryApplicationReadOnly",
     "name": "AWSRAMPermissionServiceCatalogAppRegistryApplicationReadOnly",
     "resource_type": "servicecatalog:Applications",
     "is_default": true,
-    "created_at": 1651517548.993,
-    "updated_at": 1651517548.993
+    "created_at": 1656619430.336,
+    "updated_at": 1656619430.336
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionServiceCatalogAppRegistryAttributeGroupAllowAssociation",
     "name": "AWSRAMPermissionServiceCatalogAppRegistryAttributeGroupAllowAssociation",
     "resource_type": "servicecatalog:AttributeGroups",
     "is_default": false,
-    "created_at": 1651517842.208,
-    "updated_at": 1651517842.208
+    "created_at": 1656619433.382,
+    "updated_at": 1656619433.382
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionServiceCatalogAppRegistryAttributeGroupReadOnly",
     "name": "AWSRAMPermissionServiceCatalogAppRegistryAttributeGroupReadOnly",
     "resource_type": "servicecatalog:AttributeGroups",
     "is_default": true,
-    "created_at": 1651517813.769,
-    "updated_at": 1651517813.769
+    "created_at": 1656619432.392,
+    "updated_at": 1656619432.392
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionSSMContactsContact",
     "name": "AWSRAMDefaultPermissionSSMContactsContact",
     "resource_type": "ssm-contacts:Contact",
     "is_default": true,
-    "created_at": 1648055337.295,
-    "updated_at": 1648055337.295
+    "created_at": 1656619468.373,
+    "updated_at": 1656619468.373
   },
   {
     "arn": "arn:aws:ram::aws:permission/AWSRAMDefaultPermissionSSMIncidentsResponsePlan",
     "name": "AWSRAMDefaultPermissionSSMIncidentsResponsePlan",
     "resource_type": "ssm-incidents:ResponsePlan",
     "is_default": true,
-    "created_at": 1648055336.541,
-    "updated_at": 1648055336.541
+    "created_at": 1656619467.833,
+    "updated_at": 1656619467.833
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionVpcLatticeServiceReadWrite",
+    "name": "AWSRAMPermissionVpcLatticeServiceReadWrite",
+    "resource_type": "vpc-lattice:Service",
+    "is_default": true,
+    "created_at": 1675793122.662,
+    "updated_at": 1675793122.662
+  },
+  {
+    "arn": "arn:aws:ram::aws:permission/AWSRAMPermissionVpcLatticeServiceNetworkReadWrite",
+    "name": "AWSRAMPermissionVpcLatticeServiceNetworkReadWrite",
+    "resource_type": "vpc-lattice:ServiceNetwork",
+    "is_default": true,
+    "created_at": 1675793131.89,
+    "updated_at": 1675793131.89
   }
 ]
