@@ -16,14 +16,14 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.65 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.40.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.19.0 |
 
 ## Modules
 
@@ -56,7 +56,7 @@ This module creates following resources.
 | <a name="input_module_tags_enabled"></a> [module\_tags\_enabled](#input\_module\_tags\_enabled) | Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | <a name="input_parent_id"></a> [parent\_id](#input\_parent\_id) | Parent Organizational Unit ID or Root ID for the account. Defaults to the Organization default Root ID. A configuration must be present for this argument to perform drift detection. | `string` | `null` | no |
 | <a name="input_policies"></a> [policies](#input\_policies) | List of IDs of the policies to be attached to the Account. | `list(string)` | `[]` | no |
-| <a name="input_preconfigured_administrator_role_name"></a> [preconfigured\_adminitrator\_role\_name](#input\_preconfigured\_adminitrator\_role\_name) | The name of an IAM role that Organizations automatically preconfigures in the new member account. This role trusts the master account, allowing users in the master account to assume the role, as permitted by the master account administrator. The role has administrator permissions in the new member account. | `string` | `null` | no |
+| <a name="input_preconfigured_administrator_role_name"></a> [preconfigured\_administrator\_role\_name](#input\_preconfigured\_administrator\_role\_name) | The name of an IAM role that Organizations automatically preconfigures in the new member account. This role trusts the master account, allowing users in the master account to assume the role, as permitted by the master account administrator. The role has administrator permissions in the new member account. | `string` | `null` | no |
 | <a name="input_resource_group_description"></a> [resource\_group\_description](#input\_resource\_group\_description) | The description of Resource Group. | `string` | `"Managed by Terraform."` | no |
 | <a name="input_resource_group_enabled"></a> [resource\_group\_enabled](#input\_resource\_group\_enabled) | Whether to create Resource Group to find and group AWS resources which are created by this module. | `bool` | `true` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. | `string` | `""` | no |
@@ -75,5 +75,5 @@ This module creates following resources.
 | <a name="output_id"></a> [id](#output\_id) | The ID of this account. |
 | <a name="output_name"></a> [name](#output\_name) | The name of this account. |
 | <a name="output_parent_id"></a> [parent\_id](#output\_parent\_id) | The ID of the parent Organizational Unit. |
-| <a name="output_preconfigured_administrator_role_name"></a> [preconfigured\_adminitrator\_role\_name](#output\_preconfigured\_adminitrator\_role\_name) | The name of an IAM role that allow users in the master account to assume as administrator. |
+| <a name="output_preconfigured_administrator_role_name"></a> [preconfigured\_administrator\_role\_name](#output\_preconfigured\_administrator\_role\_name) | The name of an IAM role that allow users in the master account to assume as administrator. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
