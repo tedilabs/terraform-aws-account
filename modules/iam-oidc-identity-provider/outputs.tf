@@ -10,6 +10,11 @@ output "arn" {
 
 output "url" {
   description = "The URL of the identity provider."
+  value       = var.url
+}
+
+output "urn" {
+  description = "The URN of the identity provider."
   value       = aws_iam_openid_connect_provider.this.url
 }
 

@@ -18,7 +18,7 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.19.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.24.0 |
 | <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
 
 ## Modules
@@ -57,4 +57,5 @@ This module creates following resources.
 | <a name="output_id"></a> [id](#output\_id) | The ID of this provider. |
 | <a name="output_thumbprints"></a> [thumbprints](#output\_thumbprints) | A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). |
 | <a name="output_url"></a> [url](#output\_url) | The URL of the identity provider. |
+| <a name="output_urn"></a> [urn](#output\_urn) | The URN of the identity provider. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
