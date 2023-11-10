@@ -27,7 +27,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.19.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.24.0 |
 
 ## Modules
 

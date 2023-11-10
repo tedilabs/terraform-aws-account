@@ -36,6 +36,7 @@ variable "permissions_boundary" {
   description = "(Optional) The ARN of the policy that is used to set the permissions boundary for the role."
   type        = string
   default     = null
+  nullable    = true
 }
 
 variable "trusted_session_tagging" {
