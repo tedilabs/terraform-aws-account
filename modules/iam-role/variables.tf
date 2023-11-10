@@ -301,11 +301,22 @@ variable "inline_policies" {
   nullable    = false
 }
 
-variable "instance_profile_enabled" {
-  description = "(Optional) Controls if Instance Profile should be created."
-  type        = bool
-  default     = false
-  nullable    = false
+variable "instance_profile" {
+  description = <<EOF
+  (Optional) A configuration for instance profile. `instance_profile` is defined below.
+    (Optional) `enabled` - Whether to create instance profile. Defaults to `false`.
+    (Optional) `name` - The name of the instance profile. If omitted, Terraform will assign a ame name with the role.
+    (Optional) `path` - The path to the instance profile. Defaults to `/`.
+    (Optional) `tags` - A map of tags to add to the instance profile.
+  EOF
+  type = object({
+    enabled = optional(bool, false)
+    name    = optional(string)
+    path    = optional(string, "/")
+    tags    = optional(map(string), {})
+  })
+  default  = {}
+  nullable = false
 }
 
 variable "tags" {

@@ -63,7 +63,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="input_description"></a> [description](#input\_description) | (Optional) The description of the role. | `string` | `"Managed by Terraform."` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | (Optional) Specifies to force detaching any policies the role has before destroying it. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_inline_policies"></a> [inline\_policies](#input\_inline\_policies) | (Optional) Map of inline IAM policies to attach to IAM role. (`name` => `policy`). | `map(string)` | `{}` | no |
-| <a name="input_instance_profile_enabled"></a> [instance\_profile\_enabled](#input\_instance\_profile\_enabled) | (Optional) Controls if Instance Profile should be created. | `bool` | `false` | no |
+| <a name="input_instance_profile"></a> [instance\_profile](#input\_instance\_profile) | (Optional) A configuration for instance profile. `instance_profile` is defined below.<br>    (Optional) `enabled` - Whether to create instance profile. Defaults to `false`.<br>    (Optional) `name` - The name of the instance profile. If omitted, Terraform will assign a ame name with the role.<br>    (Optional) `path` - The path to the instance profile. Defaults to `/`.<br>    (Optional) `tags` - A map of tags to add to the instance profile. | <pre>object({<br>    enabled = optional(bool, false)<br>    name    = optional(string)<br>    path    = optional(string, "/")<br>    tags    = optional(map(string), {})<br>  })</pre> | `{}` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | (Optional) Maximum session duration (in seconds) that you want to set for the specified role. Valid value is from 1 hour (`3600`) to 12 hours (`43200`). Defaults to `3600`. | `number` | `3600` | no |
 | <a name="input_module_tags_enabled"></a> [module\_tags\_enabled](#input\_module\_tags\_enabled) | (Optional) Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | <a name="input_path"></a> [path](#input\_path) | (Optional) Desired path for the IAM role. | `string` | `"/"` | no |
@@ -88,9 +88,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | List of ARNs of IAM roles which members of IAM role can assume. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the role. |
 | <a name="output_inline_policies"></a> [inline\_policies](#output\_inline\_policies) | List of names of inline IAM polices which are attached to IAM role. |
-| <a name="output_instance_profile_arn"></a> [instance\_profile\_arn](#output\_instance\_profile\_arn) | The ARN assigned by AWS for the Instance Profile. |
-| <a name="output_instance_profile_name"></a> [instance\_profile\_name](#output\_instance\_profile\_name) | IAM Instance Profile name. |
-| <a name="output_instance_profile_unique_id"></a> [instance\_profile\_unique\_id](#output\_instance\_profile\_unique\_id) | The unique ID assigned by AWS for the Instance Profile. |
+| <a name="output_instance_profile"></a> [instance\_profile](#output\_instance\_profile) | The instance profile associated with the IAM Role.<br>    `id` - The instance profile's ID.<br>    `arn` - The ARN assigned by AWS for the instance profile.<br>    `name` - The name of the instance profile.<br>    `path` - The path to the instance profile.<br>    `created_at` - Creation timestamp of the instance profile. |
 | <a name="output_name"></a> [name](#output\_name) | IAM Role name. |
 | <a name="output_policies"></a> [policies](#output\_policies) | List of ARNs of IAM policies which are atached to IAM role. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
