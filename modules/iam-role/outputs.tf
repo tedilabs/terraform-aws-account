@@ -33,17 +33,23 @@ output "inline_policies" {
   value       = keys(var.inline_policies)
 }
 
-output "instance_profile_name" {
-  description = "IAM Instance Profile name."
-  value       = try(aws_iam_instance_profile.this[*].name[0], null)
-}
-
-output "instance_profile_arn" {
-  description = "The ARN assigned by AWS for the Instance Profile."
-  value       = try(aws_iam_instance_profile.this[*].arn[0], null)
-}
-
-output "instance_profile_unique_id" {
-  description = "The unique ID assigned by AWS for the Instance Profile."
-  value       = try(aws_iam_instance_profile.this[*].unique_id[0], null)
+output "instance_profile" {
+  description = <<EOF
+  The instance profile associated with the IAM Role.
+    `id` - The instance profile's ID.
+    `arn` - The ARN assigned by AWS for the instance profile.
+    `name` - The name of the instance profile.
+    `path` - The path to the instance profile.
+    `created_at` - Creation timestamp of the instance profile.
+  EOF
+  value = (var.instance_profile.enabled
+    ? {
+      id         = aws_iam_instance_profile.this[0].unique_id
+      arn        = aws_iam_instance_profile.this[0].arn
+      name       = aws_iam_instance_profile.this[0].name
+      path       = aws_iam_instance_profile.this[1].path
+      created_at = aws_iam_instance_profile.this[0].create_date
+    }
+    : null
+  )
 }

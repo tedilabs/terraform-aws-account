@@ -99,17 +99,19 @@ resource "aws_iam_role_policy" "inline" {
 ###################################################
 
 resource "aws_iam_instance_profile" "this" {
-  count = var.instance_profile_enabled ? 1 : 0
+  count = var.instance_profile.enabled ? 1 : 0
 
   role = aws_iam_role.this.name
-  name = local.metadata.name
-  path = var.path
+
+  name = coalesce(var.instance_profile.name, local.metadata.name)
+  path = var.instance_profile.path
 
   tags = merge(
     {
-      "Name" = local.metadata.name
+      "Name" = coalesce(var.instance_profile.name, local.metadata.name)
     },
     local.module_tags,
     var.tags,
+    var.instance_profile.tags,
   )
 }
