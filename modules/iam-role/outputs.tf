@@ -47,7 +47,7 @@ output "instance_profile" {
       id         = aws_iam_instance_profile.this[0].unique_id
       arn        = aws_iam_instance_profile.this[0].arn
       name       = aws_iam_instance_profile.this[0].name
-      path       = aws_iam_instance_profile.this[1].path
+      path       = aws_iam_instance_profile.this[0].path
       created_at = aws_iam_instance_profile.this[0].create_date
     }
     : null
