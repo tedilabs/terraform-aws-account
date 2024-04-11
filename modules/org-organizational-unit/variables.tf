@@ -1,30 +1,35 @@
 variable "name" {
-  description = "The name of the Organizational Unit."
+  description = "(Required) The name of the Organizational Unit."
   type        = string
+  nullable    = false
 }
 
 variable "parent_id" {
-  description = "The ID of the parent organizational unit, which may be the root."
+  description = "(Optional) The ID of the parent organizational unit, which may be the root."
   type        = string
   default     = null
+  nullable    = true
 }
 
 variable "policies" {
-  description = "List of IDs of the policies to be attached to the Organizational Unit."
+  description = "(Optional) List of IDs of the policies to be attached to the Organizational Unit."
   type        = list(string)
   default     = []
+  nullable    = false
 }
 
 variable "tags" {
-  description = "A map of tags to add to all resources."
+  description = "(Optional) A map of tags to add to all resources."
   type        = map(string)
   default     = {}
+  nullable    = false
 }
 
 variable "module_tags_enabled" {
-  description = "Whether to create AWS Resource Tags for the module informations."
+  description = "(Optional) Whether to create AWS Resource Tags for the module informations."
   type        = bool
   default     = true
+  nullable    = false
 }
 
 
@@ -33,19 +38,22 @@ variable "module_tags_enabled" {
 ###################################################
 
 variable "resource_group_enabled" {
-  description = "Whether to create Resource Group to find and group AWS resources which are created by this module."
+  description = "(Optional) Whether to create Resource Group to find and group AWS resources which are created by this module."
   type        = bool
   default     = true
+  nullable    = false
 }
 
 variable "resource_group_name" {
-  description = "The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`."
+  description = "(Optional) The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`."
   type        = string
   default     = ""
+  nullable    = false
 }
 
 variable "resource_group_description" {
-  description = "The description of Resource Group."
+  description = "(Optional) The description of Resource Group."
   type        = string
   default     = "Managed by Terraform."
+  nullable    = false
 }
