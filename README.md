@@ -15,14 +15,7 @@ Terraform module which creates Account and IAM related resources on AWS.
 - [iam-saml-identity-provider](./modules/iam-saml-identity-provider)
 - [iam-service-linked-role](./modules/iam-service-linked-role)
 - [iam-user](./modules/iam-user)
-- [org-account](./modules/org-account)
-- [org-organization](./modules/org-organization)
-- [org-organizational-unit](./modules/org-organizational-unit)
-- [ram-share](./modules/ram-share)
 - [region](./modules/region)
-- [sso-access-control-attributes](./modules/sso-access-control-attributes)
-- [sso-account-assignment](./modules/sso-account-assignment)
-- [sso-permission-set](./modules/sso-permission-set)
 
 
 ## Target AWS Services
@@ -40,19 +33,9 @@ Terraform Modules from [this package](https://github.com/tedilabs/terraform-aws-
   - Policy
   - OpenID Connect Identity Provider
   - SAML Identity Provider
-- **AWS IAM Identity Center (AWS SSO)**
-  - Access Control Attributes
-  - Account Assignment
-  - Permission Set
-- **AWS Organization**
-  - Organization
-  - Organization Unit
-  - Account
 - **AWS Resource Explorer**
   - Index
   - View
-- **AWS RAM (Resource Access Manager)**
-  - Share
 
 
 ## Examples
@@ -78,6 +61,7 @@ Enjoying [terraform-aws-account](https://github.com/tedilabs/terraform-aws-accou
 - [AWS Domain](https://github.com/tedilabs/terraform-aws-domain) - A package of Terraform Modules to manage AWS Domain resources.
 - [AWS Load Balancer](https://github.com/tedilabs/terraform-aws-load-balancer) - A package of Terraform Modules to manage AWS Load Balancer resources.
 - [AWS Network](https://github.com/tedilabs/terraform-aws-network) - A package of Terraform Modules to manage AWS Network resources.
+- [AWS Organization](https://github.com/tedilabs/terraform-aws-organization) - A package of Terraform Modules to manage AWS Organization resources.
 - [AWS Security](https://github.com/tedilabs/terraform-aws-security) - A package of Terraform Modules to manage AWS Security resources.
 
 Or check out [the full list](https://github.com/search?q=org%3Atedilabs+topic%3Aterraform-module&type=repositories)
@@ -92,4 +76,4 @@ Like this project? Follow the repository on [GitHub](https://github.com/tedilabs
 
 Provided under the terms of the [Apache License](LICENSE).
 
-Copyright © 2021-2023, [Byungjin Park](https://www.posquit0.com).
+Copyright © 2021-2024, [Byungjin Park](https://www.posquit0.com).
