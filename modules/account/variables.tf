@@ -21,6 +21,34 @@ variable "password_policy" {
   nullable = false
 }
 
+variable "additional_regions" {
+  description = "(Optional) A set of regions to enable in the account."
+  type        = set(string)
+  default     = []
+  nullable    = false
+
+  validation {
+    condition = alltrue([
+      for region in var.additional_regions :
+      contains([
+        "af-south-1",
+        "ap-east-1",
+        "ap-south-2",
+        "ap-southeast-3",
+        "ap-southeast-4",
+        "ca-west-1",
+        "eu-south-1",
+        "eu-south-2",
+        "eu-central-2",
+        "me-south-1",
+        "me-central-1",
+        "il-central-1",
+      ], region)
+    ])
+    error_message = "Available regions for `additional_regions` are `af-south-1`, `ap-east-1`, `ap-south-2`, `ap-southeast-3`, `ap-southeast-4`, `ca-west-1`, `eu-south-1`, `eu-south-2`, `eu-central-2`, `me-south-1`, `me-central-1`, `il-central-1`."
+  }
+}
+
 variable "primary_contact" {
   description = <<EOF
   (Optional) The configuration of the primary contact for the AWS Account. `primary_contact` as defined below.
