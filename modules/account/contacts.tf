@@ -2,6 +2,8 @@
 # Primary Contact
 ###################################################
 
+# INFO: Not supported attributes
+# - `account_id`
 resource "aws_account_primary_contact" "this" {
   count = var.primary_contact != null ? 1 : 0
 
@@ -26,6 +28,8 @@ resource "aws_account_primary_contact" "this" {
 # Alternate Contacts
 ###################################################
 
+# INFO: Not supported attributes
+# - `account_id`
 resource "aws_account_alternate_contact" "billing" {
   count = var.billing_contact != null ? 1 : 0
 
@@ -37,6 +41,8 @@ resource "aws_account_alternate_contact" "billing" {
   phone_number  = var.billing_contact.phone
 }
 
+# INFO: Not supported attributes
+# - `account_id`
 resource "aws_account_alternate_contact" "operation" {
   count = var.operation_contact != null ? 1 : 0
 
@@ -48,6 +54,8 @@ resource "aws_account_alternate_contact" "operation" {
   phone_number  = var.operation_contact.phone
 }
 
+# INFO: Not supported attributes
+# - `account_id`
 resource "aws_account_alternate_contact" "security" {
   count = var.security_contact != null ? 1 : 0
 

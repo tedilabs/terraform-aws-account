@@ -18,6 +18,11 @@ output "password_policy" {
   value       = aws_iam_account_password_policy.this
 }
 
+output "additional_regions" {
+  description = "A set of additional regions enabled in the account."
+  value       = var.additional_regions
+}
+
 output "primary_contact" {
   description = "The primary contact attached to an AWS Account."
   value = try({

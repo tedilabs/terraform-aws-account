@@ -7,6 +7,7 @@ This module creates following resources.
 - `aws_iam_security_token_service_preferences`
 - `aws_account_primary_contact` (optional)
 - `aws_account_alternate_contact` (optional)
+- `aws_account_region` (optional)
 - `aws_s3_account_public_access_block`
 - `aws_spot_datafeed_subscription` (optional)
 
