@@ -23,26 +23,5 @@
 ":floppy_disk: iam-user":
 - modules/iam-user/**/*
 
-":floppy_disk: org-account":
-- modules/org-account/**/*
-
-":floppy_disk: org-organization":
-- modules/org-organization/**/*
-
-":floppy_disk: org-organizational-unit":
-- modules/org-organizational-unit/**/*
-
-":floppy_disk: ram-share":
-- modules/ram-share/**/*
-
 ":floppy_disk: region":
 - modules/region/**/*
-
-":floppy_disk: sso-access-control-attributes":
-- modules/sso-access-control-attributes/**/*
-
-":floppy_disk: sso-account-assignments":
-- modules/sso-account-assignments/**/*
-
-":floppy_disk: sso-permission-set":
-- modules/sso-permission-set/**/*
