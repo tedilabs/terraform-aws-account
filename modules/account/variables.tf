@@ -173,6 +173,58 @@ variable "sts_global_endpoint_token_version" {
   }
 }
 
+variable "support_app" {
+  description = <<EOF
+  (Optional) The configuration of the Support App for the AWS Account. `support_app` as defined below.
+    (Optional) `account_alias` - An account alias associated with a customer's account.
+    (Optional) `slack_workspaces` - A set of team ID for each Slack workspace, which uniquely identifies a workspace.
+    (Optional) `slack_channel_configurations` - A list of configurations for each Slack channels. Each block of `slack_channel_configurations` as defined below.
+      (Optional) `name` - The name of the Slack channel configuration.
+      (Required) `workspace` - The team ID of the Slack workspace, which uniquely identifies a workspace.
+      (Required) `channel` - The ID of the Slack channel.
+      (Optional) `permission` - The permission of the default IAM role which created by this module. Valid values are `READ_ONLY` and `FULL_ACCESS`. Defaults to `FULL_ACCESS`.
+      (Optional) `channel_role` - The ARN (Amazon Resource Name) of the IAM role associated with the Support App to post messages to the Slack channel. Only required to override default role which created with `permission`.
+      (Optional) `notification_case_severity` - The severity level of the support case that a customer wants to get notified for. Valid values are `ALL`, `HIGH`, and `NONE`. Defaults to `ALL`.
+      (Optional) `notification_on_add_correspondence_to_case` - Whether to notify when a correspondence is added to a case. Defaults to `true`.
+      (Optional) `notification_on_create_or_reopen_case` - Whether to notify when a case is created or reopened. Defaults to `true`.
+      (Optional) `notification_on_resolve_case` - Whether to notify when a case is resolved. Defaults to `true`.
+  EOF
+  type = object({
+    account_alias    = optional(string)
+    slack_workspaces = optional(set(string), [])
+    slack_channel_configurations = optional(list(object({
+      name      = optional(string)
+      workspace = string
+      channel   = string
+
+      # permission   = optional(string, "FULL_ACCESS")
+      channel_role = optional(string)
+
+      notification_case_severity                 = optional(string, "ALL")
+      notification_on_add_correspondence_to_case = optional(bool, true)
+      notification_on_create_or_reopen_case      = optional(bool, true)
+      notification_on_resolve_case               = optional(bool, true)
+    })), [])
+  })
+  default  = {}
+  nullable = false
+
+  validation {
+    condition = alltrue([
+      for config in var.support_app.slack_channel_configurations :
+      contains(["ALL", "HIGH", "NONE"], config.notification_case_severity)
+    ])
+    error_message = "Valid values for `notification_case_severity` are `ALL`, `HIGH`, and `NONE`."
+  }
+  # validation {
+  #   condition = alltrue([
+  #     for config in var.support_app.slack_channel_configurations :
+  #     contains(["READ_ONLY", "FULL_ACCESS"], config.permission)
+  #   ])
+  #   error_message = "Valid values for `permission` are `READ_ONLY` and `FULL_ACCESS`."
+  # }
+}
+
 variable "s3_public_access_enabled" {
   description = "(Optional) Whether to enable S3 account-level Public Access Block configuration. Block the public access to S3 bucket if the value is `false`."
   type        = bool
