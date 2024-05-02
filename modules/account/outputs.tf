@@ -100,6 +100,34 @@ output "sts" {
   }
 }
 
+output "support_app" {
+  description = <<EOF
+  The account-level configurations of Support App service.
+    `account_alias` - The account alias associated with a customer's account.
+  EOF
+  value = {
+    account_alias    = one(awscc_supportapp_account_alias.this[*].account_alias)
+    slack_workspaces = values(awscc_supportapp_slack_workspace_configuration.this)[*].team_id
+    slack_channel_configurations = {
+      for name, configuration in awscc_supportapp_slack_channel_configuration.this :
+      name => {
+        name      = configuration.channel_name
+        workspace = configuration.team_id
+        channel   = configuration.channel_id
+
+        channel_role = {
+          arn = configuration.channel_role_arn
+        }
+
+        notification_case_severity                 = upper(configuration.notify_on_case_severity)
+        notification_on_add_correspondence_to_case = configuration.notify_on_add_correspondence_to_case
+        notification_on_create_or_reopen_case      = configuration.notify_on_create_or_reopen_case
+        notification_on_resolve_case               = configuration.notify_on_resolve_case
+      }
+    }
+  }
+}
+
 output "s3" {
   description = <<EOF
   The account-level configurations of S3 service.
