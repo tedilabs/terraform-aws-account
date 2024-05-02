@@ -1,46 +1,21 @@
 version: 2
 updates:
-- package-ecosystem: "github-actions"
-  directory: "/"
+- package-ecosystem: github-actions
+  directory: /
   schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/account"
+    interval: daily
+
+- package-ecosystem: terraform
+  directories:
+  - /modules/account
+  - /modules/iam-group
+  - /modules/iam-oidc-identity-provider
+  - /modules/iam-policy
+  - /modules/iam-predefined-policies
+  - /modules/iam-role
+  - /modules/iam-saml-identity-provider
+  - /modules/iam-service-linked-role
+  - /modules/iam-user
+  - /modules/region
   schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/iam-group"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/iam-role"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/iam-user"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/org-account"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/org-organization"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/org-organizational-unit"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/service-quota-requests"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/sso-account-assignment"
-  schedule:
-    interval: "daily"
-- package-ecosystem: "terraform"
-  directory: "/modules/sso-permission-set"
-  schedule:
-    interval: "daily"
+    interval: weekly
