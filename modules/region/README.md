@@ -5,6 +5,7 @@ This module creates following resources.
 - `aws_ebs_encryption_by_default`
 - `aws_ebs_default_kms_key` (optional)
 - `aws_ec2_serial_console_access`
+- `aws_macie2_organization_admin_account` (optional)
 - `aws_resourceexplorer2_index` (optional)
 - `aws_resourceexplorer2_view` (optional)
 - `aws_servicequotas_service_quota` (optional)
@@ -21,7 +22,7 @@ This module creates following resources.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.19.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.48.0 |
 
 ## Modules
 
@@ -37,6 +38,7 @@ This module creates following resources.
 | [aws_ebs_encryption_by_default.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_encryption_by_default) | resource |
 | [aws_ec2_availability_zone_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_availability_zone_group) | resource |
 | [aws_ec2_serial_console_access.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_serial_console_access) | resource |
+| [aws_macie2_organization_admin_account.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/macie2_organization_admin_account) | resource |
 | [aws_resourceexplorer2_index.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/resourceexplorer2_index) | resource |
 | [aws_resourceexplorer2_view.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/resourceexplorer2_view) | resource |
 | [aws_servicequotas_service_quota.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/servicequotas_service_quota) | resource |
@@ -48,6 +50,7 @@ This module creates following resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_ebs_default_encryption"></a> [ebs\_default\_encryption](#input\_ebs\_default\_encryption) | (Optional) The configuration of the EBS default encryption. `ebs_default_encryption` as defined below.<br>    (Optional) `enabled` - Whether or not default EBS encryption is enabled.<br>    (Optional) `kms_key` - The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume. | <pre>object({<br>    enabled = optional(bool, false)<br>    kms_key = optional(string)<br>  })</pre> | `{}` | no |
 | <a name="input_ec2_serial_console_enabled"></a> [ec2\_serial\_console\_enabled](#input\_ec2\_serial\_console\_enabled) | (Optional) Whether serial console access is enabled for the current AWS region. | `bool` | `false` | no |
+| <a name="input_macie"></a> [macie](#input\_macie) | (Optional) The configuration of Macie in the current AWS region. `macie` as defined below.<br>    (Optional) `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization. This can be configured only if Macie is enabled for the organization. The account must be a management account of the organization. | <pre>object({<br>    delegated_administrator = optional(string)<br>  })</pre> | `{}` | no |
 | <a name="input_module_tags_enabled"></a> [module\_tags\_enabled](#input\_module\_tags\_enabled) | (Optional) Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | <a name="input_resource_explorer"></a> [resource\_explorer](#input\_resource\_explorer) | (Optional) The configuration of the Resource Explorer in the current AWS region. `resource_explorer` as defined below.<br>    (Optional) `enabled` - Whether or not to enable the Resource Explorer in the current AWS region. Defaults to `true`.<br>    (Optional) `index_type` - The type of the index. Valid values are `AGGREGATOR`, `LOCAL`. Defaults to `LOCAL`.<br>    (Optional) `views` - A list of views to create. `views` as defined below.<br>      (Required) `name` - The name of the view. The name must be no more than 64 characters long, and can include letters, digits, and the dash (-) character. The name must be unique within its AWS Region.<br>      (Optional) `is_default` - Whether the view is the default view for the AWS Region. Defaults to `false`.<br>      (Optional) `filter_queries` - A list of filter queries. Specify which resources are included in the results of queries made using this view. The filter string is combined using a logical AND operator. Defaults to `[]` (include all resources).<br>      (Optional) `additional_resource_attributes` - A list of additional resource attributes. By default, the results include ARN, owner account, Region, service, and resource type. Valid values are `tags`. Defaults to `[]`. | <pre>object({<br>    enabled    = optional(bool, true)<br>    index_type = optional(string, "LOCAL")<br>    views = optional(list(object({<br>      name           = string<br>      is_default     = optional(bool, false)<br>      filter_queries = optional(list(string), [])<br><br>      additional_resource_attributes = optional(set(string), [])<br>    })), [])<br>  })</pre> | `{}` | no |
 | <a name="input_resource_group_description"></a> [resource\_group\_description](#input\_resource\_group\_description) | (Optional) The description of Resource Groupolicy. | `string` | `"Managed by Terraform."` | no |
@@ -67,6 +70,7 @@ This module creates following resources.
 | <a name="output_ebs"></a> [ebs](#output\_ebs) | The region-level configurations of EBS service.<br>    `default_encryption` - The configurations for EBS Default Encryption. |
 | <a name="output_ec2"></a> [ec2](#output\_ec2) | The region-level configurations of EC2 service.<br>    `serial_console` - The configurations for EC2 Serial Console. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the current region. |
+| <a name="output_macie"></a> [macie](#output\_macie) | The region-level configurations of Macie service.<br>    `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the current region. |
 | <a name="output_resource_explorer"></a> [resource\_explorer](#output\_resource\_explorer) | The region-level configurations of Resource Explorer service.<br>    `enabled` - Whether the Resource Explorer is enabled in the current AWS region.<br>    `index_type` - The type of the index.<br>    `views` - The list of views. |
 | <a name="output_service_quotas"></a> [service\_quotas](#output\_service\_quotas) | The region-level configurations of Service Quotas. |

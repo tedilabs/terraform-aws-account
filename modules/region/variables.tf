@@ -19,6 +19,18 @@ variable "ec2_serial_console_enabled" {
   nullable    = false
 }
 
+variable "macie" {
+  description = <<EOF
+  (Optional) The configuration of Macie in the current AWS region. `macie` as defined below.
+    (Optional) `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization. This can be configured only if Macie is enabled for the organization. The account must be a management account of the organization.
+  EOF
+  type = object({
+    delegated_administrator = optional(string)
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "resource_explorer" {
   description = <<EOF
   (Optional) The configuration of the Resource Explorer in the current AWS region. `resource_explorer` as defined below.
