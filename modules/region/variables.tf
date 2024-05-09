@@ -12,11 +12,18 @@ variable "ebs_default_encryption" {
   nullable = false
 }
 
-variable "ec2_serial_console_enabled" {
-  description = "(Optional) Whether serial console access is enabled for the current AWS region."
-  type        = bool
-  default     = false
-  nullable    = false
+variable "ec2" {
+  description = <<EOF
+  (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.
+    (Optional) `ami_public_access_enabled` - Whether to allow or block public access for AMIs at the account level to prevent the public sharing of your AMIs in this region. Defaults to `false`.
+    (Optional) `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. Defaults to `false`.
+  EOF
+  type = object({
+    ami_public_access_enabled = optional(bool, false)
+    serial_console_enabled    = optional(bool, false)
+  })
+  default  = {}
+  nullable = false
 }
 
 variable "macie" {
