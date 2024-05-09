@@ -16,11 +16,22 @@ variable "ec2" {
   description = <<EOF
   (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.
     (Optional) `ami_public_access_enabled` - Whether to allow or block public access for AMIs at the account level to prevent the public sharing of your AMIs in this region. Defaults to `false`.
+    (Optional) `instance_metadata_defaults` - The configuration of the regional instance metadata default settings. `instance_metadata_defaults` as defined below.
+      (Optional) `http_enabled` - Whether to enable or disable the HTTP metadata endpoint on your instances. Defaults to `null` (No preference).
+      (Optional) `http_token_required` - Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Defaults to `false`. Defaults to `null` (No preference).
+      (Optional) `http_put_response_hop_limit` - A desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from `1` to `64`. Defaults to `null` (No preference).
+      (Optional) `instance_tags_enabled` - Whether to enable the access to instance tags from the instance metadata service. Defaults to `null` (No preference).
     (Optional) `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. Defaults to `false`.
   EOF
   type = object({
     ami_public_access_enabled = optional(bool, false)
-    serial_console_enabled    = optional(bool, false)
+    instance_metadata_defaults = optional(object({
+      http_enabled                = optional(bool)
+      http_token_required         = optional(bool)
+      http_put_response_hop_limit = optional(number)
+      instance_tags_enabled       = optional(bool)
+    }), {})
+    serial_console_enabled = optional(bool, false)
   })
   default  = {}
   nullable = false
