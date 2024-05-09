@@ -44,6 +44,16 @@ output "ec2" {
   }
 }
 
+output "inspector" {
+  description = <<EOF
+  The region-level configurations of Inspector service.
+    `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon Inspector administrator account for the organization.
+  EOF
+  value = {
+    delegated_administrator = one(aws_inspector2_delegated_admin_account.this[*].account_id)
+  }
+}
+
 output "macie" {
   description = <<EOF
   The region-level configurations of Macie service.
