@@ -44,6 +44,16 @@ output "ec2" {
   }
 }
 
+output "guardduty" {
+  description = <<EOF
+  The region-level configurations of GuardDuty service.
+    `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon GuardDuty administrator account for the organization.
+  EOF
+  value = {
+    delegated_administrator = one(aws_guardduty_organization_admin_account.this[*].admin_account_id)
+  }
+}
+
 output "inspector" {
   description = <<EOF
   The region-level configurations of Inspector service.

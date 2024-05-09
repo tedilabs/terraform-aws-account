@@ -37,6 +37,18 @@ variable "ec2" {
   nullable = false
 }
 
+variable "guardduty" {
+  description = <<EOF
+  (Optional) The configuration of GuardDuty in the current AWS region. `guardduty` as defined below.
+    (Optional) `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon GuardDuty administrator account for the organization. The delegated administrator will be assigned the two GuardDuty roles required to administer GuardDuty policy in your organization. Can be used in only management account of the organization.
+  EOF
+  type = object({
+    delegated_administrator = optional(string)
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "inspector" {
   description = <<EOF
   (Optional) The configuration of Inspector in the current AWS region. `inspector` as defined below.
