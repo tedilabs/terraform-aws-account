@@ -5,7 +5,7 @@ This module creates following resources.
 - `aws_ebs_encryption_by_default`
 - `aws_ebs_default_kms_key` (optional)
 - `aws_ec2_image_block_public_access`
-- `aws_ec2_instance_metadata_defaults`
+- `aws_ec2_instance_metadata_defaults` (optional)
 - `aws_ec2_serial_console_access`
 - `aws_inspector2_delegated_admin_account` (optional)
 - `aws_macie2_organization_admin_account` (optional)

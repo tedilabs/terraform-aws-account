@@ -15,6 +15,11 @@ resource "aws_ec2_image_block_public_access" "this" {
 ###################################################
 
 resource "aws_ec2_instance_metadata_defaults" "this" {
+  count = anytrue([
+    for k, v in var.ec2.instance_metadata_defaults :
+    v != null
+  ]) ? 1 : 0
+
   http_endpoint = (var.ec2.instance_metadata_defaults.http_enabled != null
     ? (var.ec2.instance_metadata_defaults.http_enabled ? "enabled" : "disabled")
     : "no-preference"
