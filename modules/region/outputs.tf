@@ -38,8 +38,9 @@ output "ec2" {
     `serial_console_enabled` - Whether serial console access is enabled for the current AWS region.
   EOF
   value = {
-    ami_public_access_enabled = aws_ec2_image_block_public_access.this.state == "unblocked"
-    serial_console_enabled    = aws_ec2_serial_console_access.this.enabled
+    ami_public_access_enabled  = aws_ec2_image_block_public_access.this.state == "unblocked"
+    instance_metadata_defaults = var.ec2.instance_metadata_defaults
+    serial_console_enabled     = aws_ec2_serial_console_access.this.enabled
   }
 }
 
