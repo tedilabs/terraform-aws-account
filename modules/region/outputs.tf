@@ -34,12 +34,12 @@ output "ebs" {
 output "ec2" {
   description = <<EOF
   The region-level configurations of EC2 service.
-    `serial_console` - The configurations for EC2 Serial Console.
+    `ami_public_access_enabled` - Whether to allow or block public access for AMIs at the account level to prevent the public sharing of your AMIs in this region.
+    `serial_console_enabled` - Whether serial console access is enabled for the current AWS region.
   EOF
   value = {
-    serial_console = {
-      enabled = aws_ec2_serial_console_access.this.enabled
-    }
+    ami_public_access_enabled = aws_ec2_image_block_public_access.this.state == "unblocked"
+    serial_console_enabled    = aws_ec2_serial_console_access.this.enabled
   }
 }
 
