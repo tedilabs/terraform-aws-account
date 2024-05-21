@@ -15,7 +15,7 @@ output "url" {
 
 output "urn" {
   description = "The URN of the identity provider."
-  value       = aws_iam_openid_connect_provider.this.url
+  value       = trimprefix(trimprefix(aws_iam_openid_connect_provider.this.url, "http://"), "https://")
 }
 
 output "audiences" {
