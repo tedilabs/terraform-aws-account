@@ -3,20 +3,17 @@
 ###################################################
 
 module "cloudwatch_oam_sink" {
-  for_each = {
-    for sink in var.cloudwatch.oam_sinks :
-    sink.name => sink
-  }
+  count = var.cloudwatch.oam_sink != null ? 1 : 0
 
   source  = "tedilabs/observability/aws//modules/cloudwatch-oam-sink"
   version = "~> 0.2.0"
 
-  name            = each.key
-  telemetry_types = each.value.telemetry_types
+  name            = var.cloudwatch.oam_sink.name
+  telemetry_types = var.cloudwatch.oam_sink.telemetry_types
 
-  allowed_source_accounts           = each.value.allowed_source_accounts
-  allowed_source_organizations      = each.value.allowed_source_organizations
-  allowed_source_organization_paths = each.value.allowed_source_organization_paths
+  allowed_source_accounts           = var.cloudwatch.oam_sink.allowed_source_accounts
+  allowed_source_organizations      = var.cloudwatch.oam_sink.allowed_source_organizations
+  allowed_source_organization_paths = var.cloudwatch.oam_sink.allowed_source_organization_paths
 
   resource_group_enabled = false
   module_tags_enabled    = false

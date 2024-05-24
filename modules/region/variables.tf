@@ -1,7 +1,7 @@
 variable "cloudwatch" {
   description = <<EOF
   (Optional) The configuration of CloudWatch in the current AWS region. `cloudwatch` as defined below.
-    (Optional) `oam_sinks` - A list of CloudWatch OAM(Observability Access Manager) sinks. Each items of `oam_sinks` as defined below.
+    (Optional) `oam_sink` - A configuration of CloudWatch OAM(Observability Access Manager) sink. `oam_sink` as defined below.
       (Required) `name` - The name of the CloudWatch OAM sink.
       (Optional) `telemetry_types` - A set of the telemetry types can be shared with it. Valid values are `AWS::CloudWatch::Metric`, `AWS::Logs::LogGroup`, `AWS::XRay::Trace`, `AWS::ApplicationInsights::Application`, `AWS::InternetMonitor::Monitor`.
       (Optional) `allowed_source_accounts` - A list of the IDs of AWS accounts that will share data with this monitoring account.
@@ -10,14 +10,14 @@ variable "cloudwatch" {
       (Optional) `tags` - A map of tags to add to the resource.
   EOF
   type = object({
-    oam_sinks = optional(list(object({
+    oam_sink = optional(object({
       name                              = string
       telemetry_types                   = optional(set(string), [])
       allowed_source_accounts           = optional(list(string), [])
       allowed_source_organizations      = optional(list(string), [])
       allowed_source_organization_paths = optional(list(string), [])
       tags                              = optional(map(string), {})
-    })), [])
+    }))
   })
   default  = {}
   nullable = false

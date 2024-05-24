@@ -21,10 +21,10 @@ output "description" {
 output "cloudwdatch" {
   description = <<EOF
   The region-level configurations of CloudWatch service.
-    `oam_sinks` - A list of CloudWatch OAM(Observability Access Manager) sinks.
+    `oam_sink` - A configuration of CloudWatch OAM(Observability Access Manager) sink.
   EOF
   value = {
-    oam_sinks = module.cloudwatch_oam_sink
+    oam_sink = one(module.cloudwatch_oam_sink[*])
   }
 }
 
