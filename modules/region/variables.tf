@@ -1,3 +1,28 @@
+variable "cloudwatch" {
+  description = <<EOF
+  (Optional) The configuration of CloudWatch in the current AWS region. `cloudwatch` as defined below.
+    (Optional) `oam_sinks` - A list of CloudWatch OAM(Observability Access Manager) sinks. Each items of `oam_sinks` as defined below.
+      (Required) `name` - The name of the CloudWatch OAM sink.
+      (Optional) `telemetry_types` - A set of the telemetry types can be shared with it. Valid values are `AWS::CloudWatch::Metric`, `AWS::Logs::LogGroup`, `AWS::XRay::Trace`, `AWS::ApplicationInsights::Application`, `AWS::InternetMonitor::Monitor`.
+      (Optional) `allowed_source_accounts` - A list of the IDs of AWS accounts that will share data with this monitoring account.
+      (Optional) `allowed_source_organizations` - A list of the organization IDs of AWS accounts that will share data with this monitoring account.
+      (Optional) `allowed_source_organization_paths` - A list of the organization paths of the AWS accounts that will share data with this monitoring account.
+      (Optional) `tags` - A map of tags to add to the resource.
+  EOF
+  type = object({
+    oam_sinks = optional(list(object({
+      name                              = string
+      telemetry_types                   = optional(set(string), [])
+      allowed_source_accounts           = optional(list(string), [])
+      allowed_source_organizations      = optional(list(string), [])
+      allowed_source_organization_paths = optional(list(string), [])
+      tags                              = optional(map(string), {})
+    })), [])
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "ebs_default_encryption" {
   description = <<EOF
   (Optional) The configuration of the EBS default encryption. `ebs_default_encryption` as defined below.

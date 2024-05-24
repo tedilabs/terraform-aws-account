@@ -18,6 +18,16 @@ output "description" {
   value       = data.aws_region.this.description
 }
 
+output "cloudwdatch" {
+  description = <<EOF
+  The region-level configurations of CloudWatch service.
+    `oam_sinks` - A list of CloudWatch OAM(Observability Access Manager) sinks.
+  EOF
+  value = {
+    oam_sinks = module.cloudwatch_oam_sink
+  }
+}
+
 output "ebs" {
   description = <<EOF
   The region-level configurations of EBS service.
