@@ -21,6 +21,6 @@ module "cloudwatch_oam_sink" {
   tags = merge(
     local.module_tags,
     var.tags,
-    each.value.tags,
+    var.cloudwatch.oam_sink.tags,
   )
 }
