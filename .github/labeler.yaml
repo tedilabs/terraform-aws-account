@@ -1,27 +1,45 @@
 # Modules
 ":floppy_disk: account":
-- modules/account/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/account/**/*
 
 ":floppy_disk: iam-group":
-- modules/iam-group/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-group/**/*
 
 ":floppy_disk: iam-oidc-identity-provider":
-- modules/iam-oidc-identity-provider/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-oidc-identity-provider/**/*
 
 ":floppy_disk: iam-policy":
-- modules/iam-policy/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-policy/**/*
 
 ":floppy_disk: iam-predefined-policies":
-- modules/iam-predefined-policies/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-predefined-policies/**/*
 
 ":floppy_disk: iam-role":
-- modules/iam-role/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-role/**/*
 
 ":floppy_disk: iam-saml-identity-provider":
-- modules/iam-saml-identity-provider/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-saml-identity-provider/**/*
 
 ":floppy_disk: iam-user":
-- modules/iam-user/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-user/**/*
 
 ":floppy_disk: region":
-- modules/region/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/region/**/*
