@@ -7,15 +7,6 @@ updates:
 
 - package-ecosystem: terraform
   directories:
-  - /modules/account
-  - /modules/iam-group
-  - /modules/iam-oidc-identity-provider
-  - /modules/iam-policy
-  - /modules/iam-predefined-policies
-  - /modules/iam-role
-  - /modules/iam-saml-identity-provider
-  - /modules/iam-service-linked-role
-  - /modules/iam-user
-  - /modules/region
+  - /modules/*
   schedule:
     interval: weekly
