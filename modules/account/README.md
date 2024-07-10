@@ -8,6 +8,7 @@ This module creates following resources.
 - `aws_account_primary_contact` (optional)
 - `aws_account_alternate_contact` (optional)
 - `aws_account_region` (optional)
+- `aws_ce_cost_allocation_tag` (optional)
 - `aws_s3_account_public_access_block`
 - `aws_spot_datafeed_subscription` (optional)
 
@@ -40,6 +41,7 @@ No modules.
 | [aws_account_alternate_contact.security](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
 | [aws_account_primary_contact.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_primary_contact) | resource |
 | [aws_account_region.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_region) | resource |
+| [aws_ce_cost_allocation_tag.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ce_cost_allocation_tag) | resource |
 | [aws_iam_account_alias.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_alias) | resource |
 | [aws_iam_account_password_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_password_policy) | resource |
 | [aws_iam_security_token_service_preferences.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_security_token_service_preferences) | resource |
@@ -57,6 +59,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name for the AWS account. Used for the account alias. | `string` | n/a | yes |
 | <a name="input_additional_regions"></a> [additional\_regions](#input\_additional\_regions) | (Optional) A set of regions to enable in the account. | `set(string)` | `[]` | no |
 | <a name="input_billing_contact"></a> [billing\_contact](#input\_billing\_contact) | (Optional) The configuration of the billing contact for the AWS Account. `billing_contact` as defined below.<br>    (Required) `name` - The name of the billing contact.<br>    (Optional) `title` - The tile of the billing contact. Defaults to `Billing Manager`.<br>    (Required) `email` - The email address of the billing contact.<br>    (Required) `phone` - The phone number of the billing contact. | <pre>object({<br>    name  = string<br>    title = optional(string, "Billing Manager")<br>    email = string<br>    phone = string<br>  })</pre> | `null` | no |
+| <a name="input_cost"></a> [cost](#input\_cost) | (Optional) The configuration of the Cost & Billing for the AWS Account. `cost` as defined below.<br>    (Optional) `cost_allocation_tags` - A set of the key for the cost allocation tags. | <pre>object({<br>    cost_allocation_tags = optional(set(string), [])<br>  })</pre> | `{}` | no |
 | <a name="input_ec2_spot_datafeed_subscription"></a> [ec2\_spot\_datafeed\_subscription](#input\_ec2\_spot\_datafeed\_subscription) | (Optional) The configuration of the Spot Data Feed Subscription. `ec2_spot_datafeed_subscription` as defined below.<br>    (Optional) `enabled` - Indicate whether to enable Spot Data Feed Subscription to S3 Bucket. Defaults to `false`.<br>    (Optional) `s3_bucket` - The configuration of the S3 bucket where AWS deliver the spot data feed. `s3_bucket` as defined below.<br>      (Required) `name` - The name of the S3 bucket where AWS deliver the spot data feed.<br>      (Optional) `key_prefix` - The path of directory inside S3 bucket to place spot pricing data. | <pre>object({<br>    enabled = optional(bool, false)<br>    s3_bucket = optional(object({<br>      name       = optional(string, "")<br>      key_prefix = optional(string, "")<br>    }))<br>  })</pre> | `{}` | no |
 | <a name="input_operation_contact"></a> [operation\_contact](#input\_operation\_contact) | (Optional) The configuration of the operation contact for the AWS Account. `operation_contact` as defined below.<br>    (Required) `name` - The name of the operation contact.<br>    (Optional) `title` - The tile of the operation contact. Defaults to `Operation Manager`.<br>    (Required) `email` - The email address of the operation contact.<br>    (Required) `phone` - The phone number of the operation contact. | <pre>object({<br>    name  = string<br>    title = optional(string, "Operation Manager")<br>    email = string<br>    phone = string<br>  })</pre> | `null` | no |
 | <a name="input_password_policy"></a> [password\_policy](#input\_password\_policy) | (Optional) Password Policy for the AWS account. | <pre>object({<br>    minimum_password_length        = optional(number, 8)<br>    require_numbers                = optional(bool, true)<br>    require_symbols                = optional(bool, true)<br>    require_lowercase_characters   = optional(bool, true)<br>    require_uppercase_characters   = optional(bool, true)<br>    allow_users_to_change_password = optional(bool, true)<br>    hard_expiry                    = optional(bool, false)<br>    max_password_age               = optional(number, 0)<br>    password_reuse_prevention      = optional(number, 0)<br>  })</pre> | `{}` | no |
@@ -72,6 +75,7 @@ No modules.
 |------|-------------|
 | <a name="output_additional_regions"></a> [additional\_regions](#output\_additional\_regions) | A set of additional regions enabled in the account. |
 | <a name="output_billing_contact"></a> [billing\_contact](#output\_billing\_contact) | The billing contact attached to an AWS Account. |
+| <a name="output_cost"></a> [cost](#output\_cost) | The account-level configurations of Cost & Billing Management service.<br>    `cost_allocation_tags` - A set of the key for the cost allocation tags. |
 | <a name="output_ec2"></a> [ec2](#output\_ec2) | The account-level configurations of EC2 service.<br>    `spot_datafeed_subscription` - To help you understand the charges for your Spot instances, Amazon EC2 provides a data feed that describes your Spot instance usage and pricing. This data feed is sent to an Amazon S3 bucket that you specify when you subscribe to the data feed. |
 | <a name="output_id"></a> [id](#output\_id) | The AWS Account ID. |
 | <a name="output_name"></a> [name](#output\_name) | Name of the AWS account. The account alias. |

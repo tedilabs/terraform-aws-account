@@ -71,6 +71,16 @@ output "security_contact" {
   }, null)
 }
 
+output "cost" {
+  description = <<EOF
+  The account-level configurations of Cost & Billing Management service.
+    `cost_allocation_tags` - A set of the key for the cost allocation tags.
+  EOF
+  value = {
+    cost_allocation_tags = keys(aws_ce_cost_allocation_tag.this)
+  }
+}
+
 output "ec2" {
   description = <<EOF
   The account-level configurations of EC2 service.

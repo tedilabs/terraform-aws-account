@@ -137,6 +137,18 @@ variable "security_contact" {
   default  = null
 }
 
+variable "cost" {
+  description = <<EOF
+  (Optional) The configuration of the Cost & Billing for the AWS Account. `cost` as defined below.
+    (Optional) `cost_allocation_tags` - A set of the key for the cost allocation tags.
+  EOF
+  type = object({
+    cost_allocation_tags = optional(set(string), [])
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "ec2_spot_datafeed_subscription" {
   description = <<EOF
   (Optional) The configuration of the Spot Data Feed Subscription. `ec2_spot_datafeed_subscription` as defined below.
