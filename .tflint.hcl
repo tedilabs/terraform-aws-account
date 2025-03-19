@@ -2,7 +2,7 @@ config {
   plugin_dir = "~/.tflint.d/plugins"
 
   format = "compact"
-  module = true
+  call_module_type = "local"
   force = false
   disabled_by_default = false
 
@@ -70,7 +70,7 @@ rule "terraform_unused_required_providers" {
 
 plugin "aws" {
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
-  version = "0.21.1"
+  version = "0.38.0"
 
   enabled = true
   deep_check = false
