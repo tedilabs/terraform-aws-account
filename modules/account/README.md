@@ -12,7 +12,7 @@ This module creates following resources.
 - `aws_s3_account_public_access_block`
 - `aws_spot_datafeed_subscription` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -87,4 +87,4 @@ No modules.
 | <a name="output_signin_url"></a> [signin\_url](#output\_signin\_url) | The URL to signin for the AWS account. |
 | <a name="output_sts"></a> [sts](#output\_sts) | The account-level configurations of STS service.<br/>    `global_endpoint_token_version` - The version of the STS global endpoint token. |
 | <a name="output_support_app"></a> [support\_app](#output\_support\_app) | The account-level configurations of Support App service.<br/>    `account_alias` - The account alias associated with a customer's account. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

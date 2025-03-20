@@ -4,7 +4,7 @@ This module creates following resources.
 
 - `aws_iam_policy`
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -46,4 +46,4 @@ This module creates following resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_policies"></a> [policies](#output\_policies) | A list of policies which are managed by this module. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

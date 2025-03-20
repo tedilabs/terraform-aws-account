@@ -1,25 +1,39 @@
+default_install_hook_types:
+- pre-commit
+- commit-msg
+
 repos:
 - repo: https://github.com/antonbabenko/pre-commit-terraform
   rev: v1.97.4
   hooks:
   - id: terraform_fmt
+    name: (terraform) Format .tf files with `terraform fmt`
     args:
     - --args=-diff
   - id: terraform_validate
+    name: (terraform) Check with `terraform validate`
     args:
-    - --tf-init-args=-upgrade
     - --hook-config=--retry-once-with-cleanup=true
-  - id: terraform_providers_lock
-    args:
-    - --hook-config=--mode=always-regenerate-lockfile
+    - --tf-init-args=-upgrade
   - id: terraform_tflint
+    name: (terraform) Check with `tflint`
     args:
     - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
     files: ^modules/
   - id: terraform_docs
+    name: (terraform) Generate docs with `terraform-docs`
     args: ["--args=--sort-by required"]
 
 - repo: https://github.com/adrienverge/yamllint
   rev: v1.36.2
   hooks:
   - id: yamllint
+    name: (yaml) Check with `yamllint`
+
+- repo: https://github.com/compilerla/conventional-pre-commit
+  rev: v4.0.0
+  hooks:
+  - id: conventional-pre-commit
+    name: (commit-message) Check conventional commit
+    stages: [commit-msg]
+    args: []

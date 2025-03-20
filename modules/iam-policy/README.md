@@ -5,7 +5,7 @@ This module creates following resources.
 - `aws_iam_policy`
 
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -54,4 +54,4 @@ This module creates following resources.
 | <a name="output_id"></a> [id](#output\_id) | The ID of this IAM policy. |
 | <a name="output_name"></a> [name](#output\_name) | The URL of the IAM policy. |
 | <a name="output_path"></a> [path](#output\_path) | The path of the IAM policy. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

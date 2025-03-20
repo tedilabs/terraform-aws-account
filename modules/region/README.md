@@ -16,7 +16,7 @@ This module creates following resources.
 - `aws_resourceexplorer2_view` (optional)
 - `aws_servicequotas_service_quota` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -92,4 +92,4 @@ This module creates following resources.
 | <a name="output_resource_explorer"></a> [resource\_explorer](#output\_resource\_explorer) | The region-level configurations of Resource Explorer service.<br/>    `enabled` - Whether the Resource Explorer is enabled in the current AWS region.<br/>    `index_type` - The type of the index.<br/>    `views` - The list of views. |
 | <a name="output_service_quotas"></a> [service\_quotas](#output\_service\_quotas) | The region-level configurations of Service Quotas. |
 | <a name="output_vpc"></a> [vpc](#output\_vpc) | The region-level configurations of VPC. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

@@ -5,7 +5,7 @@ This module creates following resources.
 - `aws_iam_saml_provider`
 
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -51,4 +51,4 @@ This module creates following resources.
 | <a name="output_expire_at"></a> [expire\_at](#output\_expire\_at) | The expiration date and time for the SAML provider in RFC1123 format, e.g., `Mon, 02 Jan 2006 15:04:05 MST`. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of this provider. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the identity provider. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

@@ -5,7 +5,7 @@ This module creates following resources.
 - `aws_iam_openid_connect_provider`
 
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -58,4 +58,4 @@ This module creates following resources.
 | <a name="output_thumbprints"></a> [thumbprints](#output\_thumbprints) | A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). |
 | <a name="output_url"></a> [url](#output\_url) | The URL of the identity provider. |
 | <a name="output_urn"></a> [urn](#output\_urn) | The URN of the identity provider. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

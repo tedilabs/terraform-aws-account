@@ -4,7 +4,7 @@ This module creates following resources.
 
 - `aws_iam_service_linked_role`
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -54,4 +54,4 @@ This module creates following resources.
 | <a name="output_name"></a> [name](#output\_name) | IAM Role name. |
 | <a name="output_path"></a> [path](#output\_path) | The path of the role. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

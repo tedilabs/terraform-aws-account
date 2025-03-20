@@ -6,7 +6,7 @@ This module creates following resources.
 - `aws_iam_group_policy` (optional)
 - `aws_iam_group_policy_attachment` (optional)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -54,4 +54,4 @@ No modules.
 | <a name="output_name"></a> [name](#output\_name) | IAM group name. |
 | <a name="output_policies"></a> [policies](#output\_policies) | List of ARNs of IAM policies which are atached to IAM group. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

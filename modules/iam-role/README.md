@@ -15,7 +15,7 @@ This module creates following resources.
 
 When `pgp_key` is specified as `keybase:username`, make sure that that user has already uploaded public key to keybase.io. For example, user with username `test` has done it properly and you can [verify it here](https://keybase.io/test/pgp_keys.asc).
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -92,4 +92,4 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="output_name"></a> [name](#output\_name) | IAM Role name. |
 | <a name="output_policies"></a> [policies](#output\_policies) | List of ARNs of IAM policies which are atached to IAM role. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
