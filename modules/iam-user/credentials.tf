@@ -3,7 +3,7 @@
 ###################################################
 
 resource "aws_iam_user_login_profile" "this" {
-  count = try(var.console_access.enabled, true) ? 1 : 0
+  count = var.console_access.enabled ? 1 : 0
 
   user    = aws_iam_user.this.name
   pgp_key = var.pgp_key
@@ -31,7 +31,7 @@ resource "aws_iam_access_key" "this" {
   user    = aws_iam_user.this.name
   pgp_key = var.pgp_key
 
-  status = try(var.access_keys[count.index].enabled, true) ? "Active" : "Inactive"
+  status = var.access_keys[count.index].enabled ? "Active" : "Inactive"
 
   lifecycle {
     ignore_changes = [
@@ -54,8 +54,8 @@ resource "aws_iam_user_ssh_key" "this" {
   username = aws_iam_user.this.name
 
   public_key = each.value.public_key
-  encoding   = try(each.value.encoding, "SSH")
-  status     = try(each.value.enabled, true) ? "Active" : "Inactive"
+  encoding   = each.value.encoding
+  status     = each.value.enabled ? "Active" : "Inactive"
 }
 
 
@@ -72,5 +72,5 @@ resource "aws_iam_service_specific_credential" "this" {
   user_name = aws_iam_user.this.name
 
   service_name = each.key
-  status       = try(each.value.enabled, true) ? "Active" : "Inactive"
+  status       = each.value.enabled ? "Active" : "Inactive"
 }

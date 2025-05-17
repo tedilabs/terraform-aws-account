@@ -37,7 +37,7 @@ output "pgp_key" {
 output "console_access" {
   description = "The information of the AWS console access and password for the user."
   value = {
-    enabled            = try(var.console_access.enabled, true)
+    enabled            = var.console_access.enabled
     encrypted_password = one(aws_iam_user_login_profile.this[*].encrypted_password)
   }
 }

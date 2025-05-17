@@ -41,33 +41,62 @@ variable "pgp_key" {
 
 variable "console_access" {
   description = <<EOF
-  (Optional) The configuration of the AWS console access and password for the user. `console_access` block as defined below.
-    (Optional) `enabled` - Whether to activate the AWS console access and password.
-    (Optional) `password_length` - The length of the generated password. Only applies on resource creation. Default value is `20`.
+  (Optional) A configuration of the AWS console access and password for the user. `console_access` as defined below.
+    (Optional) `enabled` - Whether to activate the AWS console access and password. Defaults to `true`.
+    (Optional) `password_length` - The length of the generated password. Only applies on resource creation. Defaults to `20`.
     (Optional) `password_reset_required` -  Whether the user should be forced to reset the generated password on first login. Defaults to `true`.
   EOF
-  type        = any
-  default     = {}
+  type = object({
+    enabled                 = optional(bool, true)
+    password_length         = optional(number, 20)
+    password_reset_required = optional(bool, true)
+  })
+  default  = {}
+  nullable = false
 }
 
 variable "access_keys" {
   description = <<EOF
-  (Optional) A list of Access Keys to associate with the IAM user. This is a set of credentials that allow API requests to be made as an IAM user. Each value of `access_keys` block as defined below.
-    (Required) `enabled` - Whether to activate the Access Key.
+  (Optional) A list of Access Keys to associate with the IAM user. This is a set of credentials that allow API requests to be made as an IAM user. The IAM User can have a maximum of two Access Keys (active or inactive) at a time. Each item of `access_keys` as defined below.
+    (Optional) `enabled` - Whether to activate the Access Key. Defaults to `true`.
   EOF
-  type        = list(map(bool))
-  default     = []
+  type = list(object({
+    enabled = optional(bool, true)
+  }))
+  default  = []
+  nullable = false
+
+  validation {
+    condition     = length(var.access_keys) <= 2
+    error_message = "The IAM User can have a maximum of two Access Keys (active or inactive) at a time."
+  }
 }
 
 variable "ssh_keys" {
   description = <<EOF
-  (Optional) A list of SSH public keys to associate with the IAM user. Each value of `ssh_keys` block as defined below.
+  (Optional) A list of SSH public keys to associate with the IAM user. can have a maximum of five SSH public keys (active or inactive) at a time. Each item of `ssh_keys` as defined below.
+    (Optional) `enabled` - Whether to activate the SSH public key. Defaults to `true`.
     (Required) `public_key` - The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.
     (Optional) `encoding` - Specify the public key encoding format. Valid values are `SSH` and `PEM`. To retrieve the public key in ssh-rsa format, use `SSH`. To retrieve the public key in PEM format, use `PEM`.
-    (Optional) `enabled` - Whether to activate the SSH public key.
   EOF
-  type        = any
-  default     = []
+  type = list(object({
+    enabled    = optional(bool, true)
+    public_key = string
+    encoding   = optional(string, "SSH")
+  }))
+  default  = []
+  nullable = false
+
+  validation {
+    condition = alltrue([
+      for ssh_key in var.ssh_keys : contains(["SSH", "PEM"], ssh_key.encoding)
+    ])
+    error_message = "Valid values for `encoding` are `SSH` and `PEM`."
+  }
+  validation {
+    condition     = length(var.ssh_keys) <= 5
+    error_message = "The IAM User can have a maximum of five SSH public keys (active or inactive) at a time."
+  }
 }
 
 variable "service_credentials" {
