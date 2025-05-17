@@ -33,6 +33,11 @@ output "exclusive_policy_management_enabled" {
   value       = var.exclusive_policy_management_enabled
 }
 
+output "exclusive_inline_policy_management_enabled" {
+  description = "Whether exclusive inline policy management is enabled for the IAM group."
+  value       = var.exclusive_inline_policy_management_enabled
+}
+
 output "policies" {
   description = "A set of ARNs of IAM policies which are atached to IAM group."
   value = (var.exclusive_policy_management_enabled
