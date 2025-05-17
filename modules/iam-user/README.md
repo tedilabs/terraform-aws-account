@@ -4,6 +4,7 @@ This module creates following resources.
 
 - `aws_iam_user`
 - `aws_iam_user_group_membership`
+- `aws_iam_user_policies_exclusive` (optional)
 - `aws_iam_user_policy` (optional)
 - `aws_iam_user_policy_attachment` (optional)
 - `aws_iam_user_policy_attachments_exclusive` (optional)
@@ -49,6 +50,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | [aws_iam_user.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user_group_membership.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership) | resource |
 | [aws_iam_user_login_profile.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_login_profile) | resource |
+| [aws_iam_user_policies_exclusive.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policies_exclusive) | resource |
 | [aws_iam_user_policy.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy) | resource |
 | [aws_iam_user_policy.inline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy) | resource |
 | [aws_iam_user_policy_attachment.managed](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
@@ -64,10 +66,11 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="input_access_keys"></a> [access\_keys](#input\_access\_keys) | (Optional) A list of Access Keys to associate with the IAM user. This is a set of credentials that allow API requests to be made as an IAM user. The IAM User can have a maximum of two Access Keys (active or inactive) at a time. Each item of `access_keys` as defined below.<br/>    (Optional) `enabled` - Whether to activate the Access Key. Defaults to `true`. | <pre>list(object({<br/>    enabled = optional(bool, true)<br/>  }))</pre> | `[]` | no |
 | <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | (Optional) A set of IAM roles ARNs which can be assumed by the user. | `set(string)` | `[]` | no |
 | <a name="input_console_access"></a> [console\_access](#input\_console\_access) | (Optional) A configuration of the AWS console access and password for the user. `console_access` as defined below.<br/>    (Optional) `enabled` - Whether to activate the AWS console access and password. Defaults to `true`.<br/>    (Optional) `password_length` - The length of the generated password. Only applies on resource creation. Defaults to `20`.<br/>    (Optional) `password_reset_required` -  Whether the user should be forced to reset the generated password on first login. Defaults to `true`. | <pre>object({<br/>    enabled                 = optional(bool, true)<br/>    password_length         = optional(number, 20)<br/>    password_reset_required = optional(bool, true)<br/>  })</pre> | `{}` | no |
+| <a name="input_exclusive_inline_policy_management_enabled"></a> [exclusive\_inline\_policy\_management\_enabled](#input\_exclusive\_inline\_policy\_management\_enabled) | (Optional) Whether to enable exclusive management for inline IAM policies of the IAM user. This includes removal of inline IAM policies which are not explicitly configured. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_exclusive_policy_management_enabled"></a> [exclusive\_policy\_management\_enabled](#input\_exclusive\_policy\_management\_enabled) | (Optional) Whether to enable exclusive management for managed IAM policies of the IAM user. This includes removal of managed IAM policies which are not explicitly configured. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_force_destroy"></a> [force\_destroy](#input\_force\_destroy) | (Optional) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force\_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_groups"></a> [groups](#input\_groups) | (Optional) A set of IAM Groups to add the user to. | `set(string)` | `[]` | no |
-| <a name="input_inline_policies"></a> [inline\_policies](#input\_inline\_policies) | (Optional) A map of inline IAM policies to attach to IAM user. The policy is a JSON document that you attach to an identity to specify what API actions you're allowing or denying for that identity, and under which conditions. Each key is the name of the policy, and the value is the policy document. If `exclusive_policy_management_enabled` is `true`, this variable is ignored. | `map(string)` | `{}` | no |
+| <a name="input_inline_policies"></a> [inline\_policies](#input\_inline\_policies) | (Optional) A map of inline IAM policies to attach to IAM user. The policy is a JSON document that you attach to an identity to specify what API actions you're allowing or denying for that identity, and under which conditions. Each key is the name of the policy, and the value is the policy document. | `map(string)` | `{}` | no |
 | <a name="input_module_tags_enabled"></a> [module\_tags\_enabled](#input\_module\_tags\_enabled) | (Optional) Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | <a name="input_path"></a> [path](#input\_path) | (Optional) Desired path for the IAM user. Defaults to `/`. | `string` | `"/"` | no |
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | (Optional) The ARN of the policy that is used to set the permissions boundary for the user. | `string` | `null` | no |
@@ -88,6 +91,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN of the IAM user. |
 | <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | A set of ARNs of IAM roles which IAM user can assume. |
 | <a name="output_console_access"></a> [console\_access](#output\_console\_access) | The information of the AWS console access and password for the user. |
+| <a name="output_exclusive_inline_policy_management_enabled"></a> [exclusive\_inline\_policy\_management\_enabled](#output\_exclusive\_inline\_policy\_management\_enabled) | Whether exclusive inline policy management is enabled for the IAM user. |
 | <a name="output_exclusive_policy_management_enabled"></a> [exclusive\_policy\_management\_enabled](#output\_exclusive\_policy\_management\_enabled) | Whether exclusive policy management is enabled for the IAM user. |
 | <a name="output_groups"></a> [groups](#output\_groups) | A set of IAM Groups which the user is a member of. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the IAM user. |

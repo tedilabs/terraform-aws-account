@@ -28,3 +28,10 @@ resource "aws_iam_user_policy" "inline" {
   name   = each.key
   policy = each.value
 }
+
+resource "aws_iam_user_policies_exclusive" "this" {
+  count = var.exclusive_inline_policy_management_enabled ? 1 : 0
+
+  user_name    = aws_iam_user.this.name
+  policy_names = keys(var.inline_policies)
+}

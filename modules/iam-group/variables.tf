@@ -25,6 +25,13 @@ variable "exclusive_policy_management_enabled" {
   nullable    = false
 }
 
+variable "exclusive_inline_policy_management_enabled" {
+  description = "(Optional) Whether to enable exclusive management for inline IAM policies of the IAM user. This includes removal of inline IAM policies which are not explicitly configured. Defaults to `false`."
+  type        = bool
+  default     = false
+  nullable    = false
+}
+
 variable "policies" {
   description = "(Optional) A set of IAM policies ARNs to attach to IAM group."
   type        = set(string)
@@ -33,8 +40,9 @@ variable "policies" {
 }
 
 variable "inline_policies" {
-  description = "(Optional) A map of inline IAM policies to attach to IAM group. The policy is a JSON document that you attach to an identity to specify what API actions you're allowing or denying for that identity, and under which conditions. Each key is the name of the policy, and the value is the policy document. If `exclusive_policy_management_enabled` is `true`, this variable is ignored."
+  description = "(Optional) A map of inline IAM policies to attach to IAM group. The policy is a JSON document that you attach to an identity to specify what API actions you're allowing or denying for that identity, and under which conditions. Each key is the name of the policy, and the value is the policy document."
   type        = map(string)
   default     = {}
   nullable    = false
 }
+
