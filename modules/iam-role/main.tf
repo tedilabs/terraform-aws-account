@@ -14,6 +14,16 @@ locals {
   } : {}
 }
 
+
+###################################################
+# IAM Role
+###################################################
+
+# INFO: Not supported attributes
+# - `name_prefix`
+# INFO: Deprecated attributes
+# - `inline_policy`
+# - `managed_policy_arns`
 resource "aws_iam_role" "this" {
   name                  = local.metadata.name
   path                  = var.path
@@ -66,31 +76,6 @@ resource "aws_iam_role_policy" "assume_role" {
   role   = aws_iam_role.this.id
   name   = "assume-role"
   policy = data.aws_iam_policy_document.assume_role.json
-}
-
-
-###################################################
-# IAM Policy Attachment for Managed Policies
-###################################################
-
-resource "aws_iam_role_policy_attachment" "managed" {
-  for_each = toset(var.policies)
-
-  role       = aws_iam_role.this.id
-  policy_arn = each.key
-}
-
-
-###################################################
-# IAM Policy Attachment for Inline Policies
-###################################################
-
-resource "aws_iam_role_policy" "inline" {
-  for_each = var.inline_policies
-
-  role   = aws_iam_role.this.id
-  name   = each.key
-  policy = each.value
 }
 
 

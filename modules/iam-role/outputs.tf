@@ -1,11 +1,11 @@
-output "name" {
-  description = "IAM Role name."
-  value       = aws_iam_role.this.name
+output "arn" {
+  description = "The ARN of the IAM role."
+  value       = aws_iam_role.this.arn
 }
 
-output "arn" {
-  description = "The ARN assigned by AWS for this role."
-  value       = aws_iam_role.this.arn
+output "id" {
+  description = "The ID of the IAM role."
+  value       = aws_iam_role.this.id
 }
 
 output "unique_id" {
@@ -13,24 +13,47 @@ output "unique_id" {
   value       = aws_iam_role.this.unique_id
 }
 
+output "name" {
+  description = "IAM Role name."
+  value       = aws_iam_role.this.name
+}
+
 output "description" {
   description = "The description of the role."
   value       = aws_iam_role.this.description
 }
 
+output "path" {
+  description = "The path of the IAM role."
+  value       = aws_iam_role.this.path
+}
+
 output "assumable_roles" {
-  description = "List of ARNs of IAM roles which members of IAM role can assume."
-  value       = var.assumable_roles
+  description = "A set of ARNs of IAM roles which members of IAM role can assume."
+  value       = toset(var.assumable_roles)
+}
+
+output "exclusive_policy_management_enabled" {
+  description = "Whether exclusive policy management is enabled for the IAM role."
+  value       = var.exclusive_policy_management_enabled
 }
 
 output "policies" {
-  description = "List of ARNs of IAM policies which are atached to IAM role."
-  value       = var.policies
+  description = "A set of ARNs of IAM policies which are atached to IAM role."
+  value = (var.exclusive_policy_management_enabled
+    ? toset(aws_iam_role_policy_attachments_exclusive.this[0].policy_arns)
+    : toset(values(aws_iam_role_policy_attachment.managed)[*].policy_arn)
+  )
 }
 
 output "inline_policies" {
-  description = "List of names of inline IAM polices which are attached to IAM role."
-  value       = keys(var.inline_policies)
+  description = "A set of names of inline IAM polices which are attached to IAM role."
+  value       = toset(keys(var.inline_policies))
+}
+
+output "created_at" {
+  description = "Creation date of the IAM role."
+  value       = aws_iam_role.this.create_date
 }
 
 output "instance_profile" {

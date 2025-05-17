@@ -1,36 +1,42 @@
 variable "name" {
   description = "(Required) Desired name for the IAM user."
   type        = string
+  nullable    = false
 }
 
 variable "path" {
-  description = "(Optional) Desired path for the IAM user."
+  description = "(Optional) Desired path for the IAM user. Defaults to `/`."
   type        = string
   default     = "/"
+  nullable    = false
 }
 
 variable "force_destroy" {
-  description = "(Optional) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed."
+  description = "(Optional) When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. Defaults to `false`."
   type        = bool
   default     = false
+  nullable    = false
 }
 
 variable "permissions_boundary" {
   description = "(Optional) The ARN of the policy that is used to set the permissions boundary for the user."
   type        = string
   default     = null
+  nullable    = true
 }
 
 variable "groups" {
-  description = "(Optional) A list of IAM Groups to add the user to."
-  type        = list(string)
+  description = "(Optional) A set of IAM Groups to add the user to."
+  type        = set(string)
   default     = []
+  nullable    = false
 }
 
 variable "pgp_key" {
   description = "(Optional) Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key."
   type        = string
   default     = ""
+  nullable    = false
 }
 
 variable "console_access" {
@@ -75,33 +81,45 @@ variable "service_credentials" {
 }
 
 variable "assumable_roles" {
-  description = "(Optional) List of IAM roles ARNs which can be assumed by the user."
-  type        = list(string)
+  description = "(Optional) A set of IAM roles ARNs which can be assumed by the user."
+  type        = set(string)
   default     = []
+  nullable    = false
+}
+
+variable "exclusive_policy_management_enabled" {
+  description = "(Optional) Whether to enable exclusive management for managed IAM policies of the IAM user. This includes removal of managed IAM policies which are not explicitly configured. Defaults to `false`."
+  type        = bool
+  default     = false
+  nullable    = false
 }
 
 variable "policies" {
-  description = "(Optional) List of IAM policies ARNs to attach to IAM user."
-  type        = list(string)
+  description = "(Optional) A set of IAM policies ARNs to attach to IAM user."
+  type        = set(string)
   default     = []
+  nullable    = false
 }
 
 variable "inline_policies" {
-  description = "(Optional) Map of inline IAM policies to attach to IAM user. (`name` => `policy`)."
+  description = "(Optional) A map of inline IAM policies to attach to IAM user. The policy is a JSON document that you attach to an identity to specify what API actions you're allowing or denying for that identity, and under which conditions. Each key is the name of the policy, and the value is the policy document. If `exclusive_policy_management_enabled` is `true`, this variable is ignored."
   type        = map(string)
   default     = {}
+  nullable    = false
 }
 
 variable "tags" {
   description = "(Optional) A map of tags to add to all resources."
   type        = map(string)
   default     = {}
+  nullable    = false
 }
 
 variable "module_tags_enabled" {
   description = "(Optional) Whether to create AWS Resource Tags for the module informations."
   type        = bool
   default     = true
+  nullable    = false
 }
 
 
@@ -113,16 +131,19 @@ variable "resource_group_enabled" {
   description = "(Optional) Whether to create Resource Group to find and group AWS resources which are created by this module."
   type        = bool
   default     = true
+  nullable    = false
 }
 
 variable "resource_group_name" {
   description = "(Optional) The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`."
   type        = string
   default     = ""
+  nullable    = false
 }
 
 variable "resource_group_description" {
   description = "(Optional) The description of Resource Group."
   type        = string
   default     = "Managed by Terraform."
+  nullable    = false
 }

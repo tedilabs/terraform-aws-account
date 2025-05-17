@@ -1,3 +1,7 @@
+###################################################
+# IAM Group
+###################################################
+
 resource "aws_iam_group" "this" {
   name = var.name
   path = var.path
@@ -22,29 +26,4 @@ resource "aws_iam_group_policy" "assume_role" {
   group  = aws_iam_group.this.id
   name   = "assume-role"
   policy = data.aws_iam_policy_document.assume_role.json
-}
-
-
-###################################################
-# IAM Policy Attachment for Managed Policies
-###################################################
-
-resource "aws_iam_group_policy_attachment" "managed" {
-  for_each = toset(var.policies)
-
-  group      = aws_iam_group.this.id
-  policy_arn = each.key
-}
-
-
-###################################################
-# IAM Policy Attachment for Inline Policies
-###################################################
-
-resource "aws_iam_group_policy" "inline" {
-  for_each = var.inline_policies
-
-  group  = aws_iam_group.this.id
-  name   = each.key
-  policy = each.value
 }
