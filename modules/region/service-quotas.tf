@@ -27,7 +27,8 @@ locals {
     "route53/hosted-zones-per-region"    = "L-4EA4796A"
     "route53/delegation-sets-per-region" = "L-A72C7724"
     # SES
-    "ses/sending-emails-per-day" = "L-804C8AE8"
+    "ses/sending-emails-per-day"    = "L-804C8AE8"
+    "ses/sending-emails-per-second" = "L-CDEF9B6B"
     # SSO
     "sso/permission-sets-total"              = "L-B44C7A29"
     "sso/permission-sets-per-aws-account"    = "L-89954265"
