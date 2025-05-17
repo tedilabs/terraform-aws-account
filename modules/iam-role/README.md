@@ -5,6 +5,7 @@ This module creates following resources.
 - `aws_iam_role`
 - `aws_iam_role_policy` (optional)
 - `aws_iam_role_policy_attachment` (optional)
+- `aws_iam_role_policy_attachments_exclusive` (optional)
 - `aws_iam_instance_profile` (optional)
 
 ## Notes
@@ -20,8 +21,8 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.45 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.76 |
 
 ## Providers
 
@@ -44,6 +45,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | [aws_iam_role_policy.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.inline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.managed](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachments_exclusive.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachments_exclusive) | resource |
 | [aws_caller_identity.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.trusted_entities](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -58,17 +60,18 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | (Required) Desired name for the IAM role. | `string` | n/a | yes |
-| <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | (Optional) List of IAM roles ARNs which can be assumed by the role. | `list(string)` | `[]` | no |
+| <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | (Optional) A set of IAM roles ARNs which can be assumed by the role. | `set(string)` | `[]` | no |
 | <a name="input_conditions"></a> [conditions](#input\_conditions) | (Required) A list of required conditions to assume the role. Each item of `conditions` is defined below.<br/>    (Required) `key` - The key to match a condition for when a policy is in effect.<br/>    (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.<br/>    (Required) `values` - A list of allowed values of the key to match a condition with condition operator. | <pre>list(object({<br/>    key       = string<br/>    condition = string<br/>    values    = list(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) The description of the role. | `string` | `"Managed by Terraform."` | no |
+| <a name="input_exclusive_policy_management_enabled"></a> [exclusive\_policy\_management\_enabled](#input\_exclusive\_policy\_management\_enabled) | (Optional) Whether to enable exclusive management for managed IAM policies of the IAM role. This includes removal of managed IAM policies which are not explicitly configured. Defaults to `false`. | `bool` | `false` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | (Optional) Specifies to force detaching any policies the role has before destroying it. Defaults to `false`. | `bool` | `false` | no |
-| <a name="input_inline_policies"></a> [inline\_policies](#input\_inline\_policies) | (Optional) Map of inline IAM policies to attach to IAM role. (`name` => `policy`). | `map(string)` | `{}` | no |
+| <a name="input_inline_policies"></a> [inline\_policies](#input\_inline\_policies) | (Optional) A map of inline IAM policies to attach to IAM role. The policy is a JSON document that you attach to an identity to specify what API actions you're allowing or denying for that identity, and under which conditions. Each key is the name of the policy, and the value is the policy document. If `exclusive_policy_management_enabled` is `true`, this variable is ignored. | `map(string)` | `{}` | no |
 | <a name="input_instance_profile"></a> [instance\_profile](#input\_instance\_profile) | (Optional) A configuration for instance profile. `instance_profile` is defined below.<br/>    (Optional) `enabled` - Whether to create instance profile. Defaults to `false`.<br/>    (Optional) `name` - The name of the instance profile. If omitted, Terraform will assign a ame name with the role.<br/>    (Optional) `path` - The path to the instance profile. Defaults to `/`.<br/>    (Optional) `tags` - A map of tags to add to the instance profile. | <pre>object({<br/>    enabled = optional(bool, false)<br/>    name    = optional(string)<br/>    path    = optional(string, "/")<br/>    tags    = optional(map(string), {})<br/>  })</pre> | `{}` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | (Optional) Maximum session duration (in seconds) that you want to set for the specified role. Valid value is from 1 hour (`3600`) to 12 hours (`43200`). Defaults to `3600`. | `number` | `3600` | no |
 | <a name="input_module_tags_enabled"></a> [module\_tags\_enabled](#input\_module\_tags\_enabled) | (Optional) Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
-| <a name="input_path"></a> [path](#input\_path) | (Optional) Desired path for the IAM role. | `string` | `"/"` | no |
+| <a name="input_path"></a> [path](#input\_path) | (Optional) Desired path for the IAM role. Defaults to `/`. | `string` | `"/"` | no |
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | (Optional) The ARN of the policy that is used to set the permissions boundary for the role. | `string` | `null` | no |
-| <a name="input_policies"></a> [policies](#input\_policies) | (Optional) List of IAM policies ARNs to attach to IAM role. | `list(string)` | `[]` | no |
+| <a name="input_policies"></a> [policies](#input\_policies) | (Optional) A set of IAM policies ARNs to attach to IAM role. | `set(string)` | `[]` | no |
 | <a name="input_resource_group_description"></a> [resource\_group\_description](#input\_resource\_group\_description) | (Optional) The description of Resource Groupolicy. | `string` | `"Managed by Terraform."` | no |
 | <a name="input_resource_group_enabled"></a> [resource\_group\_enabled](#input\_resource\_group\_enabled) | (Optional) Whether to create Resource Group to find and group AWS resources which are created by this module. | `bool` | `true` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Optional) The name of Resource Groupolicy. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. | `string` | `""` | no |
@@ -84,12 +87,16 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 
 | Name | Description |
 |------|-------------|
-| <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS for this role. |
-| <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | List of ARNs of IAM roles which members of IAM role can assume. |
+| <a name="output_arn"></a> [arn](#output\_arn) | The ARN of the IAM role. |
+| <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | A set of ARNs of IAM roles which members of IAM role can assume. |
+| <a name="output_created_at"></a> [created\_at](#output\_created\_at) | Creation date of the IAM role. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the role. |
-| <a name="output_inline_policies"></a> [inline\_policies](#output\_inline\_policies) | List of names of inline IAM polices which are attached to IAM role. |
+| <a name="output_exclusive_policy_management_enabled"></a> [exclusive\_policy\_management\_enabled](#output\_exclusive\_policy\_management\_enabled) | Whether exclusive policy management is enabled for the IAM role. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the IAM role. |
+| <a name="output_inline_policies"></a> [inline\_policies](#output\_inline\_policies) | A set of names of inline IAM polices which are attached to IAM role. |
 | <a name="output_instance_profile"></a> [instance\_profile](#output\_instance\_profile) | The instance profile associated with the IAM Role.<br/>    `id` - The instance profile's ID.<br/>    `arn` - The ARN assigned by AWS for the instance profile.<br/>    `name` - The name of the instance profile.<br/>    `path` - The path to the instance profile.<br/>    `created_at` - Creation timestamp of the instance profile. |
 | <a name="output_name"></a> [name](#output\_name) | IAM Role name. |
-| <a name="output_policies"></a> [policies](#output\_policies) | List of ARNs of IAM policies which are atached to IAM role. |
+| <a name="output_path"></a> [path](#output\_path) | The path of the IAM role. |
+| <a name="output_policies"></a> [policies](#output\_policies) | A set of ARNs of IAM policies which are atached to IAM role. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
 <!-- END_TF_DOCS -->

@@ -14,6 +14,11 @@ locals {
   } : {}
 }
 
+
+###################################################
+# IAM User
+###################################################
+
 resource "aws_iam_user" "this" {
   name          = var.name
   path          = var.path
@@ -54,29 +59,4 @@ resource "aws_iam_user_policy" "assume_role" {
   user   = aws_iam_user.this.name
   name   = "assume-role"
   policy = data.aws_iam_policy_document.assume_role.json
-}
-
-
-###################################################
-# IAM Policy Attachment for Managed Policies
-###################################################
-
-resource "aws_iam_user_policy_attachment" "managed" {
-  for_each = toset(var.policies)
-
-  user       = aws_iam_user.this.name
-  policy_arn = each.key
-}
-
-
-###################################################
-# IAM Policy Attachment for Inline Policies
-###################################################
-
-resource "aws_iam_user_policy" "inline" {
-  for_each = var.inline_policies
-
-  user   = aws_iam_user.this.name
-  name   = each.key
-  policy = each.value
 }

@@ -1,11 +1,11 @@
-output "name" {
-  description = "The user's name."
-  value       = aws_iam_user.this.name
+output "arn" {
+  description = "The ARN of the IAM user."
+  value       = aws_iam_user.this.arn
 }
 
-output "arn" {
-  description = "The ARN assigned by AWS for this user."
-  value       = aws_iam_user.this.arn
+output "id" {
+  description = "The ID of the IAM user."
+  value       = aws_iam_user.this.id
 }
 
 output "unique_id" {
@@ -13,8 +13,18 @@ output "unique_id" {
   value       = aws_iam_user.this.unique_id
 }
 
+output "name" {
+  description = "The user's name."
+  value       = aws_iam_user.this.name
+}
+
+output "path" {
+  description = "The path of the IAM user."
+  value       = aws_iam_user.this.path
+}
+
 output "groups" {
-  description = "The list of IAM Groups."
+  description = "A set of IAM Groups which the user is a member of."
   value       = aws_iam_user_group_membership.this.groups
 }
 
@@ -74,16 +84,24 @@ output "service_credentials" {
 }
 
 output "assumable_roles" {
-  description = "List of ARNs of IAM roles which IAM user can assume."
-  value       = var.assumable_roles
+  description = "A set of ARNs of IAM roles which IAM user can assume."
+  value       = toset(var.assumable_roles)
+}
+
+output "exclusive_policy_management_enabled" {
+  description = "Whether exclusive policy management is enabled for the IAM user."
+  value       = var.exclusive_policy_management_enabled
 }
 
 output "policies" {
-  description = "List of ARNs of IAM policies which are atached to IAM user."
-  value       = var.policies
+  description = "A set of ARNs of IAM policies which are atached to IAM user."
+  value = (var.exclusive_policy_management_enabled
+    ? toset(aws_iam_user_policy_attachments_exclusive.this[0].policy_arns)
+    : toset(values(aws_iam_user_policy_attachment.managed)[*].policy_arn)
+  )
 }
 
 output "inline_policies" {
-  description = "List of names of inline IAM polices which are attached to IAM user."
-  value       = keys(var.inline_policies)
+  description = "A set of names of inline IAM polices which are attached to IAM user."
+  value       = toset(keys(var.inline_policies))
 }

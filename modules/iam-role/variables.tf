@@ -5,7 +5,7 @@ variable "name" {
 }
 
 variable "path" {
-  description = "(Optional) Desired path for the IAM role."
+  description = "(Optional) Desired path for the IAM role. Defaults to `/`."
   type        = string
   default     = "/"
   nullable    = false
@@ -281,21 +281,28 @@ variable "conditions" {
 }
 
 variable "assumable_roles" {
-  description = "(Optional) List of IAM roles ARNs which can be assumed by the role."
-  type        = list(string)
+  description = "(Optional) A set of IAM roles ARNs which can be assumed by the role."
+  type        = set(string)
   default     = []
   nullable    = false
 }
 
 variable "policies" {
-  description = "(Optional) List of IAM policies ARNs to attach to IAM role."
-  type        = list(string)
+  description = "(Optional) A set of IAM policies ARNs to attach to IAM role."
+  type        = set(string)
   default     = []
   nullable    = false
 }
 
+variable "exclusive_policy_management_enabled" {
+  description = "(Optional) Whether to enable exclusive management for managed IAM policies of the IAM role. This includes removal of managed IAM policies which are not explicitly configured. Defaults to `false`."
+  type        = bool
+  default     = false
+  nullable    = false
+}
+
 variable "inline_policies" {
-  description = "(Optional) Map of inline IAM policies to attach to IAM role. (`name` => `policy`)."
+  description = "(Optional) A map of inline IAM policies to attach to IAM role. The policy is a JSON document that you attach to an identity to specify what API actions you're allowing or denying for that identity, and under which conditions. Each key is the name of the policy, and the value is the policy document. If `exclusive_policy_management_enabled` is `true`, this variable is ignored."
   type        = map(string)
   default     = {}
   nullable    = false
