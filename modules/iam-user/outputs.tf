@@ -50,6 +50,8 @@ output "access_keys" {
       id                          = access_key.id
       encrypted_secret_access_key = access_key.encrypted_secret
       encrypted_ses_smtp_password = access_key.encrypted_ses_smtp_password_v4
+      secret_access_key           = access_key.secret
+      ses_smtp_password           = access_key.ses_smtp_password_v4
       created_at                  = access_key.create_date
       enabled                     = access_key.status == "Active"
     }
@@ -110,3 +112,4 @@ output "inline_policies" {
   description = "A set of names of inline IAM polices which are attached to IAM user."
   value       = toset(keys(var.inline_policies))
 }
+
