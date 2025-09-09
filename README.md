@@ -76,4 +76,4 @@ Like this project? Follow the repository on [GitHub](https://github.com/tedilabs
 
 Provided under the terms of the [Apache License](LICENSE).
 
-Copyright © 2021-2024, [Byungjin Park](https://www.posquit0.com).
+Copyright © 2021-2025, [Byungjin Park](https://www.posquit0.com).
