@@ -27,3 +27,19 @@ output "thumbprints" {
   description = "A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s)."
   value       = aws_iam_openid_connect_provider.this.thumbprint_list
 }
+
+output "resource_group" {
+  description = "The resource group created to manage resources in this module."
+  value = merge(
+    {
+      enabled = var.resource_group.enabled && var.module_tags_enabled
+    },
+    (var.resource_group.enabled && var.module_tags_enabled
+      ? {
+        arn  = module.resource_group[0].arn
+        name = module.resource_group[0].name
+      }
+      : {}
+    )
+  )
+}
