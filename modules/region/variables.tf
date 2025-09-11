@@ -159,6 +159,24 @@ variable "service_quotas_code_translation_enabled" {
   type        = bool
   default     = false
   nullable    = false
+variable "ses" {
+  description = <<EOF
+  (Optional) The configuration of the SES (Simple Email Service) for the account. `ses` as defined below.
+    (Optional) `suppression_reasons` - A set of the reasons that email addresses will be automatically added to the suppression list for your account. Valid values are `COMPLAINT`, `BOUNCE`.
+  EOF
+  type = object({
+    suppression_reasons = optional(set(string), ["COMPLAINT", "BOUNCE"])
+  })
+  default  = {}
+  nullable = false
+
+  validation {
+    condition = alltrue([
+      for reason in var.ses.suppression_reasons :
+      contains(["COMPLAINT", "BOUNCE"], reason)
+    ])
+    error_message = "Valid values for `suppression_reasons` are `COMPLAINT` and `BOUNCE`."
+  }
 }
 
 variable "vpc_availability_zone_groups" {

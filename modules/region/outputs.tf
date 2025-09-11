@@ -123,6 +123,16 @@ output "service_quotas" {
   }
 }
 
+output "ses" {
+  description = <<EOF
+  The region-level configurations of SES service.
+    `suppression_reasons` - A set of the reasons that email addresses will be automatically added to the suppression list for your account.
+  EOF
+  value = {
+    suppression_reasons = aws_sesv2_account_suppression_attributes.this.suppressed_reasons
+  }
+}
+
 output "vpc" {
   description = <<EOF
   The region-level configurations of VPC.
