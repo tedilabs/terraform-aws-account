@@ -48,9 +48,6 @@ variable "module_tags_enabled" {
 # Resource Group
 ###################################################
 
-
-
-
 variable "resource_group" {
   description = <<EOF
   (Optional) A configurations of Resource Group for this module. `resource_group` as defined below.
