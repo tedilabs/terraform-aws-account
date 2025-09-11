@@ -1,3 +1,10 @@
+variable "region" {
+  description = "(Optional) The region in which to create the module resources. If not provided, the module resources will be created in the provider's configured region."
+  type        = string
+  default     = null
+  nullable    = true
+}
+
 variable "cloudwatch" {
   description = <<EOF
   (Optional) The configuration of CloudWatch in the current AWS region. `cloudwatch` as defined below.

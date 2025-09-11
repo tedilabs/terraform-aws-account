@@ -2,6 +2,7 @@
 # Public Access Block for EC2 AMI
 ###################################################
 
+# TODO: Why this resource does not have region argument?
 resource "aws_ec2_image_block_public_access" "this" {
   state = (var.ec2.ami_public_access_enabled
     ? "unblocked"
@@ -19,6 +20,8 @@ resource "aws_ec2_instance_metadata_defaults" "this" {
     for k, v in var.ec2.instance_metadata_defaults :
     v != null
   ]) ? 1 : 0
+
+  region = var.region
 
   http_endpoint = (var.ec2.instance_metadata_defaults.http_enabled != null
     ? (var.ec2.instance_metadata_defaults.http_enabled ? "enabled" : "disabled")
@@ -41,6 +44,9 @@ resource "aws_ec2_instance_metadata_defaults" "this" {
 # Serial Consol Access for EC2
 ###################################################
 
+# TODO: Why this resource does not have region argument?
 resource "aws_ec2_serial_console_access" "this" {
+  # region = var.region
+
   enabled = var.ec2.serial_console_enabled
 }

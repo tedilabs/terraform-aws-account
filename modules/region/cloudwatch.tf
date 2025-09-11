@@ -2,6 +2,7 @@
 # CloudWatch OAM (Observability Access Manager)
 ###################################################
 
+# TODO: Move to other module
 module "cloudwatch_oam_sink" {
   count = var.cloudwatch.oam_sink != null ? 1 : 0
 

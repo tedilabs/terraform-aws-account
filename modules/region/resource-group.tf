@@ -16,6 +16,8 @@ module "resource_group" {
 
   count = (var.resource_group.enabled && var.module_tags_enabled) ? 1 : 0
 
+  region = var.region
+
   name        = local.resource_group_name
   description = var.resource_group.description
 

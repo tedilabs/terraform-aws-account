@@ -10,7 +10,7 @@ output "code" {
 
 output "name" {
   description = "The name of the current region."
-  value       = data.aws_region.this.name
+  value       = data.aws_region.this.region
 }
 
 output "description" {

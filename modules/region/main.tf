@@ -17,7 +17,7 @@ locals {
 data "aws_region" "this" {}
 
 locals {
-  region = data.aws_region.this.name
+  region = data.aws_region.this.region
   region_codes = {
     "us-east-1"      = "use1"
     "us-east-2"      = "use2"
@@ -27,6 +27,7 @@ locals {
     "us-west-2"      = "usw2"
     "af-south-1"     = "afs1"
     "ap-east-1"      = "ape1"
+    "ap-east-2"      = "ape2"
     "ap-northeast-1" = "apne1"
     "ap-northeast-2" = "apne2"
     "ap-northeast-3" = "apne3"
@@ -37,6 +38,7 @@ locals {
     "ap-southeast-3" = "apse3"
     "ap-southeast-4" = "apse4"
     "ap-southeast-5" = "apse5"
+    "ap-southeast-6" = "apse6"
     "ap-southeast-7" = "apse7"
     "ca-central-1"   = "cac1"
     "ca-west-1"      = "caw1"
