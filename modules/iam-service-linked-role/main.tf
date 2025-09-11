@@ -14,9 +14,14 @@ locals {
   } : {}
 }
 
+
+###################################################
+# Service Linked Role
+###################################################
+
 resource "aws_iam_service_linked_role" "this" {
   aws_service_name = var.aws_service
-  custom_suffix    = var.custom_suffix
+  custom_suffix    = var.custom_suffix != "" ? var.custom_suffix : null
   description      = var.description
 
   tags = merge(
