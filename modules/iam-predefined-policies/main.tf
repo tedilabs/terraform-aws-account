@@ -19,21 +19,27 @@ locals {
 # IAM Predefined Policies
 ###################################################
 
-resource "aws_iam_policy" "this" {
+module "iam_policy" {
+  source = "../iam-policy"
+
   for_each = {
     for item in var.enabled_policies :
     item.policy => item
   }
 
-  name        = try(each.value.name, each.key)
-  path        = try(each.value.path, "/managed/")
-  description = try(each.value.description, "Managed by Terraform.")
+  name        = coalesce(each.value.name, each.key)
+  path        = each.value.path
+  description = each.value.description
 
   policy = file("${path.module}/policies/${each.key}.json")
 
+  resource_group = {
+    enabled = false
+  }
+
   tags = merge(
     {
-      "Name" = try(each.value.name, each.key)
+      "Name" = coalesce(each.value.name, each.key)
     },
     local.module_tags,
     var.tags,

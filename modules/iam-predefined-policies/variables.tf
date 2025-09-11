@@ -1,7 +1,12 @@
 variable "enabled_policies" {
   description = "(Optional) List of IAM policies to enable as map. `policy` is required. `name`, `path`, `description` are optional."
-  type        = list(map(string))
-  default     = []
+  type = list(object({
+    policy      = string
+    name        = optional(string, "")
+    path        = optional(string, "/managed/")
+    description = optional(string, "Managed by Terraform.")
+  }))
+  default = []
 
   validation {
     condition = alltrue([
@@ -30,9 +35,6 @@ variable "module_tags_enabled" {
 ###################################################
 # Resource Group
 ###################################################
-
-
-
 
 variable "resource_group" {
   description = <<EOF
