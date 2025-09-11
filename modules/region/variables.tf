@@ -139,26 +139,28 @@ variable "resource_explorer" {
   }
 }
 
-variable "service_quotas_request" {
-  description = "(Optional) A map of service quotas to request. The key is `<service-code>/<quota-code>` and the value is a desired value to request."
-  type        = map(number)
-  default     = {}
-  nullable    = false
+variable "service_quotas" {
+  description = <<EOF
+  (Optional) The configuration of Service Quotas in the current AWS region. `service_quotas` as defined below.
+    (Optional) `requests` - A map of service quotas to request. The key is `<service-code>/<quota-code>` and the value is a desired value to request.
+    (Optional) `code_translation_enabled` - Whether to use translated quota code for readability. Defaults to `false`.
+  EOF
+  type = object({
+    requests                 = optional(map(number), {})
+    code_translation_enabled = optional(bool, false)
+  })
+  default  = {}
+  nullable = false
 
   validation {
     condition = alltrue([
-      for code, quota in var.service_quotas_request :
+      for code, quota in var.service_quotas.requests :
       length(split("/", code)) == 2
     ])
     error_message = "Require valid service quota codes. The format is `<service-code>/<quota-code>`."
   }
 }
 
-variable "service_quotas_code_translation_enabled" {
-  description = "(Optional) Whether to use translated quota code for readability."
-  type        = bool
-  default     = false
-  nullable    = false
 variable "ses" {
   description = <<EOF
   (Optional) The configuration of the SES (Simple Email Service) for the account. `ses` as defined below.

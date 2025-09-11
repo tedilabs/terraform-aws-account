@@ -52,7 +52,7 @@ locals {
 
 resource "aws_servicequotas_service_quota" "this" {
   for_each = {
-    for code, quota in var.service_quotas_request :
+    for code, quota in var.service_quotas.requests :
     code => {
       service_code = split("/", code)[0]
       quota_code   = split("/", code)[1]
@@ -60,9 +60,11 @@ resource "aws_servicequotas_service_quota" "this" {
     }
   }
 
+  region = var.region
+
   service_code = each.value.service_code
   quota_code = (
-    var.service_quotas_code_translation_enabled
+    var.service_quotas.code_translation_enabled
     ? local.quota_codes[each.key]
     : each.value.quota_code
   )
