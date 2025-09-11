@@ -106,6 +106,7 @@ variable "resource_explorer" {
     (Optional) `views` - A list of views to create. `views` as defined below.
       (Required) `name` - The name of the view. The name must be no more than 64 characters long, and can include letters, digits, and the dash (-) character. The name must be unique within its AWS Region.
       (Optional) `is_default` - Whether the view is the default view for the AWS Region. Defaults to `false`.
+      (Optional) `scope` - The root ARN of the account, an organizational unit (OU), or an organization ARN. Defaults to the account.
       (Optional) `filter_queries` - A list of filter queries. Specify which resources are included in the results of queries made using this view. The filter string is combined using a logical AND operator. Defaults to `[]` (include all resources).
       (Optional) `additional_resource_attributes` - A list of additional resource attributes. By default, the results include ARN, owner account, Region, service, and resource type. Valid values are `tags`. Defaults to `[]`.
   EOF

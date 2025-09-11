@@ -101,6 +101,7 @@ output "resource_explorer" {
         arn                            = view.arn
         name                           = view.name
         is_default                     = view.default_view
+        scope                          = view.scope
         filter_queries                 = view.filters[*].filter_string
         additional_resource_attributes = view.included_property[*].name
       }

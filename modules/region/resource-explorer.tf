@@ -13,6 +13,8 @@ locals {
 resource "aws_resourceexplorer2_index" "this" {
   count = var.resource_explorer.enabled ? 1 : 0
 
+  region = var.region
+
   type = var.resource_explorer.index_type
 
   tags = merge(
@@ -30,8 +32,11 @@ resource "aws_resourceexplorer2_view" "this" {
     view.name => view
   }
 
+  region = aws_resourceexplorer2_index.this[0].region
+
   name         = each.key
   default_view = each.value.is_default
+  scope        = each.value.scope
 
   dynamic "filters" {
     for_each = each.value.filter_queries
@@ -58,8 +63,4 @@ resource "aws_resourceexplorer2_view" "this" {
     local.module_tags,
     var.tags,
   )
-
-  depends_on = [
-    aws_resourceexplorer2_index.this,
-  ]
 }
