@@ -85,6 +85,16 @@ output "service_credentials" {
   }
 }
 
+output "signing_certificates" {
+  description = "The list of X.509 signing certificates for the user."
+  value = [
+    for id, certificate in aws_iam_signing_certificate.this : {
+      id      = certificate.certificate_id
+      enabled = certificate.status == "Active"
+    }
+  ]
+}
+
 output "assumable_roles" {
   description = "A set of ARNs of IAM roles which IAM user can assume."
   value       = toset(var.assumable_roles)
@@ -112,7 +122,6 @@ output "inline_policies" {
   description = "A set of names of inline IAM polices which are attached to IAM user."
   value       = toset(keys(var.inline_policies))
 }
-
 
 output "resource_group" {
   description = "The resource group created to manage resources in this module."

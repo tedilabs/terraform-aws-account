@@ -8,8 +8,8 @@ resource "aws_iam_user_login_profile" "this" {
   user    = aws_iam_user.this.name
   pgp_key = var.pgp_key
 
-  password_length         = try(var.console_access.password_length, 20)
-  password_reset_required = try(var.console_access.password_reset_required, true)
+  password_length         = var.console_access.password_length
+  password_reset_required = var.console_access.password_reset_required
 
   lifecycle {
     ignore_changes = [
@@ -73,4 +73,21 @@ resource "aws_iam_service_specific_credential" "this" {
 
   service_name = each.key
   status       = each.value.enabled ? "Active" : "Inactive"
+}
+
+
+###################################################
+# X.509 Signing Certificates for IAM User
+###################################################
+
+resource "aws_iam_signing_certificate" "this" {
+  for_each = {
+    for certificate in var.signing_certificates :
+    md5(certificate.certificate) => certificate
+  }
+
+  user_name = aws_iam_user.this.name
+
+  certificate_body = each.value.certificate
+  status           = each.value.enabled ? "Active" : "Inactive"
 }

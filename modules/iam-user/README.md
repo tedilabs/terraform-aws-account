@@ -12,6 +12,7 @@ This module creates following resources.
 - `aws_iam_access_key` (optional)
 - `aws_iam_user_ssh_key` (optional)
 - `aws_iam_service_specific_credential` (optional)
+- `aws_iam_signing_certificate` (optional)
 
 ## Notes
 
@@ -26,20 +27,20 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.96 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.12 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.91.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.12.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.10.0 |
+| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.12.0 |
 
 ## Resources
 
@@ -47,6 +48,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 |------|------|
 | [aws_iam_access_key.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_service_specific_credential.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_service_specific_credential) | resource |
+| [aws_iam_signing_certificate.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_signing_certificate) | resource |
 | [aws_iam_user.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user_group_membership.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership) | resource |
 | [aws_iam_user_login_profile.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_login_profile) | resource |
@@ -76,10 +78,9 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | (Optional) The ARN of the policy that is used to set the permissions boundary for the user. | `string` | `null` | no |
 | <a name="input_pgp_key"></a> [pgp\_key](#input\_pgp\_key) | (Optional) Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | `string` | `""` | no |
 | <a name="input_policies"></a> [policies](#input\_policies) | (Optional) A set of IAM policies ARNs to attach to IAM user. | `set(string)` | `[]` | no |
-| <a name="input_resource_group_description"></a> [resource\_group\_description](#input\_resource\_group\_description) | (Optional) The description of Resource Group. | `string` | `"Managed by Terraform."` | no |
-| <a name="input_resource_group_enabled"></a> [resource\_group\_enabled](#input\_resource\_group\_enabled) | (Optional) Whether to create Resource Group to find and group AWS resources which are created by this module. | `bool` | `true` | no |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Optional) The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. | `string` | `""` | no |
-| <a name="input_service_credentials"></a> [service\_credentials](#input\_service\_credentials) | (Optional) A list of service specific credentials to associate with the IAM user. Each value of `service_credentials` block as defined below.<br/>    (Required) `service` - The name of the AWS service that is to be associated with the credentials. The service you specify here is the only service that can be accessed using these credentials.<br/>    (Optional) `enabled` - Whether to activate the service specific credential. | `any` | `[]` | no |
+| <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | (Optional) A configurations of Resource Group for this module. `resource_group` as defined below.<br/>    (Optional) `enabled` - Whether to create Resource Group to find and group AWS resources which are created by this module. Defaults to `true`.<br/>    (Optional) `name` - The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. If not provided, a name will be generated using the module name and instance name.<br/>    (Optional) `description` - The description of Resource Group. Defaults to `Managed by Terraform.`. | <pre>object({<br/>    enabled     = optional(bool, true)<br/>    name        = optional(string, "")<br/>    description = optional(string, "Managed by Terraform.")<br/>  })</pre> | `{}` | no |
+| <a name="input_service_credentials"></a> [service\_credentials](#input\_service\_credentials) | (Optional) A list of service specific credentials to associate with the IAM user. Each value of `service_credentials` block as defined below.<br/>    (Required) `service` - The name of the AWS service that is to be associated with the credentials. The service you specify here is the only service that can be accessed using these credentials.<br/>    (Optional) `enabled` - Whether to activate the service specific credential. Defaults to `true`. | <pre>list(object({<br/>    service = string<br/>    enabled = optional(bool, true)<br/>  }))</pre> | `[]` | no |
+| <a name="input_signing_certificates"></a> [signing\_certificates](#input\_signing\_certificates) | (Optional) A list of X.509 signing certificates to associate with the IAM user. Each item of `signing_certificates` as defined below.<br/>    (Optional) `enabled` - Whether to activate the signing certificate. Defaults to `true`.<br/>    (Required) `certificate` - The contents of the signing certificate in PEM encoded format. | <pre>list(object({<br/>    enabled          = optional(bool, true)<br/>    certificate_body = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_ssh_keys"></a> [ssh\_keys](#input\_ssh\_keys) | (Optional) A list of SSH public keys to associate with the IAM user. can have a maximum of five SSH public keys (active or inactive) at a time. Each item of `ssh_keys` as defined below.<br/>    (Optional) `enabled` - Whether to activate the SSH public key. Defaults to `true`.<br/>    (Required) `public_key` - The SSH public key. The public key must be encoded in ssh-rsa format or PEM format.<br/>    (Optional) `encoding` - Specify the public key encoding format. Valid values are `SSH` and `PEM`. To retrieve the public key in ssh-rsa format, use `SSH`. To retrieve the public key in PEM format, use `PEM`. | <pre>list(object({<br/>    enabled    = optional(bool, true)<br/>    public_key = string<br/>    encoding   = optional(string, "SSH")<br/>  }))</pre> | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to add to all resources. | `map(string)` | `{}` | no |
 
@@ -100,7 +101,9 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="output_path"></a> [path](#output\_path) | The path of the IAM user. |
 | <a name="output_pgp_key"></a> [pgp\_key](#output\_pgp\_key) | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted). |
 | <a name="output_policies"></a> [policies](#output\_policies) | A set of ARNs of IAM policies which are atached to IAM user. |
+| <a name="output_resource_group"></a> [resource\_group](#output\_resource\_group) | The resource group created to manage resources in this module. |
 | <a name="output_service_credentials"></a> [service\_credentials](#output\_service\_credentials) | The list of service specific credentials for the user. |
+| <a name="output_signing_certificates"></a> [signing\_certificates](#output\_signing\_certificates) | The list of X.509 signing certificates for the user. |
 | <a name="output_ssh_keys"></a> [ssh\_keys](#output\_ssh\_keys) | The list of SSH public keys for the user. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
 <!-- END_TF_DOCS -->

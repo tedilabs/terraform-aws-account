@@ -103,10 +103,28 @@ variable "service_credentials" {
   description = <<EOF
   (Optional) A list of service specific credentials to associate with the IAM user. Each value of `service_credentials` block as defined below.
     (Required) `service` - The name of the AWS service that is to be associated with the credentials. The service you specify here is the only service that can be accessed using these credentials.
-    (Optional) `enabled` - Whether to activate the service specific credential.
+    (Optional) `enabled` - Whether to activate the service specific credential. Defaults to `true`.
   EOF
-  type        = any
-  default     = []
+  type = list(object({
+    service = string
+    enabled = optional(bool, true)
+  }))
+  default  = []
+  nullable = false
+}
+
+variable "signing_certificates" {
+  description = <<EOF
+  (Optional) A list of X.509 signing certificates to associate with the IAM user. Each item of `signing_certificates` as defined below.
+    (Optional) `enabled` - Whether to activate the signing certificate. Defaults to `true`.
+    (Required) `certificate` - The contents of the signing certificate in PEM encoded format.
+  EOF
+  type = list(object({
+    enabled          = optional(bool, true)
+    certificate_body = string
+  }))
+  default  = []
+  nullable = false
 }
 
 variable "assumable_roles" {
@@ -162,9 +180,6 @@ variable "module_tags_enabled" {
 ###################################################
 # Resource Group
 ###################################################
-
-
-
 
 variable "resource_group" {
   description = <<EOF
