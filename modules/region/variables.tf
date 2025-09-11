@@ -179,11 +179,16 @@ variable "ses" {
   }
 }
 
-variable "vpc_availability_zone_groups" {
-  description = "(Optional) The configurations to manage Availability Zone Groups for the current AWS region. The key is the name of Availability Zone Group, the value is a boolean value to enable the group. In this time, disabling Availability Zone Group is not supported on AWS."
-  type        = map(bool)
-  default     = {}
-  nullable    = false
+variable "vpc" {
+  description = <<EOF
+  (Optional) The configuration of VPC in the current AWS region. `vpc` as defined below.
+    (Optional) `availability_zone_groups` - A map of Availability Zone Groups to manage for the current AWS region. The key is the name of Availability Zone Group, the value is a boolean value to enable the group. In this time, disabling Availability Zone Group is not supported on AWS.
+  EOF
+  type = object({
+    availability_zone_groups = optional(map(bool), {})
+  })
+  default  = {}
+  nullable = false
 }
 
 variable "tags" {
