@@ -22,7 +22,7 @@ resource "aws_iam_user_policy_attachments_exclusive" "this" {
 ###################################################
 
 resource "aws_iam_user_policy" "inline" {
-  for_each = var.inline_policies
+  for_each = var.exclusive_inline_policy_management_enabled ? {} : var.inline_policies
 
   user   = aws_iam_user.this.name
   name   = each.key

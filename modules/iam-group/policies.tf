@@ -22,7 +22,7 @@ resource "aws_iam_group_policy_attachments_exclusive" "this" {
 ###################################################
 
 resource "aws_iam_group_policy" "inline" {
-  for_each = var.inline_policies
+  for_each = var.exclusive_inline_policy_management_enabled ? {} : var.inline_policies
 
   group  = aws_iam_group.this.id
   name   = each.key

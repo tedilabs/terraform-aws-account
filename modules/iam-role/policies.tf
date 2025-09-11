@@ -22,7 +22,7 @@ resource "aws_iam_role_policy_attachments_exclusive" "this" {
 ###################################################
 
 resource "aws_iam_role_policy" "inline" {
-  for_each = var.inline_policies
+  for_each = var.exclusive_inline_policy_management_enabled ? {} : var.inline_policies
 
   role   = aws_iam_role.this.id
   name   = each.key
