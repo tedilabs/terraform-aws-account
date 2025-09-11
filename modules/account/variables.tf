@@ -22,30 +22,35 @@ variable "password_policy" {
 }
 
 variable "additional_regions" {
-  description = "(Optional) A set of regions to enable in the account."
-  type        = set(string)
-  default     = []
+  description = "(Optional) A map of additional regions to enable for the account. Each key should be a region name and the value should be `true` to enable the region or `false` to disable it. By default, all regions are disabled."
+  type        = map(bool)
+  default     = {}
   nullable    = false
 
   validation {
     condition = alltrue([
-      for region in var.additional_regions :
+      for region in keys(var.additional_regions) :
       contains([
         "af-south-1",
         "ap-east-1",
+        "ap-east-2",
         "ap-south-2",
         "ap-southeast-3",
         "ap-southeast-4",
+        "ap-southeast-5",
+        "ap-southeast-6",
+        "ap-southeast-7",
         "ca-west-1",
         "eu-south-1",
         "eu-south-2",
         "eu-central-2",
         "me-south-1",
         "me-central-1",
+        "mx-central-1",
         "il-central-1",
       ], region)
     ])
-    error_message = "Available regions for `additional_regions` are `af-south-1`, `ap-east-1`, `ap-south-2`, `ap-southeast-3`, `ap-southeast-4`, `ca-west-1`, `eu-south-1`, `eu-south-2`, `eu-central-2`, `me-south-1`, `me-central-1`, `il-central-1`."
+    error_message = "Available regions for `additional_regions` are `af-south-1`, `ap-east-1`, `ap-east-2`, `ap-south-2`, `ap-southeast-3`, `ap-southeast-4`, `ap-southeast-5`, `ap-southeast-6`, `ap-southeast-7`, `ca-west-1`, `eu-south-1`, `eu-south-2`, `eu-central-2`, `me-south-1`, `me-central-1`, `mx-central-1`, `il-central-1`."
   }
 }
 

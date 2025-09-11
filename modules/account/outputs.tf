@@ -19,8 +19,12 @@ output "password_policy" {
 }
 
 output "additional_regions" {
-  description = "A set of additional regions enabled in the account."
-  value       = var.additional_regions
+  description = "A map of additional regions enabled in the account."
+  value = toset([
+    for region, enabled in var.additional_regions :
+    region
+    if enabled
+  ])
 }
 
 output "primary_contact" {
