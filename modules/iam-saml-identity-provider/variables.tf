@@ -1,6 +1,7 @@
 variable "name" {
   description = "(Required) The name of the identity provider."
   type        = string
+  nullable    = false
 }
 
 variable "metadata_document" {
@@ -27,9 +28,6 @@ variable "module_tags_enabled" {
 ###################################################
 # Resource Group
 ###################################################
-
-
-
 
 variable "resource_group" {
   description = <<EOF
