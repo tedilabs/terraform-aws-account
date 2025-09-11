@@ -173,26 +173,6 @@ variable "ec2_spot_datafeed_subscription" {
   nullable = false
 }
 
-variable "ses" {
-  description = <<EOF
-  (Optional) The configuration of the SES (Simple Email Service) for the AWS Account. `ses` as defined below.
-    (Optional) `suppression_reasons` - A set of the reasons that email addresses will be automatically added to the suppression list for your account. Valid values are `COMPLAINT`, `BOUNCE`.
-  EOF
-  type = object({
-    suppression_reasons = optional(set(string), ["COMPLAINT", "BOUNCE"])
-  })
-  default  = {}
-  nullable = false
-
-  validation {
-    condition = alltrue([
-      for reason in var.ses.suppression_reasons :
-      contains(["COMPLAINT", "BOUNCE"], reason)
-    ])
-    error_message = "Valid values for `suppression_reasons` are `COMPLAINT` and `BOUNCE`."
-  }
-}
-
 variable "sts_global_endpoint_token_version" {
   description = <<EOF
   (Optional) The version of the STS global endpoint token. Valid values are `v1` and
