@@ -22,20 +22,20 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.76 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.12 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.91.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.12.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.10.0 |
+| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.12.0 |
 
 ## Resources
 
@@ -75,9 +75,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="input_path"></a> [path](#input\_path) | (Optional) Desired path for the IAM role. Defaults to `/`. | `string` | `"/"` | no |
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | (Optional) The ARN of the policy that is used to set the permissions boundary for the role. | `string` | `null` | no |
 | <a name="input_policies"></a> [policies](#input\_policies) | (Optional) A set of IAM policies ARNs to attach to IAM role. | `set(string)` | `[]` | no |
-| <a name="input_resource_group_description"></a> [resource\_group\_description](#input\_resource\_group\_description) | (Optional) The description of Resource Groupolicy. | `string` | `"Managed by Terraform."` | no |
-| <a name="input_resource_group_enabled"></a> [resource\_group\_enabled](#input\_resource\_group\_enabled) | (Optional) Whether to create Resource Group to find and group AWS resources which are created by this module. | `bool` | `true` | no |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Optional) The name of Resource Groupolicy. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. | `string` | `""` | no |
+| <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | (Optional) A configurations of Resource Group for this module. `resource_group` as defined below.<br/>    (Optional) `enabled` - Whether to create Resource Group to find and group AWS resources which are created by this module. Defaults to `true`.<br/>    (Optional) `name` - The name of Resource Group. A Resource Group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with `AWS` or `aws`. If not provided, a name will be generated using the module name and instance name.<br/>    (Optional) `description` - The description of Resource Group. Defaults to `Managed by Terraform.`. | <pre>object({<br/>    enabled     = optional(bool, true)<br/>    name        = optional(string, "")<br/>    description = optional(string, "Managed by Terraform.")<br/>  })</pre> | `{}` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to add to all resources. | `map(string)` | `{}` | no |
 | <a name="input_trusted_iam_entity_policies"></a> [trusted\_iam\_entity\_policies](#input\_trusted\_iam\_entity\_policies) | (Optional) A configuration for trusted iam entity policies. Each item of `trusted_iam_entity_policies` is defined below.<br/>    (Required) `iam_entities` - A list of ARNs of AWS IAM entities who can assume the role.<br/>    (Optional) `conditions` - A list of required conditions to assume the role via IAM entities.<br/>      (Required) `key` - The key to match a condition for when a policy is in effect.<br/>      (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.<br/>      (Required) `values` - A list of allowed values of the key to match a condition with condition operator.<br/>    (Optional) `mfa` - A configuration of MFA requirement.<br/>      (Optional) `required` - Whether to require MFA to assume role. Defaults to `false`.<br/>      (Optional) `ttl` - Max age of valid MFA (in seconds) for roles which require MFA. Defaults to `86400` (24 hours).<br/>    (Optional) `effective_date` - Allow to assume IAM role only after a specific date and time.<br/>    (Optional) `expiration_date` - Allow to assume IAM role only before a specific date and time.<br/>    (Optional) `source_ip_whitelist` - A list of source IP addresses or CIDRs allowed to assume IAM role from.<br/>    (Optional) `source_ip_blacklist` - A list of source IP addresses or CIDRs not allowed to assume IAM role from. | <pre>list(object({<br/>    iam_entities = list(string)<br/>    conditions = optional(list(object({<br/>      key       = string<br/>      condition = string<br/>      values    = list(string)<br/>    })), [])<br/>    mfa = optional(object({<br/>      required = optional(bool, false)<br/>      ttl      = optional(number, 24 * 60 * 60)<br/>    }), {})<br/>    effective_date      = optional(string)<br/>    expiration_date     = optional(string)<br/>    source_ip_whitelist = optional(list(string), [])<br/>    source_ip_blacklist = optional(list(string), [])<br/>  }))</pre> | `[]` | no |
 | <a name="input_trusted_oidc_provider_policies"></a> [trusted\_oidc\_provider\_policies](#input\_trusted\_oidc\_provider\_policies) | (Optional) A configuration for trusted OIDC identity provider policies. Each item of `trusted_oidc_provider_policies` is defined below.<br/>    (Required) `url` - The URL of the OIDC identity provider. If the provider is not common, the corresponding IAM OIDC Provider should be created before. Supported common OIDC providers are `accounts.google.com`, `cognito-identity.amazonaws.com`, `graph.facebook.com`, `www.amazon.com`.<br/>    (Optional) `conditions` - A list of required conditions to assume the role via OIDC providers.<br/>      (Required) `key` - The OIDC key to match a condition for when a policy is in effect.<br/>      (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.<br/>      (Required) `values` - A list of allowed values of OIDC key to match a condition with condition operator.<br/>    (Optional) `effective_date` - Allow to assume IAM role only after a specific date and time.<br/>    (Optional) `expiration_date` - Allow to assume IAM role only before a specific date and time.<br/>    (Optional) `source_ip_whitelist` - A list of source IP addresses or CIDRs allowed to assume IAM role from.<br/>    (Optional) `source_ip_blacklist` - A list of source IP addresses or CIDRs not allowed to assume IAM role from. | <pre>list(object({<br/>    url = string<br/>    conditions = optional(list(object({<br/>      key       = string<br/>      condition = string<br/>      values    = list(string)<br/>    })), [])<br/>    effective_date      = optional(string)<br/>    expiration_date     = optional(string)<br/>    source_ip_whitelist = optional(list(string), [])<br/>    source_ip_blacklist = optional(list(string), [])<br/>  }))</pre> | `[]` | no |
@@ -102,5 +100,6 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="output_name"></a> [name](#output\_name) | IAM Role name. |
 | <a name="output_path"></a> [path](#output\_path) | The path of the IAM role. |
 | <a name="output_policies"></a> [policies](#output\_policies) | A set of ARNs of IAM policies which are atached to IAM role. |
+| <a name="output_resource_group"></a> [resource\_group](#output\_resource\_group) | The resource group created to manage resources in this module. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
 <!-- END_TF_DOCS -->
