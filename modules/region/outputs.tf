@@ -1,3 +1,8 @@
+output "region" {
+  description = "The AWS region this module resources resides in."
+  value       = var.region
+}
+
 output "id" {
   description = "The ID of the current region."
   value       = data.aws_region.this.id
@@ -38,6 +43,7 @@ output "ebs" {
       enabled = aws_ebs_encryption_by_default.this.enabled
       kms_key = one(aws_ebs_default_kms_key.this[*].key_arn)
     }
+    snapshot_public_access_mode = aws_ebs_snapshot_block_public_access.this.state
   }
 }
 
@@ -48,7 +54,7 @@ output "ec2" {
     `serial_console_enabled` - Whether serial console access is enabled for the current AWS region.
   EOF
   value = {
-    ami_public_access_enabled  = aws_ec2_image_block_public_access.this.state == "unblocked"
+    ami_public_access_mode     = aws_ec2_image_block_public_access.this.state
     instance_metadata_defaults = var.ec2.instance_metadata_defaults
     serial_console_enabled     = aws_ec2_serial_console_access.this.enabled
   }
@@ -114,12 +120,14 @@ output "service_quotas" {
   The region-level configurations of Service Quotas.
   EOF
   value = {
-    for code, quota in aws_servicequotas_service_quota.this :
-    code => {
-      quota_code    = quota.quota_code
-      quota_name    = quota.quota_name
-      default_value = quota.default_value
-      value         = quota.value
+    requests = {
+      for code, quota in aws_servicequotas_service_quota.this :
+      code => {
+        quota_code    = quota.quota_code
+        quota_name    = quota.quota_name
+        default_value = quota.default_value
+        value         = quota.value
+      }
     }
   }
 }

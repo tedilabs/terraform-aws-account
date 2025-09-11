@@ -30,24 +30,34 @@ variable "cloudwatch" {
   nullable = false
 }
 
-variable "ebs_default_encryption" {
+variable "ebs" {
   description = <<EOF
-  (Optional) The configuration of the EBS default encryption. `ebs_default_encryption` as defined below.
-    (Optional) `enabled` - Whether or not default EBS encryption is enabled.
-    (Optional) `kms_key` - The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume.
+  (Optional) The configuration of EBS in the current AWS region. `ebs` as defined below.
+    (Optional) `default_encryption` - The configuration of the EBS default encryption. `default_encryption` as defined below.
+      (Optional) `enabled` - Whether or not default EBS encryption is enabled.
+      (Optional) `kms_key` - The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume.
+    (Optional) `snapshot_public_access_mode` - The mode in which to enable "Block public access for snapshots" for the region. Valid values are `block-all-sharing`, `block-new-sharing`, `unblocked`. Defaults to `block-new-sharing`.
   EOF
   type = object({
-    enabled = optional(bool, false)
-    kms_key = optional(string)
+    default_encryption = optional(object({
+      enabled = optional(bool, false)
+      kms_key = optional(string)
+    }), {})
+    snapshot_public_access_mode = optional(string, "block-new-sharing")
   })
   default  = {}
   nullable = false
+
+  validation {
+    condition     = contains(["block-all-sharing", "block-new-sharing", "unblocked"], var.ebs.snapshot_public_access_mode)
+    error_message = "Valid values for `snapshot_public_access_mode` are `block-all-sharing`, `block-new-sharing`, `unblocked`."
+  }
 }
 
 variable "ec2" {
   description = <<EOF
   (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.
-    (Optional) `ami_public_access_enabled` - Whether to allow or block public access for AMIs at the account level to prevent the public sharing of your AMIs in this region. Defaults to `false`.
+    (Optional) `ami_public_access_mode` - The mode of block public access for AMIs at the account level in the configured AWS Region. Valid values are `block-new-sharing`, `unblocked`. Defaults to `block-new-sharing`.
     (Optional) `instance_metadata_defaults` - The configuration of the regional instance metadata default settings. `instance_metadata_defaults` as defined below.
       (Optional) `http_enabled` - Whether to enable or disable the HTTP metadata endpoint on your instances. Defaults to `null` (No preference).
       (Optional) `http_token_required` - Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Defaults to `false`. Defaults to `null` (No preference).
@@ -56,7 +66,7 @@ variable "ec2" {
     (Optional) `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. Defaults to `false`.
   EOF
   type = object({
-    ami_public_access_enabled = optional(bool, false)
+    ami_public_access_mode = optional(string, "block-new-sharing")
     instance_metadata_defaults = optional(object({
       http_enabled                = optional(bool)
       http_token_required         = optional(bool)
@@ -67,6 +77,11 @@ variable "ec2" {
   })
   default  = {}
   nullable = false
+
+  validation {
+    condition     = contains(["block-new-sharing", "unblocked"], var.ec2.ami_public_access_mode)
+    error_message = "Valid values for `ami_public_access_mode` are `block-new-sharing`, `unblocked`."
+  }
 }
 
 variable "guardduty" {
@@ -123,6 +138,7 @@ variable "resource_explorer" {
     views = optional(list(object({
       name           = string
       is_default     = optional(bool, false)
+      scope          = optional(string)
       filter_queries = optional(list(string), [])
 
       additional_resource_attributes = optional(set(string), [])
@@ -219,9 +235,6 @@ variable "module_tags_enabled" {
 ###################################################
 # Resource Group
 ###################################################
-
-
-
 
 variable "resource_group" {
   description = <<EOF

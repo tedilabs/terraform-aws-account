@@ -4,10 +4,7 @@
 
 # TODO: Why this resource does not have region argument?
 resource "aws_ec2_image_block_public_access" "this" {
-  state = (var.ec2.ami_public_access_enabled
-    ? "unblocked"
-    : "block-new-sharing"
-  )
+  state = var.ec2.ami_public_access_mode
 }
 
 
