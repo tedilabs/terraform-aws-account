@@ -14,7 +14,9 @@ locals {
   } : {}
 }
 
-data "aws_region" "this" {}
+data "aws_region" "this" {
+  region = var.region
+}
 
 locals {
   region = data.aws_region.this.region
