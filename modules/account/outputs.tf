@@ -27,6 +27,11 @@ output "additional_regions" {
   ])
 }
 
+output "all_available_regions" {
+  description = "A set of all available regions in the account."
+  value       = local.all_available_regions
+}
+
 output "primary_contact" {
   description = "The primary contact attached to an AWS Account."
   value = try({

@@ -51,6 +51,7 @@ No modules.
 | [awscc_supportapp_slack_channel_configuration.this](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/supportapp_slack_channel_configuration) | resource |
 | [awscc_supportapp_slack_workspace_configuration.this](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/supportapp_slack_workspace_configuration) | resource |
 | [aws_caller_identity.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_regions.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/regions) | data source |
 
 ## Inputs
 
@@ -74,6 +75,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_additional_regions"></a> [additional\_regions](#output\_additional\_regions) | A map of additional regions enabled in the account. |
+| <a name="output_all_available_regions"></a> [all\_available\_regions](#output\_all\_available\_regions) | A set of all available regions in the account. |
 | <a name="output_billing_contact"></a> [billing\_contact](#output\_billing\_contact) | The billing contact attached to an AWS Account. |
 | <a name="output_cost"></a> [cost](#output\_cost) | The account-level configurations of Cost & Billing Management service.<br/>    `cost_allocation_tags` - A set of the key for the cost allocation tags. |
 | <a name="output_ec2"></a> [ec2](#output\_ec2) | The account-level configurations of EC2 service.<br/>    `spot_datafeed_subscription` - To help you understand the charges for your Spot instances, Amazon EC2 provides a data feed that describes your Spot instance usage and pricing. This data feed is sent to an Amazon S3 bucket that you specify when you subscribe to the data feed. |
