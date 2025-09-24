@@ -84,42 +84,6 @@ variable "ec2" {
   }
 }
 
-variable "guardduty" {
-  description = <<EOF
-  (Optional) The configuration of GuardDuty in the current AWS region. `guardduty` as defined below.
-    (Optional) `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon GuardDuty administrator account for the organization. The delegated administrator will be assigned the two GuardDuty roles required to administer GuardDuty policy in your organization. Can be used in only management account of the organization.
-  EOF
-  type = object({
-    delegated_administrator = optional(string)
-  })
-  default  = {}
-  nullable = false
-}
-
-variable "inspector" {
-  description = <<EOF
-  (Optional) The configuration of Inspector in the current AWS region. `inspector` as defined below.
-    (Optional) `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon Inspector administrator account for the organization. The delegated administrator is granted all of the permissions required to administer Inspector for your organization. When you choose a delegated administrator, Inspector is activated for that account. Can be used in only management account of the organization.
-  EOF
-  type = object({
-    delegated_administrator = optional(string)
-  })
-  default  = {}
-  nullable = false
-}
-
-variable "macie" {
-  description = <<EOF
-  (Optional) The configuration of Macie in the current AWS region. `macie` as defined below.
-    (Optional) `delegated_administrator` - The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization. This can be configured only if Macie is enabled for the organization. The account must be a management account of the organization.
-  EOF
-  type = object({
-    delegated_administrator = optional(string)
-  })
-  default  = {}
-  nullable = false
-}
-
 variable "resource_explorer" {
   description = <<EOF
   (Optional) The configuration of the Resource Explorer in the current AWS region. `resource_explorer` as defined below.
