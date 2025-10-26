@@ -14,6 +14,7 @@ This module creates following resources.
 - `aws_resourceexplorer2_view` (optional)
 - `aws_servicequotas_service_quota` (optional)
 - `aws_sesv2_account_suppression_attributes` (optional)
+- `aws_vpc_block_public_access_options` (optional)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -51,6 +52,7 @@ This module creates following resources.
 | [aws_resourceexplorer2_view.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/resourceexplorer2_view) | resource |
 | [aws_servicequotas_service_quota.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/servicequotas_service_quota) | resource |
 | [aws_sesv2_account_suppression_attributes.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sesv2_account_suppression_attributes) | resource |
+| [aws_vpc_block_public_access_options.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_block_public_access_options) | resource |
 | [aws_region.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
@@ -67,7 +69,7 @@ This module creates following resources.
 | <a name="input_service_quotas"></a> [service\_quotas](#input\_service\_quotas) | (Optional) The configuration of Service Quotas in the current AWS region. `service_quotas` as defined below.<br/>    (Optional) `requests` - A map of service quotas to request. The key is `<service-code>/<quota-code>` and the value is a desired value to request.<br/>    (Optional) `code_translation_enabled` - Whether to use translated quota code for readability. Defaults to `false`. | <pre>object({<br/>    requests                 = optional(map(number), {})<br/>    code_translation_enabled = optional(bool, false)<br/>  })</pre> | `{}` | no |
 | <a name="input_ses"></a> [ses](#input\_ses) | (Optional) The configuration of the SES (Simple Email Service) for the account. `ses` as defined below.<br/>    (Optional) `suppression_reasons` - A set of the reasons that email addresses will be automatically added to the suppression list for your account. Valid values are `COMPLAINT`, `BOUNCE`. | <pre>object({<br/>    suppression_reasons = optional(set(string), ["COMPLAINT", "BOUNCE"])<br/>  })</pre> | `{}` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to add to all resources. | `map(string)` | `{}` | no |
-| <a name="input_vpc"></a> [vpc](#input\_vpc) | (Optional) The configuration of VPC in the current AWS region. `vpc` as defined below.<br/>    (Optional) `availability_zone_groups` - A map of Availability Zone Groups to manage for the current AWS region. The key is the name of Availability Zone Group, the value is a boolean value to enable the group. In this time, disabling Availability Zone Group is not supported on AWS. | <pre>object({<br/>    availability_zone_groups = optional(map(bool), {})<br/>  })</pre> | `{}` | no |
+| <a name="input_vpc"></a> [vpc](#input\_vpc) | (Optional) The configuration of VPC in the current AWS region. `vpc` as defined below.<br/>    (Optional) `availability_zone_groups` - A map of Availability Zone Groups to manage for the current AWS region. The key is the name of Availability Zone Group, the value is a boolean value to enable the group. In this time, disabling Availability Zone Group is not supported on AWS.<br/>    (Optional) `block_public_access_mode` - The mode in which to enable "Block Public Access" for the VPC in the current AWS region. Valid values are `BIDIRECTIONAL`, `INGRESS`, `OFF`. Defaults to `OFF`. | <pre>object({<br/>    availability_zone_groups = optional(map(bool), {})<br/>    block_public_access_mode = optional(string, "OFF")<br/>  })</pre> | `{}` | no |
 
 ## Outputs
 

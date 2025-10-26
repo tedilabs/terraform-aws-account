@@ -173,12 +173,19 @@ variable "vpc" {
   description = <<EOF
   (Optional) The configuration of VPC in the current AWS region. `vpc` as defined below.
     (Optional) `availability_zone_groups` - A map of Availability Zone Groups to manage for the current AWS region. The key is the name of Availability Zone Group, the value is a boolean value to enable the group. In this time, disabling Availability Zone Group is not supported on AWS.
+    (Optional) `block_public_access_mode` - The mode in which to enable "Block Public Access" for the VPC in the current AWS region. Valid values are `BIDIRECTIONAL`, `INGRESS`, `OFF`. Defaults to `OFF`.
   EOF
   type = object({
     availability_zone_groups = optional(map(bool), {})
+    block_public_access_mode = optional(string, "OFF")
   })
   default  = {}
   nullable = false
+
+  validation {
+    condition     = contains(["BIDIRECTIONAL", "INGRESS", "OFF"], var.vpc.block_public_access_mode)
+    error_message = "Valid values for `block_public_access_mode` are `BIDIRECTIONAL`, `INGRESS`, `OFF`."
+  }
 }
 
 variable "tags" {

@@ -121,6 +121,13 @@ output "vpc" {
       for name, group in aws_ec2_availability_zone_group.this :
       name => group.opt_in_status == "opted-in"
     }
+    block_public_access_mode = (one(aws_vpc_block_public_access_options.this) != null
+      ? {
+        for k, v in local.block_public_access_mode :
+        v => k
+      }[aws_vpc_block_public_access_options.this[0].internet_gateway_block_mode]
+      : "OFF"
+    )
   }
 }
 
