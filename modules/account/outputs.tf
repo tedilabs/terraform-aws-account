@@ -90,6 +90,28 @@ output "cost" {
   }
 }
 
+output "cost_optimization_hub" {
+  description = <<EOF
+  The account-level configurations of Cost Optimization Hub service.
+    `enabled` - Whether Cost Optimization Hub is enabled.
+    `scope` - The scope of Cost Optimization Hub enrollment.
+    `allow_member_account_discount_visibility` - Whether to allow member account discount visibility.
+    `savings_estimation_mode` - The savings estimation mode for Cost Optimization Hub.
+  EOF
+  value = {
+    enabled = length(aws_costoptimizationhub_enrollment_status.this) != 0
+    scope   = try(aws_costoptimizationhub_enrollment_status.this[0].include_member_accounts ? "ORGANIZATION" : "ACCOUNT", "ACCOUNT")
+    allow_member_account_discount_visibility = (var.cost_optimization_hub.scope == "ORGANIZATION"
+      ? var.cost_optimization_hub.allow_member_account_discount_visibility
+      : null
+    )
+    savings_estimation_mode = try({
+      for k, v in local.savings_estimation_mode :
+      v => k
+    }[aws_costoptimizationhub_preferences.this[0].savings_estimation_mode], null)
+  }
+}
+
 output "ec2" {
   description = <<EOF
   The account-level configurations of EC2 service.

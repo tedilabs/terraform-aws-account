@@ -154,6 +154,33 @@ variable "cost" {
   nullable = false
 }
 
+variable "cost_optimization_hub" {
+  description = <<EOF
+  (Optional) The configuration of the Cost Optimization Hub for the AWS Account. `cost_optimization_hub` as defined below.
+    (Optional) `enabled` - Whether to enable Cost Optimization Hub for the AWS Account. Defaults to `true`.
+    (Optional) `scope` - The scope of Cost Optimization Hub enrollment. Valid values are `ACCOUNT` and `ORGANIZATION`. Defaults to `ACCOUNT`.
+    (Optional) `allow_member_account_discount_visibility` - Whether to allow member accounts to access estimated savings after discounts. Defaults to `false`.
+    (Optional) `savings_estimation_mode` - The mode for savings estimation. Valid values are `BEFORE_DISCOUNTS` and `AFTER_DISCOUNTS`. Defaults to `BEFORE_DISCOUNTS`.
+  EOF
+  type = object({
+    enabled                                  = optional(bool, true)
+    scope                                    = optional(string, "ACCOUNT")
+    allow_member_account_discount_visibility = optional(bool, false)
+    savings_estimation_mode                  = optional(string, "BEFORE_DISCOUNTS")
+  })
+  default  = {}
+  nullable = false
+
+  validation {
+    condition     = contains(["ACCOUNT", "ORGANIZATION"], var.cost_optimization_hub.scope)
+    error_message = "Valid values for `scope` are `ACCOUNT` and `ORGANIZATION`."
+  }
+  validation {
+    condition     = contains(["BEFORE_DISCOUNTS", "AFTER_DISCOUNTS"], var.cost_optimization_hub.savings_estimation_mode)
+    error_message = "Valid values for `savings_estimation_mode` are `BEFORE_DISCOUNTS` and `AFTER_DISCOUNTS`."
+  }
+}
+
 variable "ec2_spot_datafeed_subscription" {
   description = <<EOF
   (Optional) The configuration of the Spot Data Feed Subscription. `ec2_spot_datafeed_subscription` as defined below.
