@@ -2,8 +2,9 @@
 # Public Access Block for EC2 AMI
 ###################################################
 
-# TODO: Why this resource does not have region argument?
 resource "aws_ec2_image_block_public_access" "this" {
+  region = var.region
+
   state = var.ec2.ami_public_access_mode
 }
 
@@ -41,9 +42,8 @@ resource "aws_ec2_instance_metadata_defaults" "this" {
 # Serial Consol Access for EC2
 ###################################################
 
-# TODO: Why this resource does not have region argument?
 resource "aws_ec2_serial_console_access" "this" {
-  # region = var.region
+  region = var.region
 
   enabled = var.ec2.serial_console_enabled
 }
