@@ -53,6 +53,22 @@ rule "terraform_naming_convention" {
   data {
     format = "extended_snake_case"
   }
+
+  locals {
+    format = "extended_snake_case"
+  }
+
+  variable {
+    format = "extended_snake_case"
+  }
+
+  output {
+    format = "extended_snake_case"
+  }
+
+  check {
+    format = "extended_snake_case"
+  }
 }
 
 rule "terraform_unused_declarations" {
@@ -70,8 +86,24 @@ rule "terraform_unused_required_providers" {
 
 plugin "aws" {
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
-  version = "0.38.0"
+  version = "0.44.0"
 
   enabled = true
   deep_check = false
+}
+
+rule "aws_iam_policy_attachment_exclusive_attachment" {
+  enabled = true
+}
+
+rule "aws_iam_role_deprecated_policy_attributes" {
+  enabled = true
+}
+
+rule "aws_security_group_inline_rules" {
+  enabled = true
+}
+
+rule "aws_security_group_rule_deprecated" {
+  enabled = true
 }
