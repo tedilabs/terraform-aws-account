@@ -41,3 +41,11 @@ jobs:
       pr_size_xl_label: 'size/XL'
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
+
+  welcome:
+    name: Welcome for First Pull Request
+    uses: tedilabs/github-actions/.github/workflows/github.issue.welcome.yaml@main
+    if: ${{ github.event_name == 'pull_request_target' && github.event.action == 'opened' }}
+
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
