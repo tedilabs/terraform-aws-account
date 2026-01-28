@@ -275,3 +275,20 @@ variable "s3_public_access_enabled" {
   default     = false
   nullable    = false
 }
+
+variable "user_notifications" {
+  description = <<EOF
+  (Optional) The configuration of the User Notifications for the AWS Account. `user_notifications` as defined below.
+    (Optional) `notification_hubs` - A set of regions to create Notification Hubs in. Notification hubs allow you to select the specific Regions where your user configured notifications data is stored and processed in, or replicated to. You must select at least one notification hub in the account to use AWS User Notifications. Maximum of 3 notification hubs can be created per account.
+  EOF
+  type = object({
+    notification_hubs = optional(set(string), [])
+  })
+  default  = {}
+  nullable = false
+
+  validation {
+    condition     = length(var.user_notifications.notification_hubs) <= 3
+    error_message = "A maximum of 3 notification hubs can be created per account."
+  }
+}

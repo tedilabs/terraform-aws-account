@@ -178,3 +178,13 @@ output "s3" {
     public_access_enabled = var.s3_public_access_enabled
   }
 }
+
+output "user_notifications" {
+  description = <<EOF
+  The account-level configurations of User Notifications service.
+    `notification_hubs` - A set of notification hub regions.
+  EOF
+  value = {
+    notification_hubs = values(aws_notifications_notification_hub.this)[*].notification_hub_region
+  }
+}
