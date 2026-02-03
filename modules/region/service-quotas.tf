@@ -26,6 +26,11 @@ locals {
     "route53/health-checks-per-region"   = "L-ACB674F3"
     "route53/hosted-zones-per-region"    = "L-4EA4796A"
     "route53/delegation-sets-per-region" = "L-A72C7724"
+    # Route53 Profiles
+    "route53profiles/private-hosted-zone-associations-per-profile" = "L-BA3424AB"
+    "route53profiles/profiles-per-region"                          = "L-D9B2356C"
+    "route53profiles/vpc-associations-per-region"                  = "L-9BABD1D7"
+    "route53profiles/vpc-endpoint-associations-per-profile"        = "L-0B404E57"
     # SES
     "ses/sending-emails-per-day"    = "L-804C8AE8"
     "ses/sending-emails-per-second" = "L-CDEF9B6B"
