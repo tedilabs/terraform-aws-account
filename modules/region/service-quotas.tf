@@ -3,7 +3,9 @@ locals {
   # on how to find the Service Code and Quota Code, see the README.md!
   quota_codes = {
     # EC2
-    "ec2/eips-per-region" = "L-0263D0A3"
+    "ec2/eips-per-region"                    = "L-0263D0A3"
+    "ec2/ondemand-standard-vcpus-per-region" = "L-1216C47A"
+    "ec2/spot-standard-vcpus-per-region"     = "L-34B43A08"
     # FMS
     "fms/accounts-per-organization-filter"                         = "L-0C779DC8"
     "fms/applications-per-application-list"                        = "L-A423D1D9"
