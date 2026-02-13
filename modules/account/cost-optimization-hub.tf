@@ -23,7 +23,7 @@ resource "aws_costoptimizationhub_enrollment_status" "this" {
 }
 
 resource "aws_costoptimizationhub_preferences" "this" {
-  count = length(aws_costoptimizationhub_enrollment_status.this) > 0 ? 1 : 0
+  count = var.cost_optimization_hub.enabled ? 1 : 0
 
   member_account_discount_visibility = (var.cost_optimization_hub.scope == "ORGANIZATION"
     ? (var.cost_optimization_hub.allow_member_account_discount_visibility ? "All" : "None")
