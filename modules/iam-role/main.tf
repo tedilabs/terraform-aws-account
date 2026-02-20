@@ -64,8 +64,12 @@ data "aws_iam_policy_document" "trusted_entities" {
 
 data "aws_iam_policy_document" "assume_role" {
   statement {
-    effect    = "Allow"
-    actions   = ["sts:AssumeRole"]
+    effect = "Allow"
+    actions = [
+      "sts:AssumeRole",
+      "sts:TagSession",
+      "sts:SetSourceIdentity",
+    ]
     resources = var.assumable_roles
   }
 }
