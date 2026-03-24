@@ -84,6 +84,18 @@ variable "ec2" {
   }
 }
 
+variable "rds" {
+  description = <<EOF
+  (Optional) The configuration of RDS in the current AWS region. `rds` as defined below.
+    (Optional) `default_certificate_identifier` - The new default certificate identifier to override the current one with.
+  EOF
+  type = object({
+    default_certificate_identifier = optional(string)
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "resource_explorer" {
   description = <<EOF
   (Optional) The configuration of the Resource Explorer in the current AWS region. `resource_explorer` as defined below.

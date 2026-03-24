@@ -60,6 +60,16 @@ output "ec2" {
   }
 }
 
+output "rds" {
+  description = <<EOF
+  The region-level configurations of RDS service.
+    `default_certificate_identifier` - The default certificate identifier for RDS instances in the current AWS region.
+  EOF
+  value = {
+    default_certificate_identifier = one(aws_rds_certificate.this[*].certificate_identifier)
+  }
+}
+
 output "resource_explorer" {
   description = <<EOF
   The region-level configurations of Resource Explorer service.
