@@ -297,6 +297,8 @@ variable "uxc" {
   description = <<EOF
   (Optional) The configuration of UXC Account Customizations for the AWS Account. `uxc` as defined below.
     (Optional) `account_color` - The color used to identify the account in the AWS Management Console. Valid values are `none`, `red`, `blu`e, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`. Defaults to `none`.
+    (Optional) `visible_regions` - The set of regions that are visible in the AWS Management Console. If not specified, all regions are visible.
+    (Optional) `visible_services` - The set of services that are visible in the AWS Management Console. If not specified, all services are visible.
   EOF
   type = object({
     account_color    = optional(string, "none")
