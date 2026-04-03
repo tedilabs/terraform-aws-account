@@ -188,3 +188,17 @@ output "user_notifications" {
     notification_hubs = values(aws_notifications_notification_hub.this)[*].notification_hub_region
   }
 }
+
+output "uxc" {
+  description = <<EOF
+  The account-level configurations of UXC service.
+    `account_color` - The color associated with the account in UXC.
+    `visible_regions` - A set of regions that are visible in UXC.
+    `visible_services` - A set of services that are visible in UXC.
+  EOF
+  value = {
+    account_color    = aws_uxc_account_customizations.this.account_color
+    visible_regions  = aws_uxc_account_customizations.this.visible_regions
+    visible_services = aws_uxc_account_customizations.this.visible_services
+  }
+}

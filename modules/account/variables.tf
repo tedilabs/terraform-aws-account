@@ -292,3 +292,22 @@ variable "user_notifications" {
     error_message = "A maximum of 3 notification hubs can be created per account."
   }
 }
+
+variable "uxc" {
+  description = <<EOF
+  (Optional) The configuration of UXC Account Customizations for the AWS Account. `uxc` as defined below.
+    (Optional) `account_color` - The color used to identify the account in the AWS Management Console. Valid values are `none`, `red`, `blu`e, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`. Defaults to `none`.
+  EOF
+  type = object({
+    account_color    = optional(string, "none")
+    visible_regions  = optional(set(string), [])
+    visible_services = optional(set(string), [])
+  })
+  default  = {}
+  nullable = false
+
+  validation {
+    condition     = contains(["none", "red", "blue", "green", "yellow", "orange", "pink", "purple", "teal"], var.uxc.account_color)
+    error_message = "Valid values for `account_color` are `none`, `red`, `blue`, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`."
+  }
+}

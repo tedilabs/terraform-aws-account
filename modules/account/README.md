@@ -13,6 +13,7 @@ This module creates following resources.
 - `aws_costoptimizationhub_preferences` (optional)
 - `aws_s3_account_public_access_block`
 - `aws_spot_datafeed_subscription` (optional)
+- `aws_uxc_account_customizations`
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -20,15 +21,15 @@ This module creates following resources.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.12 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.39 |
 | <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 1.55 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.28.0 |
-| <a name="provider_awscc"></a> [awscc](#provider\_awscc) | 1.68.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.39.0 |
+| <a name="provider_awscc"></a> [awscc](#provider\_awscc) | 1.78.0 |
 
 ## Modules
 
@@ -52,6 +53,7 @@ No modules.
 | [aws_notifications_notification_hub.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/notifications_notification_hub) | resource |
 | [aws_s3_account_public_access_block.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_account_public_access_block) | resource |
 | [aws_spot_datafeed_subscription.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/spot_datafeed_subscription) | resource |
+| [aws_uxc_account_customizations.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/uxc_account_customizations) | resource |
 | [awscc_supportapp_account_alias.this](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/supportapp_account_alias) | resource |
 | [awscc_supportapp_slack_channel_configuration.this](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/supportapp_slack_channel_configuration) | resource |
 | [awscc_supportapp_slack_workspace_configuration.this](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/supportapp_slack_workspace_configuration) | resource |
@@ -76,6 +78,7 @@ No modules.
 | <a name="input_sts_global_endpoint_token_version"></a> [sts\_global\_endpoint\_token\_version](#input\_sts\_global\_endpoint\_token\_version) | (Optional) The version of the STS global endpoint token. Valid values are `v1` and<br/>  `v2`. Defaults to `v1`.<br/>    `v1` - Version 1 Tokens are valid only in AWS Regions that are available by default. These tokens do not work in manually enabled Regions, such as Asia Pacific (Hong Kong).<br/>    `v2` - Version 2 tokens are valid in all Regions. However, version 2 tokens include more characters and might affect systems where you temporarily store tokens. | `string` | `"v1"` | no |
 | <a name="input_support_app"></a> [support\_app](#input\_support\_app) | (Optional) The configuration of the Support App for the AWS Account. `support_app` as defined below.<br/>    (Optional) `account_alias` - An account alias associated with a customer's account.<br/>    (Optional) `slack_workspaces` - A set of team ID for each Slack workspace, which uniquely identifies a workspace.<br/>    (Optional) `slack_channel_configurations` - A list of configurations for each Slack channels. Each block of `slack_channel_configurations` as defined below.<br/>      (Optional) `name` - The name of the Slack channel configuration.<br/>      (Required) `workspace` - The team ID of the Slack workspace, which uniquely identifies a workspace.<br/>      (Required) `channel` - The ID of the Slack channel.<br/>      (Optional) `permission` - The permission of the default IAM role which created by this module. Valid values are `READ_ONLY` and `FULL_ACCESS`. Defaults to `FULL_ACCESS`.<br/>      (Optional) `channel_role` - The ARN (Amazon Resource Name) of the IAM role associated with the Support App to post messages to the Slack channel. Only required to override default role which created with `permission`.<br/>      (Optional) `notification_case_severity` - The severity level of the support case that a customer wants to get notified for. Valid values are `ALL`, `HIGH`, and `NONE`. Defaults to `ALL`.<br/>      (Optional) `notification_on_add_correspondence_to_case` - Whether to notify when a correspondence is added to a case. Defaults to `true`.<br/>      (Optional) `notification_on_create_or_reopen_case` - Whether to notify when a case is created or reopened. Defaults to `true`.<br/>      (Optional) `notification_on_resolve_case` - Whether to notify when a case is resolved. Defaults to `true`. | <pre>object({<br/>    account_alias    = optional(string)<br/>    slack_workspaces = optional(set(string), [])<br/>    slack_channel_configurations = optional(list(object({<br/>      name      = optional(string)<br/>      workspace = string<br/>      channel   = string<br/><br/>      # permission   = optional(string, "FULL_ACCESS")<br/>      channel_role = optional(string)<br/><br/>      notification_case_severity                 = optional(string, "ALL")<br/>      notification_on_add_correspondence_to_case = optional(bool, true)<br/>      notification_on_create_or_reopen_case      = optional(bool, true)<br/>      notification_on_resolve_case               = optional(bool, true)<br/>    })), [])<br/>  })</pre> | `{}` | no |
 | <a name="input_user_notifications"></a> [user\_notifications](#input\_user\_notifications) | (Optional) The configuration of the User Notifications for the AWS Account. `user_notifications` as defined below.<br/>    (Optional) `notification_hubs` - A set of regions to create Notification Hubs in. Notification hubs allow you to select the specific Regions where your user configured notifications data is stored and processed in, or replicated to. You must select at least one notification hub in the account to use AWS User Notifications. Maximum of 3 notification hubs can be created per account. | <pre>object({<br/>    notification_hubs = optional(set(string), [])<br/>  })</pre> | `{}` | no |
+| <a name="input_uxc"></a> [uxc](#input\_uxc) | (Optional) The configuration of UXC Account Customizations for the AWS Account. `uxc` as defined below.<br/>    (Optional) `account_color` - The color used to identify the account in the AWS Management Console. Valid values are `none`, `red`, `blu`e, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`. Defaults to `none`. | <pre>object({<br/>    account_color    = optional(string, "none")<br/>    visible_regions  = optional(set(string), [])<br/>    visible_services = optional(set(string), [])<br/>  })</pre> | `{}` | no |
 
 ## Outputs
 
@@ -98,4 +101,5 @@ No modules.
 | <a name="output_sts"></a> [sts](#output\_sts) | The account-level configurations of STS service.<br/>    `global_endpoint_token_version` - The version of the STS global endpoint token. |
 | <a name="output_support_app"></a> [support\_app](#output\_support\_app) | The account-level configurations of Support App service.<br/>    `account_alias` - The account alias associated with a customer's account. |
 | <a name="output_user_notifications"></a> [user\_notifications](#output\_user\_notifications) | The account-level configurations of User Notifications service.<br/>    `notification_hubs` - A set of notification hub regions. |
+| <a name="output_uxc"></a> [uxc](#output\_uxc) | The account-level configurations of UXC service.<br/>    `account_color` - The color associated with the account in UXC.<br/>    `visible_regions` - A set of regions that are visible in UXC.<br/>    `visible_services` - A set of services that are visible in UXC. |
 <!-- END_TF_DOCS -->
