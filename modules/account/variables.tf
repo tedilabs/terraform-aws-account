@@ -296,7 +296,7 @@ variable "user_notifications" {
 variable "uxc" {
   description = <<EOF
   (Optional) The configuration of UXC Account Customizations for the AWS Account. `uxc` as defined below.
-    (Optional) `account_color` - The color used to identify the account in the AWS Management Console. Valid values are `none`, `red`, `blu`e, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`. Defaults to `none`.
+    (Optional) `account_color` - The color used to identify the account in the AWS Management Console. Valid values are `none`, `red`, `darkBlue`, `lightBlue`, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`. Defaults to `none`.
     (Optional) `visible_regions` - The set of regions that are visible in the AWS Management Console. If not specified, all regions are visible.
     (Optional) `visible_services` - The set of services that are visible in the AWS Management Console. If not specified, all services are visible.
   EOF
@@ -309,7 +309,7 @@ variable "uxc" {
   nullable = false
 
   validation {
-    condition     = contains(["none", "red", "blue", "green", "yellow", "orange", "pink", "purple", "teal"], var.uxc.account_color)
-    error_message = "Valid values for `account_color` are `none`, `red`, `blue`, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`."
+    condition     = contains(["none", "red", "darkBlue", "lightBlue", "green", "yellow", "orange", "pink", "purple", "teal"], var.uxc.account_color)
+    error_message = "Valid values for `account_color` are `none`, `red`, `darkBlue`, `lightBlue`, `green`, `yellow`, `orange`, `pink`, `purple`, and `teal`."
   }
 }
