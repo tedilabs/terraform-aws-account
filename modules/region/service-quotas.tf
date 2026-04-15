@@ -77,3 +77,18 @@ resource "aws_servicequotas_service_quota" "this" {
   )
   value = each.value.value
 }
+
+resource "aws_servicequotas_auto_management" "this" {
+  count = var.service_quotas.auto_management.enabled ? 1 : 0
+
+  region = var.region
+
+  opt_in_level = var.service_quotas.auto_management.level
+  opt_in_type  = var.service_quotas.auto_management.type
+
+  exclusion_list = (length(var.service_quotas.auto_management.exclusion_list) > 0
+    ? var.service_quotas.auto_management.exclusion_list
+    : null
+  )
+  notification_arn = var.service_quotas.auto_management.notification_configuration
+}

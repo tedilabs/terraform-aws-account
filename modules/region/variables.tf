@@ -189,10 +189,23 @@ variable "service_quotas" {
   (Optional) The configuration of Service Quotas in the current AWS region. `service_quotas` as defined below.
     (Optional) `requests` - A map of service quotas to request. The key is `<service-code>/<quota-code>` and the value is a desired value to request.
     (Optional) `code_translation_enabled` - Whether to use translated quota code for readability. Defaults to `false`.
+    (Optional) `auto_management` - The configuration of Service Quotas auto management. `auto_management` as defined below.
+      (Optional) `enabled` - Whether to enable Service Quotas auto management. Defaults to `false`.
+      (Optional) `level` - The opt-in level for Service Quotas auto management. Valid values are `ACCOUNT`. Defaults to `ACCOUNT`.
+      (Optional) `type` - The opt-in type for Service Quotas auto management. Valid values are `NotifyOnly`, `NotifyAndAdjust`. Defaults to `NotifyOnly`.
+      (Optional) `exclusion_list` - A map of service quotas to exclude from auto management. The key is `<service-code>` and the value is a set of `<quota-code>` to exclude for the service.
+      (Optional) `notification_configuration` - The ARN of the AWS User Notification Configuration for automatic management notification.
   EOF
   type = object({
     requests                 = optional(map(number), {})
     code_translation_enabled = optional(bool, false)
+    auto_management = optional(object({
+      enabled                    = optional(bool, false)
+      level                      = optional(string, "ACCOUNT")
+      type                       = optional(string, "NotifyOnly")
+      exclusion_list             = optional(map(set(string)), {})
+      notification_configuration = optional(string)
+    }), {})
   })
   default  = {}
   nullable = false
@@ -203,6 +216,14 @@ variable "service_quotas" {
       length(split("/", code)) == 2
     ])
     error_message = "Require valid service quota codes. The format is `<service-code>/<quota-code>`."
+  }
+  validation {
+    condition     = contains(["ACCOUNT"], var.service_quotas.auto_management.level)
+    error_message = "Valid values for `service_quotas.auto_management.level` are `ACCOUNT`."
+  }
+  validation {
+    condition     = contains(["NotifyOnly", "NotifyAndAdjust"], var.service_quotas.auto_management.type)
+    error_message = "Valid values for `service_quotas.auto_management.type` are `NotifyOnly`, `NotifyAndAdjust`."
   }
 }
 

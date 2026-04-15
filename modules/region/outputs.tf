@@ -136,6 +136,13 @@ output "service_quotas" {
         value         = quota.value
       }
     }
+    auto_management = {
+      enabled          = length(aws_servicequotas_auto_management.this) > 0
+      level            = one(aws_servicequotas_auto_management.this[*].opt_in_level)
+      type             = one(aws_servicequotas_auto_management.this[*].opt_in_type)
+      exclusion_list   = one(aws_servicequotas_auto_management.this[*].exclusion_list)
+      notification_arn = one(aws_servicequotas_auto_management.this[*].notification_arn)
+    }
   }
 }
 
