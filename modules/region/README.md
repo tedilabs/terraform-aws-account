@@ -8,6 +8,7 @@ This module creates following resources.
 - `aws_ec2_image_block_public_access`
 - `aws_ec2_instance_metadata_defaults` (optional)
 - `aws_ec2_serial_console_access`
+- `aws_ecs_account_setting_default`
 - `aws_oam_sink` (optional)
 - `aws_oam_sink_policy` (optional)
 - `aws_rds_certificate` (optional)
@@ -21,27 +22,27 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.21 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 6.30.0 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_cloudwatch_oam_sink"></a> [cloudwatch\_oam\_sink](#module\_cloudwatch\_oam\_sink) | tedilabs/observability/aws//modules/cloudwatch-oam-sink | ~> 0.2.0 |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.12.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_ebs_default_kms_key.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_default_kms_key) | resource |
 | [aws_ebs_encryption_by_default.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_encryption_by_default) | resource |
 | [aws_ebs_snapshot_block_public_access.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_snapshot_block_public_access) | resource |
@@ -49,6 +50,12 @@ This module creates following resources.
 | [aws_ec2_image_block_public_access.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_image_block_public_access) | resource |
 | [aws_ec2_instance_metadata_defaults.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_instance_metadata_defaults) | resource |
 | [aws_ec2_serial_console_access.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_serial_console_access) | resource |
+| [aws_ecs_account_setting_default.awsvpc_trunking](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_account_setting_default) | resource |
+| [aws_ecs_account_setting_default.container_insights_mode](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_account_setting_default) | resource |
+| [aws_ecs_account_setting_default.default_log_driver_mode](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_account_setting_default) | resource |
+| [aws_ecs_account_setting_default.dual_stack_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_account_setting_default) | resource |
+| [aws_ecs_account_setting_default.fargate_event_windows](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_account_setting_default) | resource |
+| [aws_ecs_account_setting_default.fargate_task_retirement_wait_period](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_account_setting_default) | resource |
 | [aws_rds_certificate.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_certificate) | resource |
 | [aws_resourceexplorer2_index.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/resourceexplorer2_index) | resource |
 | [aws_resourceexplorer2_view.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/resourceexplorer2_view) | resource |
@@ -60,10 +67,11 @@ This module creates following resources.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_cloudwatch"></a> [cloudwatch](#input\_cloudwatch) | (Optional) The configuration of CloudWatch in the current AWS region. `cloudwatch` as defined below.<br/>    (Optional) `oam_sink` - A configuration of CloudWatch OAM(Observability Access Manager) sink. `oam_sink` as defined below.<br/>      (Required) `name` - The name of the CloudWatch OAM sink.<br/>      (Optional) `telemetry_types` - A set of the telemetry types can be shared with it. Valid values are `AWS::CloudWatch::Metric`, `AWS::Logs::LogGroup`, `AWS::XRay::Trace`, `AWS::ApplicationInsights::Application`, `AWS::InternetMonitor::Monitor`.<br/>      (Optional) `allowed_source_accounts` - A list of the IDs of AWS accounts that will share data with this monitoring account.<br/>      (Optional) `allowed_source_organizations` - A list of the organization IDs of AWS accounts that will share data with this monitoring account.<br/>      (Optional) `allowed_source_organization_paths` - A list of the organization paths of the AWS accounts that will share data with this monitoring account.<br/>      (Optional) `tags` - A map of tags to add to the resource. | <pre>object({<br/>    oam_sink = optional(object({<br/>      name                              = string<br/>      telemetry_types                   = optional(set(string), [])<br/>      allowed_source_accounts           = optional(list(string), [])<br/>      allowed_source_organizations      = optional(list(string), [])<br/>      allowed_source_organization_paths = optional(list(string), [])<br/>      tags                              = optional(map(string), {})<br/>    }))<br/>  })</pre> | `{}` | no |
 | <a name="input_ebs"></a> [ebs](#input\_ebs) | (Optional) The configuration of EBS in the current AWS region. `ebs` as defined below.<br/>    (Optional) `default_encryption` - The configuration of the EBS default encryption. `default_encryption` as defined below.<br/>      (Optional) `enabled` - Whether or not default EBS encryption is enabled.<br/>      (Optional) `kms_key` - The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the EBS volume.<br/>    (Optional) `snapshot_public_access_mode` - The mode in which to enable "Block public access for snapshots" for the region. Valid values are `block-all-sharing`, `block-new-sharing`, `unblocked`. Defaults to `block-new-sharing`. | <pre>object({<br/>    default_encryption = optional(object({<br/>      enabled = optional(bool, false)<br/>      kms_key = optional(string)<br/>    }), {})<br/>    snapshot_public_access_mode = optional(string, "block-new-sharing")<br/>  })</pre> | `{}` | no |
 | <a name="input_ec2"></a> [ec2](#input\_ec2) | (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.<br/>    (Optional) `ami_public_access_mode` - The mode of block public access for AMIs at the account level in the configured AWS Region. Valid values are `block-new-sharing`, `unblocked`. Defaults to `block-new-sharing`.<br/>    (Optional) `instance_metadata_defaults` - The configuration of the regional instance metadata default settings. `instance_metadata_defaults` as defined below.<br/>      (Optional) `http_enabled` - Whether to enable or disable the HTTP metadata endpoint on your instances. Defaults to `null` (No preference).<br/>      (Optional) `http_token_required` - Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Defaults to `false`. Defaults to `null` (No preference).<br/>      (Optional) `http_put_response_hop_limit` - A desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from `1` to `64`. Defaults to `null` (No preference).<br/>      (Optional) `instance_tags_enabled` - Whether to enable the access to instance tags from the instance metadata service. Defaults to `null` (No preference).<br/>    (Optional) `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. Defaults to `false`. | <pre>object({<br/>    ami_public_access_mode = optional(string, "block-new-sharing")<br/>    instance_metadata_defaults = optional(object({<br/>      http_enabled                = optional(bool)<br/>      http_token_required         = optional(bool)<br/>      http_put_response_hop_limit = optional(number)<br/>      instance_tags_enabled       = optional(bool)<br/>    }), {})<br/>    serial_console_enabled = optional(bool, false)<br/>  })</pre> | `{}` | no |
+| <a name="input_ecs"></a> [ecs](#input\_ecs) | (Optional) The configuration of ECS in the current AWS region. `ecs` as defined below.<br/>    (Optional) `container_insights` - The configuration of Container Insights. `container_insights` as defined below.<br/>      (Optional) `mode` - The default Container Insights setting for new ECS clusters. Valid values are `ENABLED`, `ENHANCED`, `DISABLED`. Defaults to `DISABLED`.<br/>    (Optional) `awsvpc_trunking_enabled` - Whether to enable ENI trunking for `awsvpc` network mode, which allows more ENIs to be attached per container instance. Defaults to `false`.<br/>    (Optional) `dual_stack_ipv6_enabled` - Whether to enable dual-stack IPv6 networking for Fargate tasks. Defaults to `false`.<br/>    (Optional) `default_log_driver_mode` - The default log driver mode for ECS containers. Valid values are `blocking`, `non-blocking`. Defaults to `non-blocking`.<br/>    (Optional) `fargate` - The configuration of the ECS Fargate settings. `fargate` as defined below.<br/>      (Optional) `event_windows` - Whether to enable ECS Fargate maintenance windows. Defaults to `false`.<br/>      (Optional) `fips_mode` - Whether to enable FIPS mode for Fargate. Only available in AWS GovCloud regions. Defaults to `false`.<br/>      (Optional) `task_retirement_wait_period` - The number of days Fargate waits before retiring a task running on a deprecated platform version. Valid values are `0`, `7`, `14`. Defaults to `7`. | <pre>object({<br/>    container_insights = optional(object({<br/>      mode = optional(string, "DISABLED")<br/>    }), {})<br/>    awsvpc_trunking_enabled = optional(bool, false)<br/>    dual_stack_ipv6_enabled = optional(bool, false)<br/>    default_log_driver_mode = optional(string, "non-blocking")<br/>    fargate = optional(object({<br/>      event_windows = optional(bool, false)<br/>      # fips_mode                   = optional(bool, false)<br/>      task_retirement_wait_period = optional(number, 7)<br/>    }), {})<br/>  })</pre> | `{}` | no |
 | <a name="input_module_tags_enabled"></a> [module\_tags\_enabled](#input\_module\_tags\_enabled) | (Optional) Whether to create AWS Resource Tags for the module informations. | `bool` | `true` | no |
 | <a name="input_rds"></a> [rds](#input\_rds) | (Optional) The configuration of RDS in the current AWS region. `rds` as defined below.<br/>    (Optional) `default_certificate_identifier` - The new default certificate identifier to override the current one with. | <pre>object({<br/>    default_certificate_identifier = optional(string)<br/>  })</pre> | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | (Optional) The region in which to create the module resources. If not provided, the module resources will be created in the provider's configured region. | `string` | `null` | no |
@@ -77,12 +85,13 @@ This module creates following resources.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_cloudwdatch"></a> [cloudwdatch](#output\_cloudwdatch) | The region-level configurations of CloudWatch service.<br/>    `oam_sink` - A configuration of CloudWatch OAM(Observability Access Manager) sink. |
 | <a name="output_code"></a> [code](#output\_code) | The short code of the current region. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the current region in this format: `Location (Region name)` |
 | <a name="output_ebs"></a> [ebs](#output\_ebs) | The region-level configurations of EBS service.<br/>    `default_encryption` - The configurations for EBS Default Encryption. |
 | <a name="output_ec2"></a> [ec2](#output\_ec2) | The region-level configurations of EC2 service.<br/>    `ami_public_access_enabled` - Whether to allow or block public access for AMIs at the account level to prevent the public sharing of your AMIs in this region.<br/>    `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. |
+| <a name="output_ecs"></a> [ecs](#output\_ecs) | The region-level configurations of ECS service.<br/>    `container_insights` - The default Container Insights settings for new ECS clusters.<br/>    `awsvpc_trunking_enabled` - Whether ENI trunking is enabled for `awsvpc` network mode.<br/>    `dual_stack_ipv6_enabled` - Whether dual-stack IPv6 networking is enabled for Fargate tasks.<br/>    `default_log_driver_mode` - The default log driver mode for ECS containers.<br/>    `fargate` - The ECS Fargate settings. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the current region. |
 | <a name="output_name"></a> [name](#output\_name) | The name of the current region. |
 | <a name="output_rds"></a> [rds](#output\_rds) | The region-level configurations of RDS service.<br/>    `default_certificate_identifier` - The default certificate identifier for RDS instances in the current AWS region. |

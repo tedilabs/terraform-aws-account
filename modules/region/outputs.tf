@@ -60,6 +60,33 @@ output "ec2" {
   }
 }
 
+output "ecs" {
+  description = <<EOF
+  The region-level configurations of ECS service.
+    `container_insights` - The default Container Insights settings for new ECS clusters.
+    `awsvpc_trunking_enabled` - Whether ENI trunking is enabled for `awsvpc` network mode.
+    `dual_stack_ipv6_enabled` - Whether dual-stack IPv6 networking is enabled for Fargate tasks.
+    `default_log_driver_mode` - The default log driver mode for ECS containers.
+    `fargate` - The ECS Fargate settings.
+  EOF
+  value = {
+    container_insights = {
+      mode = {
+        for k, v in local.ecs_container_insights_mode :
+        v => k
+      }[aws_ecs_account_setting_default.container_insights_mode.value]
+    }
+    awsvpc_trunking_enabled = aws_ecs_account_setting_default.awsvpc_trunking.value == "enabled"
+    dual_stack_ipv6_enabled = aws_ecs_account_setting_default.dual_stack_ipv6.value == "enabled"
+    default_log_driver_mode = aws_ecs_account_setting_default.default_log_driver_mode.value
+    fargate = {
+      event_windows = aws_ecs_account_setting_default.fargate_event_windows.value == "enabled"
+      # fips_mode                   = aws_ecs_account_setting_default.fargate_fips_mode.value == "enabled"
+      task_retirement_wait_period = tonumber(aws_ecs_account_setting_default.fargate_task_retirement_wait_period.value)
+    }
+  }
+}
+
 output "rds" {
   description = <<EOF
   The region-level configurations of RDS service.

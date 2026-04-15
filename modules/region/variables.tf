@@ -84,6 +84,51 @@ variable "ec2" {
   }
 }
 
+variable "ecs" {
+  description = <<EOF
+  (Optional) The configuration of ECS in the current AWS region. `ecs` as defined below.
+    (Optional) `container_insights` - The configuration of Container Insights. `container_insights` as defined below.
+      (Optional) `mode` - The default Container Insights setting for new ECS clusters. Valid values are `ENABLED`, `ENHANCED`, `DISABLED`. Defaults to `DISABLED`.
+    (Optional) `awsvpc_trunking_enabled` - Whether to enable ENI trunking for `awsvpc` network mode, which allows more ENIs to be attached per container instance. Defaults to `false`.
+    (Optional) `dual_stack_ipv6_enabled` - Whether to enable dual-stack IPv6 networking for Fargate tasks. Defaults to `false`.
+    (Optional) `default_log_driver_mode` - The default log driver mode for ECS containers. Valid values are `blocking`, `non-blocking`. Defaults to `non-blocking`.
+    (Optional) `fargate` - The configuration of the ECS Fargate settings. `fargate` as defined below.
+      (Optional) `event_windows` - Whether to enable ECS Fargate maintenance windows. Defaults to `false`.
+      (Optional) `fips_mode` - Whether to enable FIPS mode for Fargate. Only available in AWS GovCloud regions. Defaults to `false`.
+      (Optional) `task_retirement_wait_period` - The number of days Fargate waits before retiring a task running on a deprecated platform version. Valid values are `0`, `7`, `14`. Defaults to `7`.
+  EOF
+  type = object({
+    container_insights = optional(object({
+      mode = optional(string, "DISABLED")
+    }), {})
+    awsvpc_trunking_enabled = optional(bool, false)
+    dual_stack_ipv6_enabled = optional(bool, false)
+    default_log_driver_mode = optional(string, "non-blocking")
+    fargate = optional(object({
+      event_windows = optional(bool, false)
+      # fips_mode                   = optional(bool, false)
+      task_retirement_wait_period = optional(number, 7)
+    }), {})
+  })
+  default  = {}
+  nullable = false
+
+  validation {
+    condition     = contains(["ENABLED", "ENHANCED", "DISABLED"], var.ecs.container_insights.mode)
+    error_message = "Valid values for `ecs.container_insights.mode` are `ENABLED`, `ENHANCED`, `DISABLED`."
+  }
+
+  validation {
+    condition     = contains(["blocking", "non-blocking"], var.ecs.default_log_driver_mode)
+    error_message = "Valid values for `ecs.default_log_driver_mode` are `blocking`, `non-blocking`."
+  }
+
+  validation {
+    condition     = contains([0, 7, 14], var.ecs.fargate.task_retirement_wait_period)
+    error_message = "Valid values for `ecs.fargate.task_retirement_wait_period` are `0`, `7`, `14`."
+  }
+}
+
 variable "rds" {
   description = <<EOF
   (Optional) The configuration of RDS in the current AWS region. `rds` as defined below.
