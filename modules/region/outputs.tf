@@ -5,7 +5,7 @@ output "region" {
 
 output "id" {
   description = "The ID of the current region."
-  value       = data.aws_region.this.id
+  value       = data.aws_region.this.region
 }
 
 output "code" {
