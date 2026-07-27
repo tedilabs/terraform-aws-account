@@ -18,16 +18,6 @@
       ]
     },
     {
-      "Sid": "AllowIndividualUserToDeleteOnlyTheirOwnVirtualMFA",
-      "Effect": "Allow",
-      "Action": [
-        "iam:DeleteVirtualMFADevice"
-      ],
-      "Resource": [
-        "arn:aws:iam::*:mfa/${aws:username}"
-      ]
-    },
-    {
       "Sid": "AllowIndividualUserToManageTheirOwnMFA",
       "Effect": "Allow",
       "Action": [
