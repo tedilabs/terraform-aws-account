@@ -7,8 +7,9 @@
       "Action": [
         "iam:CreateAccessKey",
         "iam:ListAccessKeys",
-        "iam:UpdateAccessKeys",
-        "iam:DeleteAccessKey"
+        "iam:UpdateAccessKey",
+        "iam:DeleteAccessKey",
+        "iam:GetAccessKeyLastUsed"
       ],
       "Resource": [
         "arn:aws:iam::*:user/${aws:username}",
