@@ -19,7 +19,7 @@ locals {
 module "saml_provider" {
   source = "../../modules/iam-saml-identity-provider"
   # source  = "tedilabs/account/aws//modules/iam-saml-identity-provider"
-  # version = "~> 0.23.0"
+  # version = "~> 0.33.0"
 
   for_each = {
     for provider in try(local.providers, []) :

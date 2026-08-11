@@ -19,7 +19,7 @@ locals {
 module "oidc_provider" {
   source = "../../modules/iam-oidc-identity-provider"
   # source  = "tedilabs/account/aws//modules/iam-oidc-identity-provider"
-  # version = "~> 0.23.0"
+  # version = "~> 0.33.0"
 
   for_each = {
     for provider in try(local.providers, []) :
@@ -54,7 +54,7 @@ locals {
 module "role" {
   source = "../../modules/iam-role"
   # source  = "tedilabs/account/aws//modules/iam-role"
-  # version = "~> 0.23.0"
+  # version = "~> 0.33.0"
 
   for_each = {
     for role in try(local.roles, []) :
