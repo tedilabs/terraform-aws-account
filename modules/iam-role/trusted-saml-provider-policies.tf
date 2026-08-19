@@ -138,4 +138,29 @@ data "aws_iam_policy_document" "trusted_saml_provider_policies" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_session_context.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedSessionContextForSamlProvider${each.key}"
+      effect  = "Allow"
+      actions = ["sts:SetContext"]
+
+      principals {
+        type        = "Federated"
+        identifiers = ["${local.saml_provider_arn_prefix}${each.value.name}"]
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_session_context.allowed_context_providers) > 0 ? ["go"] : []
+
+        content {
+          test     = "ForAllValues:ArnLike"
+          variable = "sts:RequestContextProviders"
+          values   = var.trusted_session_context.allowed_context_providers
+        }
+      }
+    }
+  }
 }

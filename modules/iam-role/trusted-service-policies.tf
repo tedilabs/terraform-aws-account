@@ -134,4 +134,29 @@ data "aws_iam_policy_document" "trusted_service_policies" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_session_context.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedSessionContextForServices${each.key}"
+      effect  = "Allow"
+      actions = ["sts:SetContext"]
+
+      principals {
+        type        = "Service"
+        identifiers = each.value.services
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_session_context.allowed_context_providers) > 0 ? ["go"] : []
+
+        content {
+          test     = "ForAllValues:ArnLike"
+          variable = "sts:RequestContextProviders"
+          values   = var.trusted_session_context.allowed_context_providers
+        }
+      }
+    }
+  }
 }
