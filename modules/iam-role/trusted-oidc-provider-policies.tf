@@ -156,4 +156,33 @@ data "aws_iam_policy_document" "trusted_oidc_provider_policies" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_session_context.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedSessionContextForOidcProvider${each.key}"
+      effect  = "Allow"
+      actions = ["sts:SetContext"]
+
+      principals {
+        type = "Federated"
+        identifiers = [
+          contains(local.oidc_provider_common_urls, each.value.url)
+          ? each.value.url
+          : "${local.oidc_provider_arn_prefix}${each.value.url}"
+        ]
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_session_context.allowed_context_providers) > 0 ? ["go"] : []
+
+        content {
+          test     = "ForAllValues:ArnLike"
+          variable = "sts:RequestContextProviders"
+          values   = var.trusted_session_context.allowed_context_providers
+        }
+      }
+    }
+  }
 }

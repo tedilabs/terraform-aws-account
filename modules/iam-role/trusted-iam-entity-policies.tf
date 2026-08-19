@@ -154,4 +154,29 @@ data "aws_iam_policy_document" "trusted_iam_entity_policies" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = var.trusted_session_context.enabled ? ["go"] : []
+
+    content {
+      sid     = "TrustedSessionContextForIamEntities${each.key}"
+      effect  = "Allow"
+      actions = ["sts:SetContext"]
+
+      principals {
+        type        = "AWS"
+        identifiers = each.value.iam_entities
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_session_context.allowed_context_providers) > 0 ? ["go"] : []
+
+        content {
+          test     = "ForAllValues:ArnLike"
+          variable = "sts:RequestContextProviders"
+          values   = var.trusted_session_context.allowed_context_providers
+        }
+      }
+    }
+  }
 }

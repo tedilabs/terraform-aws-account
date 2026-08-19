@@ -69,6 +69,7 @@ data "aws_iam_policy_document" "assume_role" {
       "sts:AssumeRole",
       "sts:TagSession",
       "sts:SetSourceIdentity",
+      "sts:SetContext",
     ]
     resources = var.assumable_roles
   }

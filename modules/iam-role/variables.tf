@@ -69,6 +69,20 @@ variable "trusted_source_identity" {
   nullable = false
 }
 
+variable "trusted_session_context" {
+  description = <<EOF
+  (Optional) A configurations of session context in AWS STS to support trusted identity propagation. `trusted_session_context` block as defined below.
+    (Optional) `enabled` - Indicate whether you want to enable session context configuration. Defaults to `false`.
+    (Optional) `allowed_context_providers` - A set of ARNs of context providers to limit the maximum set of context providers. For example, `arn:aws:iam::aws:contextProvider/IdentityCenter`.
+  EOF
+  type = object({
+    enabled                   = optional(bool, false)
+    allowed_context_providers = optional(set(string), [])
+  })
+  default  = {}
+  nullable = false
+}
+
 variable "trusted_iam_entity_policies" {
   description = <<EOF
   (Optional) A configuration for trusted iam entity policies. Each item of `trusted_iam_entity_policies` is defined below.
