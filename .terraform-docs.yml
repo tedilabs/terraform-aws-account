@@ -1,0 +1,32 @@
+formatter: markdown table
+
+output:
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+sort:
+  enabled: true
+  by: required
+
+settings:
+  # Read .terraform.lock.hcl to extract exact version of providers.
+  lockfile: false
+  # Indentation level of headings
+  indent: 2
+  # Generate HTML anchor tag for elements
+  anchor: true
+  # Generate HTML tags (a, pre, br, …) in the output
+  html: true
+  # Escape special characters such as _, * in Markdown
+  escape: true
+  # Show default value as column
+  default: true
+  # Show required as column
+  required: true
+  # Show sensitive as column
+  sensitive: true
+  # Show type as column
+  type: true
