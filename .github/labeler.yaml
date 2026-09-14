@@ -34,6 +34,11 @@
   - any-glob-to-any-file:
     - modules/iam-saml-identity-provider/**/*
 
+":floppy_disk: iam-service-linked-role":
+- changed-files:
+  - any-glob-to-any-file:
+    - modules/iam-service-linked-role/**/*
+
 ":floppy_disk: iam-user":
 - changed-files:
   - any-glob-to-any-file:
