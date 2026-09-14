@@ -39,6 +39,7 @@ jobs:
 
       terraform_docs_enabled: true
       terraform_docs_version: latest
+      terraform_docs_config_file: .terraform-docs.yml
 
     secrets:
       terraform_token: ${{ secrets.TERRAFORM_TOKEN }}
