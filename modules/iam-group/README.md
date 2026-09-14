@@ -12,15 +12,15 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.12 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.33.0 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.12 |
 
 ## Modules
 
@@ -29,7 +29,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
 | [aws_iam_group_policies_exclusive.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policies_exclusive) | resource |
 | [aws_iam_group_policy.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy) | resource |
@@ -41,7 +41,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) Desired name for the IAM group. | `string` | n/a | yes |
 | <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | (Optional) A set of IAM roles ARNs which can be assumed by the group. | `set(string)` | `[]` | no |
 | <a name="input_exclusive_inline_policy_management_enabled"></a> [exclusive\_inline\_policy\_management\_enabled](#input\_exclusive\_inline\_policy\_management\_enabled) | (Optional) Whether to enable exclusive management for inline IAM policies of the IAM user. This includes removal of inline IAM policies which are not explicitly configured. Defaults to `false`. | `bool` | `false` | no |
@@ -53,7 +53,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN of the IAM group. |
 | <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | A set of ARNs of IAM roles which members of IAM group can assume. |
 | <a name="output_exclusive_inline_policy_management_enabled"></a> [exclusive\_inline\_policy\_management\_enabled](#output\_exclusive\_inline\_policy\_management\_enabled) | Whether exclusive inline policy management is enabled for the IAM group. |
