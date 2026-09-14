@@ -22,7 +22,8 @@ repos:
     files: ^modules/
   - id: terraform_docs
     name: (terraform) Generate docs with `terraform-docs`
-    args: ["--args=--sort-by required"]
+    args:
+    - --args=--config=.terraform-docs.yml
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v6.0.0
