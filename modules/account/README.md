@@ -19,7 +19,7 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.39 |
 | <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 1.55 |
@@ -27,9 +27,9 @@ This module creates following resources.
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.39.0 |
-| <a name="provider_awscc"></a> [awscc](#provider\_awscc) | 1.78.0 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.39 |
+| <a name="provider_awscc"></a> [awscc](#provider\_awscc) | >= 1.55 |
 
 ## Modules
 
@@ -38,7 +38,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_account_alternate_contact.billing](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
 | [aws_account_alternate_contact.operation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
 | [aws_account_alternate_contact.security](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/account_alternate_contact) | resource |
@@ -63,7 +63,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name for the AWS account. Used for the account alias. | `string` | n/a | yes |
 | <a name="input_additional_regions"></a> [additional\_regions](#input\_additional\_regions) | (Optional) A map of additional regions to enable for the account. Each key should be a region name and the value should be `true` to enable the region or `false` to disable it. By default, all regions are disabled. | `map(bool)` | `{}` | no |
 | <a name="input_billing_contact"></a> [billing\_contact](#input\_billing\_contact) | (Optional) The configuration of the billing contact for the AWS Account. `billing_contact` as defined below.<br/>    (Required) `name` - The name of the billing contact.<br/>    (Optional) `title` - The tile of the billing contact. Defaults to `Billing Manager`.<br/>    (Required) `email` - The email address of the billing contact.<br/>    (Required) `phone` - The phone number of the billing contact. | <pre>object({<br/>    name  = string<br/>    title = optional(string, "Billing Manager")<br/>    email = string<br/>    phone = string<br/>  })</pre> | `null` | no |
@@ -83,7 +83,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_additional_regions"></a> [additional\_regions](#output\_additional\_regions) | A map of additional regions enabled in the account. |
 | <a name="output_all_available_regions"></a> [all\_available\_regions](#output\_all\_available\_regions) | A set of all available regions in the account. |
 | <a name="output_billing_contact"></a> [billing\_contact](#output\_billing\_contact) | The billing contact attached to an AWS Account. |

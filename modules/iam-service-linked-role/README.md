@@ -8,32 +8,32 @@ This module creates following resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.12 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.12.0 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.12 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.12.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_service_linked_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_service_linked_role) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aws_service"></a> [aws\_service](#input\_aws\_service) | (Required) The AWS service principal to which this role is attached. For example: `elasticbeanstalk.amazonaws.com`. | `string` | n/a | yes |
 | <a name="input_custom_suffix"></a> [custom\_suffix](#input\_custom\_suffix) | (Optional) Additional string appended to the role name. Not all AWS services support custom suffixes. | `string` | `""` | no |
 | <a name="input_description"></a> [description](#input\_description) | (Optional) The description of the role. Defaults to `Managed by Terraform.`. | `string` | `"Managed by Terraform."` | no |
@@ -44,7 +44,7 @@ This module creates following resources.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS for this role. |
 | <a name="output_aws_service"></a> [aws\_service](#output\_aws\_service) | The AWS service principal to which this role is attached. |
 | <a name="output_created_at"></a> [created\_at](#output\_created\_at) | The creation date of the IAM role. |

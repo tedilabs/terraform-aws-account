@@ -21,26 +21,26 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.12 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.33.0 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.12 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.12.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_instance_profile.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) | resource |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policies_exclusive.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policies_exclusive) | resource |
@@ -60,7 +60,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) Desired name for the IAM role. | `string` | n/a | yes |
 | <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | (Optional) A set of IAM roles ARNs which can be assumed by the role. | `set(string)` | `[]` | no |
 | <a name="input_conditions"></a> [conditions](#input\_conditions) | (Required) A list of required conditions to assume the role. Each item of `conditions` is defined below.<br/>    (Required) `key` - The key to match a condition for when a policy is in effect.<br/>    (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.<br/>    (Required) `values` - A list of allowed values of the key to match a condition with condition operator. | <pre>list(object({<br/>    key       = string<br/>    condition = string<br/>    values    = list(string)<br/>  }))</pre> | `[]` | no |
@@ -88,7 +88,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN of the IAM role. |
 | <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | A set of ARNs of IAM roles which members of IAM role can assume. |
 | <a name="output_created_at"></a> [created\_at](#output\_created\_at) | Creation date of the IAM role. |

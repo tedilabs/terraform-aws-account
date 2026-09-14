@@ -26,26 +26,26 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.12 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.33.0 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.12 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.12.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_access_key.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_service_specific_credential.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_service_specific_credential) | resource |
 | [aws_iam_signing_certificate.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_signing_certificate) | resource |
@@ -63,7 +63,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_name"></a> [name](#input\_name) | (Required) Desired name for the IAM user. | `string` | n/a | yes |
 | <a name="input_access_keys"></a> [access\_keys](#input\_access\_keys) | (Optional) A list of Access Keys to associate with the IAM user. This is a set of credentials that allow API requests to be made as an IAM user. The IAM User can have a maximum of two Access Keys (active or inactive) at a time. Each item of `access_keys` as defined below.<br/>    (Optional) `enabled` - Whether to activate the Access Key. Defaults to `true`. | <pre>list(object({<br/>    enabled = optional(bool, true)<br/>  }))</pre> | `[]` | no |
 | <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | (Optional) A set of IAM roles ARNs which can be assumed by the user. | `set(string)` | `[]` | no |
@@ -87,7 +87,7 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_access_keys"></a> [access\_keys](#output\_access\_keys) | The list of IAM Access Keys for the user. |
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN of the IAM user. |
 | <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | A set of ARNs of IAM roles which IAM user can assume. |
