@@ -29,7 +29,6 @@ jobs:
         examples/**
       paths_max_depth: "2"
 
-      terraform_version: latest
       terraform_host: app.terraform.io
 
       fmt_enabled: true
@@ -37,12 +36,10 @@ jobs:
       validate_enabled: true
 
       tflint_enabled: true
-      tflint_version: latest
       tflint_config_file: .tflint.hcl
       tflint_minimum_failure_severity: warning
 
       terraform_docs_enabled: true
-      terraform_docs_version: latest
       terraform_docs_config_file: .terraform-docs.yml
 
     secrets:
