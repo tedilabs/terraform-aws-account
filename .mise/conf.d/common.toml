@@ -1,0 +1,6 @@
+# Managed by Terraform in tedilabs/github. Override a version or add tools in `mise.toml`, which takes precedence.
+
+[tools]
+terraform = "1.16.3"
+tflint = "0.64.0"
+terraform-docs = "0.24.0"
