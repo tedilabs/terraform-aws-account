@@ -15,6 +15,7 @@ variable "description" {
   description = "(Optional) The description of the role. Defaults to `Managed by Terraform.`."
   type        = string
   default     = "Managed by Terraform."
+  nullable    = false
 }
 
 variable "tags" {
