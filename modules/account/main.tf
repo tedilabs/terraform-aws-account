@@ -1,3 +1,13 @@
+locals {
+  metadata = {
+    package = "terraform-aws-account"
+    version = trimspace(file("${path.module}/../../VERSION"))
+    module  = basename(path.module)
+    name    = var.name
+  }
+}
+
+
 data "aws_caller_identity" "this" {}
 
 
