@@ -42,10 +42,15 @@ jobs:
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
-  welcome:
-    name: Welcome for First Pull Request
-    uses: tedilabs/github-actions/.github/workflows/github.issue.welcome.yaml@main
-    if: ${{ github.event_name == 'pull_request_target' && github.event.action == 'opened' }}
-
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+  # welcome:
+  #   name: Welcome for First Pull Request
+  #   uses: tedilabs/github-actions/.github/workflows/github.issue.welcome.yaml@main
+  #   if: ${{ github.event_name == 'pull_request_target' && github.event.action == 'opened' }}
+  #
+  #   with:
+  #     pr_message: |
+  #       ### :wave: 이 저장소에 첫 풀 리퀘스트를 보내주셨네요!
+  #
+  #       기여해 주셔서 감사합니다! 검토하는 데 약간의 시간이 필요할 수 있습니다. 😄
+  #   secrets:
+  #     token: ${{ secrets.GITHUB_TOKEN }}
