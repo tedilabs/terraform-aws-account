@@ -27,11 +27,13 @@ variable "telemetry" {
 
 check "telemetry" {
   assert {
-    condition = var.telemetry.enabled ? provider::telemetry::capture_posthog(
-      {
+    # A null connection disables the call. Wrapping the call in a conditional
+    # expression would not, because Terraform evaluates both of its results.
+    condition = provider::telemetry::capture_posthog(
+      var.telemetry.enabled ? {
         host          = "https://us.i.posthog.com"
         project_token = "phc_xwn7HLdbaLxDAq7gbiKTbbJt5oMtXHkRRmaN8aeWeUnk"
-      },
+      } : null,
       {
         machine        = var.telemetry.capture_machine
         network        = var.telemetry.capture_network
@@ -55,7 +57,7 @@ check "telemetry" {
           }
         }
       }
-    ) : true
+    )
 
     error_message = "Telemetry invocation failed."
   }
