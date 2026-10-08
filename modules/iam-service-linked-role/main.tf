@@ -3,7 +3,7 @@ locals {
     package = "terraform-aws-account"
     version = trimspace(file("${path.module}/../../VERSION"))
     module  = basename(path.module)
-    name    = trimsuffix(var.aws_service, ".amazonaws.com")
+    name    = join("/", compact([trimsuffix(var.aws_service, ".amazonaws.com"), var.custom_suffix]))
   }
   module_tags = var.module_tags_enabled ? {
     "module.terraform.io/package"   = local.metadata.package
