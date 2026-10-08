@@ -10,5 +10,9 @@ terraform {
       source  = "hashicorp/tls"
       version = ">= 4.1"
     }
+    telemetry = {
+      source  = "tedilabs/telemetry"
+      version = ">= 0.1.1"
+    }
   }
 }
