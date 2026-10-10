@@ -1,0 +1,44 @@
+name: GitHub - Release
+
+
+on:
+  push:
+    branches:
+    - main
+
+  workflow_dispatch: {}
+
+
+permissions: {}
+
+
+concurrency:
+  group: github-release
+  cancel-in-progress: false
+
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+
+    steps:
+    # A GitHub App token, unlike `GITHUB_TOKEN`, lets the release pull request run CI and the tags trigger other workflows.
+    # See https://github.com/tedilabs/github-actions/blob/main/docs/release-github-app.md
+    - name: Generate GitHub App Token
+      id: release-github-token
+      uses: actions/create-github-app-token@v3
+      with:
+        # `client-id` replaces `app-id` in v3, but actionlint does not know it yet.
+        app-id: ${{ secrets.RELEASE_GITHUB_APP_ID }}
+        private-key: ${{ secrets.RELEASE_GITHUB_APP_PRIVATE_KEY }}
+        permission-contents: write
+        permission-issues: write
+        permission-pull-requests: write
+
+    - name: Release Please
+      uses: googleapis/release-please-action@v5
+      with:
+        token: ${{ steps.release-github-token.outputs.token }}
+        config-file: release-please-config.json
+        manifest-file: .release-please-manifest.json
