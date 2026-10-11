@@ -1,0 +1,32 @@
+name: Release
+
+
+on:
+  push:
+    branches:
+    - main
+
+  workflow_dispatch: {}
+
+
+permissions: {}
+
+
+concurrency:
+  group: github-release
+  cancel-in-progress: false
+
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+
+    steps:
+    # A GitHub App token, unlike `GITHUB_TOKEN`, lets the release pull request run CI and the tags trigger other workflows.
+    # See https://github.com/tedilabs/github-actions/blob/main/docs/release-github-app.md
+    - name: Release Please
+      uses: tedilabs/github-actions/.github/actions/github.release-please@main
+      with:
+        github_app_client_id: ${{ secrets.RELEASE_GITHUB_APP_CLIENT_ID }}
+        github_app_private_key: ${{ secrets.RELEASE_GITHUB_APP_PRIVATE_KEY }}
