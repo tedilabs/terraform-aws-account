@@ -38,8 +38,8 @@ This module creates following resources.
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
-| <a name="module_cloudwatch_oam_sink"></a> [cloudwatch\_oam\_sink](#module\_cloudwatch\_oam\_sink) | tedilabs/observability/aws//modules/cloudwatch-oam-sink | ~> 0.2.0 |
-| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.12.0 |
+| <a name="module_cloudwatch_oam_sink"></a> [cloudwatch\_oam\_sink](#module\_cloudwatch\_oam\_sink) | tedilabs/observability/aws//modules/cloudwatch-oam-sink | ~> 0.3.0 |
+| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | tedilabs/misc/aws//modules/resource-group | ~> 0.13.0 |
 
 ## Resources
 
