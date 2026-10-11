@@ -44,4 +44,8 @@ module "iam_policy" {
     local.module_tags,
     var.tags,
   )
+
+  telemetry = {
+    enabled = false
+  }
 }

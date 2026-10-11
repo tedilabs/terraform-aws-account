@@ -12,7 +12,7 @@ locals {
 
 module "resource_group" {
   source  = "tedilabs/misc/aws//modules/resource-group"
-  version = "~> 0.12.0"
+  version = "~> 0.13.0"
 
   count = (var.resource_group.enabled && var.module_tags_enabled) ? 1 : 0
 
@@ -30,4 +30,8 @@ module "resource_group" {
     local.module_tags,
     var.tags,
   )
+
+  telemetry = {
+    enabled = false
+  }
 }
