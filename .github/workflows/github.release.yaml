@@ -29,8 +29,8 @@ jobs:
       id: release-github-token
       uses: actions/create-github-app-token@v3
       with:
-        # `client-id` replaces `app-id` in v3, but actionlint does not know it yet.
-        app-id: ${{ secrets.RELEASE_GITHUB_APP_ID }}
+        # `client-id` replaces the deprecated `app-id` and also accepts the numeric App ID.
+        client-id: ${{ secrets.RELEASE_GITHUB_APP_ID }}
         private-key: ${{ secrets.RELEASE_GITHUB_APP_PRIVATE_KEY }}
         permission-contents: write
         permission-issues: write
