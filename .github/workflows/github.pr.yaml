@@ -48,6 +48,7 @@ jobs:
     if: ${{ github.event_name == 'pull_request_target' && github.event.action == 'opened' }}
 
     permissions:
+      issues: read
       pull-requests: write
 
     with:
