@@ -22,6 +22,17 @@
 - color: "1d76db"
   description: "Any dependency updates, housekeeping, or maintenance work."
   name: ":pencil2: maintenance"
+- color: "1d76db"
+  description: "A pull request that prepares a new release."
+  name: ":pencil2: release"
+
+# Release Status
+- color: "5319e7"
+  description: "A release pull request awaiting release creation."
+  name: ":rocket: pending"
+- color: "5319e7"
+  description: "The releases associated with this pull request have been created."
+  name: ":rocket: released"
 
 # Highlight
 - color: "0e8a16"
