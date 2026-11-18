@@ -57,6 +57,14 @@ variable "ebs" {
 variable "ec2" {
   description = <<EOF
   (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.
+    (Optional) `allowed_amis` - The configuration of Allowed AMIs, which controls the discovery and use of AMIs in the current AWS region. `allowed_amis` as defined below.
+      (Optional) `mode` - The mode of Allowed AMIs. Valid values are `enabled`, `audit-mode`, `disabled`. In `audit-mode`, the criteria are evaluated to report whether AMIs are allowed, but not enforced. Defaults to `disabled`.
+      (Optional) `criteria` - A list of criteria to define the allowed AMIs. Not used when `mode` is `disabled`. An AMI is allowed if it matches any of the criteria, and it must match all the conditions in a criterion. Up to 10 criteria can be configured. Each item of `criteria` as defined below.
+        (Optional) `providers` - A set of AMI providers to allow. Valid values are `amazon`, `aws-marketplace`, `aws-backup-vault`, `none`, or a 12-digit AWS account ID. Up to 200 providers can be configured.
+        (Optional) `names` - A set of AMI name patterns to allow. Wildcards `*` and `?` are supported. Up to 50 names can be configured.
+        (Optional) `marketplace_product_codes` - A set of AWS Marketplace product codes to allow. Up to 50 product codes can be configured.
+        (Optional) `maximum_days_since_created` - The maximum number of days that have elapsed since the AMI was created.
+        (Optional) `maximum_days_since_deprecated` - The maximum number of days that have elapsed since the AMI was deprecated. Set to `0` to allow no deprecated AMIs.
     (Optional) `ami_public_access_mode` - The mode of block public access for AMIs at the account level in the configured AWS Region. Valid values are `block-new-sharing`, `unblocked`. Defaults to `block-new-sharing`.
     (Optional) `default_credit_specifications` - The configuration of the default credit options for CPU usage of burstable performance instances in the current AWS region. Each instance family is configured with one of `standard`, `unlimited`. `default_credit_specifications` as defined below.
       (Optional) `t2` - The default credit option for the `t2` instance family. Defaults to `standard`.
@@ -72,6 +80,16 @@ variable "ec2" {
     (Optional) `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. Defaults to `false`.
   EOF
   type = object({
+    allowed_amis = optional(object({
+      mode = optional(string, "disabled")
+      criteria = optional(list(object({
+        providers                     = optional(set(string), [])
+        names                         = optional(set(string), [])
+        marketplace_product_codes     = optional(set(string), [])
+        maximum_days_since_created    = optional(number)
+        maximum_days_since_deprecated = optional(number)
+      })), [])
+    }), {})
     ami_public_access_mode = optional(string, "block-new-sharing")
     default_credit_specifications = optional(object({
       t2  = optional(string, "standard")
@@ -91,6 +109,10 @@ variable "ec2" {
   default  = {}
   nullable = false
 
+  validation {
+    condition     = contains(["enabled", "audit-mode", "disabled"], var.ec2.allowed_amis.mode)
+    error_message = "Valid values for `ec2.allowed_amis.mode` are `enabled`, `audit-mode`, `disabled`."
+  }
   validation {
     condition     = contains(["block-new-sharing", "unblocked"], var.ec2.ami_public_access_mode)
     error_message = "Valid values for `ami_public_access_mode` are `block-new-sharing`, `unblocked`."

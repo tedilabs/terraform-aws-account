@@ -50,12 +50,17 @@ output "ebs" {
 output "ec2" {
   description = <<EOF
   The region-level configurations of EC2 service.
+    `allowed_amis` - The configuration of Allowed AMIs for the current AWS region.
     `ami_public_access_mode` - The mode of block public access for AMIs at the account level in the current AWS region.
     `default_credit_specifications` - A map of the default credit options for CPU usage of burstable performance instances in the current AWS region. The key is the instance family, the value is the credit option.
     `instance_metadata_defaults` - The configuration of the regional instance metadata default settings.
     `serial_console_enabled` - Whether serial console access is enabled for the current AWS region.
   EOF
   value = {
+    allowed_amis = {
+      mode     = coalesce(one(aws_ec2_allowed_images_settings.this[*].state), "disabled")
+      criteria = var.ec2.allowed_amis.criteria
+    }
     ami_public_access_mode = aws_ec2_image_block_public_access.this.state
     default_credit_specifications = {
       for family, specification in aws_ec2_default_credit_specification.this :
