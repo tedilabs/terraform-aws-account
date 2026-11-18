@@ -10,6 +10,24 @@ resource "aws_ec2_image_block_public_access" "this" {
 
 
 ###################################################
+# Default Credit Specification for EC2
+###################################################
+
+# INFO: Not supported attributes
+# - `timeouts`
+# INFO: The default credit specification for an instance family can be modified
+# only once in a rolling 5-minute period, and up to four times in a rolling 24-hour period.
+resource "aws_ec2_default_credit_specification" "this" {
+  for_each = var.ec2.default_credit_specifications
+
+  region = var.region
+
+  instance_family = each.key
+  cpu_credits     = each.value
+}
+
+
+###################################################
 # Instance Metadata Defaults for EC2
 ###################################################
 

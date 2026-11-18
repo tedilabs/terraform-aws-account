@@ -51,10 +51,15 @@ output "ec2" {
   description = <<EOF
   The region-level configurations of EC2 service.
     `ami_public_access_enabled` - Whether to allow or block public access for AMIs at the account level to prevent the public sharing of your AMIs in this region.
+    `default_credit_specifications` - A map of the default credit options for CPU usage of burstable performance instances managed in the current AWS region. The key is the instance family, the value is the credit option.
     `serial_console_enabled` - Whether serial console access is enabled for the current AWS region.
   EOF
   value = {
-    ami_public_access_mode     = aws_ec2_image_block_public_access.this.state
+    ami_public_access_mode = aws_ec2_image_block_public_access.this.state
+    default_credit_specifications = {
+      for family, specification in aws_ec2_default_credit_specification.this :
+      family => specification.cpu_credits
+    }
     instance_metadata_defaults = var.ec2.instance_metadata_defaults
     serial_console_enabled     = aws_ec2_serial_console_access.this.enabled
   }

@@ -58,6 +58,7 @@ variable "ec2" {
   description = <<EOF
   (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.
     (Optional) `ami_public_access_mode` - The mode of block public access for AMIs at the account level in the configured AWS Region. Valid values are `block-new-sharing`, `unblocked`. Defaults to `block-new-sharing`.
+    (Optional) `default_credit_specifications` - A map of the default credit options for CPU usage of burstable performance instances to manage for the current AWS region. The key is the instance family, the value is the credit option. Valid values for the key are `t2`, `t3`, `t3a`, `t4g`, `t8i`. Valid values for the value are `standard`, `unlimited`. The instance families not in the map are not managed and keep their current setting (AWS defaults are `standard` for `t2`, `unlimited` for the others). Defaults to `{}`.
     (Optional) `instance_metadata_defaults` - The configuration of the regional instance metadata default settings. `instance_metadata_defaults` as defined below.
       (Optional) `http_enabled` - Whether to enable or disable the HTTP metadata endpoint on your instances. Defaults to `null` (No preference).
       (Optional) `http_token_required` - Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Defaults to `false`. Defaults to `null` (No preference).
@@ -66,7 +67,8 @@ variable "ec2" {
     (Optional) `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. Defaults to `false`.
   EOF
   type = object({
-    ami_public_access_mode = optional(string, "block-new-sharing")
+    ami_public_access_mode        = optional(string, "block-new-sharing")
+    default_credit_specifications = optional(map(string), {})
     instance_metadata_defaults = optional(object({
       http_enabled                = optional(bool)
       http_token_required         = optional(bool)
@@ -81,6 +83,20 @@ variable "ec2" {
   validation {
     condition     = contains(["block-new-sharing", "unblocked"], var.ec2.ami_public_access_mode)
     error_message = "Valid values for `ami_public_access_mode` are `block-new-sharing`, `unblocked`."
+  }
+  validation {
+    condition = alltrue([
+      for family, cpu_credits in var.ec2.default_credit_specifications :
+      contains(["t2", "t3", "t3a", "t4g", "t8i"], family)
+    ])
+    error_message = "Valid values for each key of `ec2.default_credit_specifications` are `t2`, `t3`, `t3a`, `t4g`, `t8i`."
+  }
+  validation {
+    condition = alltrue([
+      for family, cpu_credits in var.ec2.default_credit_specifications :
+      contains(["standard", "unlimited"], cpu_credits)
+    ])
+    error_message = "Valid values for each value of `ec2.default_credit_specifications` are `standard`, `unlimited`."
   }
 }
 
