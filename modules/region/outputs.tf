@@ -52,6 +52,7 @@ output "ec2" {
   The region-level configurations of EC2 service.
     `ami_public_access_mode` - The mode of block public access for AMIs at the account level in the current AWS region.
     `default_credit_specifications` - A map of the default credit options for CPU usage of burstable performance instances in the current AWS region. The key is the instance family, the value is the credit option.
+    `instance_metadata_defaults` - The configuration of the regional instance metadata default settings.
     `serial_console_enabled` - Whether serial console access is enabled for the current AWS region.
   EOF
   value = {
