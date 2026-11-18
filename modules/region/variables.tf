@@ -58,6 +58,12 @@ variable "ec2" {
   description = <<EOF
   (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.
     (Optional) `ami_public_access_mode` - The mode of block public access for AMIs at the account level in the configured AWS Region. Valid values are `block-new-sharing`, `unblocked`. Defaults to `block-new-sharing`.
+    (Optional) `default_credit_specifications` - The configuration of the default credit options for CPU usage of burstable performance instances in the current AWS region. Each instance family is configured with one of `standard`, `unlimited`. `default_credit_specifications` as defined below.
+      (Optional) `t2` - The default credit option for the `t2` instance family. Defaults to `standard`.
+      (Optional) `t3` - The default credit option for the `t3` instance family. Defaults to `unlimited`.
+      (Optional) `t3a` - The default credit option for the `t3a` instance family. Defaults to `unlimited`.
+      (Optional) `t4g` - The default credit option for the `t4g` instance family. Defaults to `unlimited`.
+      (Optional) `t8i` - The default credit option for the `t8i` instance family. Defaults to `unlimited`.
     (Optional) `instance_metadata_defaults` - The configuration of the regional instance metadata default settings. `instance_metadata_defaults` as defined below.
       (Optional) `http_enabled` - Whether to enable or disable the HTTP metadata endpoint on your instances. Defaults to `null` (No preference).
       (Optional) `http_token_required` - Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Defaults to `false`. Defaults to `null` (No preference).
@@ -67,6 +73,13 @@ variable "ec2" {
   EOF
   type = object({
     ami_public_access_mode = optional(string, "block-new-sharing")
+    default_credit_specifications = optional(object({
+      t2  = optional(string, "standard")
+      t3  = optional(string, "unlimited")
+      t3a = optional(string, "unlimited")
+      t4g = optional(string, "unlimited")
+      t8i = optional(string, "unlimited")
+    }), {})
     instance_metadata_defaults = optional(object({
       http_enabled                = optional(bool)
       http_token_required         = optional(bool)
@@ -81,6 +94,13 @@ variable "ec2" {
   validation {
     condition     = contains(["block-new-sharing", "unblocked"], var.ec2.ami_public_access_mode)
     error_message = "Valid values for `ami_public_access_mode` are `block-new-sharing`, `unblocked`."
+  }
+  validation {
+    condition = alltrue([
+      for family, cpu_credits in var.ec2.default_credit_specifications :
+      contains(["standard", "unlimited"], cpu_credits)
+    ])
+    error_message = "Valid values for each instance family of `ec2.default_credit_specifications` are `standard`, `unlimited`."
   }
 }
 
