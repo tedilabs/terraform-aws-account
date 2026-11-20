@@ -1,3 +1,61 @@
+locals {
+  ec2_allowed_amis_mode = {
+    "ENABLED"  = "enabled"
+    "AUDIT"    = "audit-mode"
+    "DISABLED" = "disabled"
+  }
+}
+
+
+###################################################
+# Allowed AMIs for EC2
+###################################################
+
+resource "aws_ec2_allowed_images_settings" "this" {
+  count = var.ec2.allowed_amis.mode != "DISABLED" ? 1 : 0
+
+  region = var.region
+
+  state = local.ec2_allowed_amis_mode[var.ec2.allowed_amis.mode]
+
+  dynamic "image_criterion" {
+    for_each = var.ec2.allowed_amis.criteria
+    iterator = criterion
+
+    content {
+      image_providers = (length(criterion.value.providers) > 0
+        ? criterion.value.providers
+        : null
+      )
+      image_names = (length(criterion.value.names) > 0
+        ? criterion.value.names
+        : null
+      )
+      marketplace_product_codes = (length(criterion.value.marketplace_product_codes) > 0
+        ? criterion.value.marketplace_product_codes
+        : null
+      )
+
+      dynamic "creation_date_condition" {
+        for_each = criterion.value.maximum_days_since_created != null ? ["go"] : []
+
+        content {
+          maximum_days_since_created = criterion.value.maximum_days_since_created
+        }
+      }
+
+      dynamic "deprecation_time_condition" {
+        for_each = criterion.value.maximum_days_since_deprecated != null ? ["go"] : []
+
+        content {
+          maximum_days_since_deprecated = criterion.value.maximum_days_since_deprecated
+        }
+      }
+    }
+  }
+}
+
+
 ###################################################
 # Public Access Block for EC2 AMI
 ###################################################
