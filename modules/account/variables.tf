@@ -226,8 +226,7 @@ variable "support_app" {
       (Optional) `name` - The name of the Slack channel configuration.
       (Required) `workspace` - The team ID of the Slack workspace, which uniquely identifies a workspace.
       (Required) `channel` - The ID of the Slack channel.
-      (Optional) `permission` - The permission of the default IAM role which created by this module. Valid values are `READ_ONLY` and `FULL_ACCESS`. Defaults to `FULL_ACCESS`.
-      (Optional) `channel_role` - The ARN (Amazon Resource Name) of the IAM role associated with the Support App to post messages to the Slack channel. Only required to override default role which created with `permission`.
+      (Required) `channel_role` - The ARN (Amazon Resource Name) of the IAM role associated with the Support App to post messages to the Slack channel.
       (Optional) `notification_case_severity` - The severity level of the support case that a customer wants to get notified for. Valid values are `ALL`, `HIGH`, and `NONE`. Defaults to `ALL`.
       (Optional) `notification_on_add_correspondence_to_case` - Whether to notify when a correspondence is added to a case. Defaults to `true`.
       (Optional) `notification_on_create_or_reopen_case` - Whether to notify when a case is created or reopened. Defaults to `true`.
@@ -242,7 +241,7 @@ variable "support_app" {
       channel   = string
 
       # permission   = optional(string, "FULL_ACCESS")
-      channel_role = optional(string)
+      channel_role = string
 
       notification_case_severity                 = optional(string, "ALL")
       notification_on_add_correspondence_to_case = optional(bool, true)
