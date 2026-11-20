@@ -110,9 +110,19 @@ data "aws_iam_policy_document" "trusted_oidc_provider_policies" {
         for_each = var.trusted_session_tagging.allowed_tags
 
         content {
-          test     = "StringLike"
+          test     = "StringLikeIfExists"
           variable = "aws:RequestTag/${condition.key}"
-          values   = condition.value.values
+          values   = condition.value
+        }
+      }
+
+      dynamic "condition" {
+        for_each = length(var.trusted_session_tagging.allowed_tags) > 0 ? ["go"] : []
+
+        content {
+          test     = "ForAllValues:StringEquals"
+          variable = "aws:TagKeys"
+          values   = keys(var.trusted_session_tagging.allowed_tags)
         }
       }
 

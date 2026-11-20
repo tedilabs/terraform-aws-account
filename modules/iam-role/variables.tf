@@ -43,7 +43,7 @@ variable "trusted_session_tagging" {
   description = <<EOF
   (Optional) A configurations of session tags in AWS STS. `trusted_session_tagging` block as defined below.
     (Optional) `enabled` - Indicate whether you want to enable session tagging. Defaults to `true`.
-    (Optional) `allowed_tags` - A map of tag key/values pairs to limit the tag keys and values that can be used as session tags.
+    (Optional) `allowed_tags` - A map of tag key/values pairs to limit the tag keys and values that can be used as session tags. Each key is a tag key and each value is a set of allowed values for the tag, which supports wildcards. If provided, only the listed tag keys can be passed as session tags. Each listed tag is optional, but its value must match one of the allowed values when passed.
     (Optional) `allowed_transitive_tag_keys` - A set of tag keys to limit the maximum set of transitive tags.
   EOF
   type = object({
