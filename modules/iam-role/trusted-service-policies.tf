@@ -92,7 +92,7 @@ data "aws_iam_policy_document" "trusted_service_policies" {
         for_each = var.trusted_session_tagging.allowed_tags
 
         content {
-          test     = "StringLike"
+          test     = "StringLikeIfExists"
           variable = "aws:RequestTag/${condition.key}"
           values   = condition.value
         }
