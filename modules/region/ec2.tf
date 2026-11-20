@@ -1,13 +1,22 @@
+locals {
+  ec2_allowed_amis_mode = {
+    "ENABLED"  = "enabled"
+    "AUDIT"    = "audit-mode"
+    "DISABLED" = "disabled"
+  }
+}
+
+
 ###################################################
 # Allowed AMIs for EC2
 ###################################################
 
 resource "aws_ec2_allowed_images_settings" "this" {
-  count = var.ec2.allowed_amis.mode != "disabled" ? 1 : 0
+  count = var.ec2.allowed_amis.mode != "DISABLED" ? 1 : 0
 
   region = var.region
 
-  state = var.ec2.allowed_amis.mode
+  state = local.ec2_allowed_amis_mode[var.ec2.allowed_amis.mode]
 
   dynamic "image_criterion" {
     for_each = var.ec2.allowed_amis.criteria

@@ -58,8 +58,8 @@ variable "ec2" {
   description = <<EOF
   (Optional) The configuration of EC2 in the current AWS region. `ec2` as defined below.
     (Optional) `allowed_amis` - The configuration of Allowed AMIs, which controls the discovery and use of AMIs in the current AWS region. `allowed_amis` as defined below.
-      (Optional) `mode` - The mode of Allowed AMIs. Valid values are `enabled`, `audit-mode`, `disabled`. In `audit-mode`, the criteria are evaluated to report whether AMIs are allowed, but not enforced. Defaults to `disabled`.
-      (Optional) `criteria` - A list of criteria to define the allowed AMIs. Not used when `mode` is `disabled`. An AMI is allowed if it matches any of the criteria, and it must match all the conditions in a criterion. Up to 10 criteria can be configured. Each item of `criteria` as defined below.
+      (Optional) `mode` - The mode of Allowed AMIs. Valid values are `ENABLED`, `AUDIT`, `DISABLED`. In `AUDIT` mode, the criteria are evaluated to report whether AMIs are allowed, but not enforced. Defaults to `DISABLED`.
+      (Optional) `criteria` - A list of criteria to define the allowed AMIs. Not used when `mode` is `DISABLED`. An AMI is allowed if it matches any of the criteria, and it must match all the conditions in a criterion. Up to 10 criteria can be configured. Each item of `criteria` as defined below.
         (Optional) `providers` - A set of AMI providers to allow. Valid values are `amazon`, `aws-marketplace`, `aws-backup-vault`, `none`, or a 12-digit AWS account ID. Up to 200 providers can be configured.
         (Optional) `names` - A set of AMI name patterns to allow. Wildcards `*` and `?` are supported. Up to 50 names can be configured.
         (Optional) `marketplace_product_codes` - A set of AWS Marketplace product codes to allow. Up to 50 product codes can be configured.
@@ -81,7 +81,7 @@ variable "ec2" {
   EOF
   type = object({
     allowed_amis = optional(object({
-      mode = optional(string, "disabled")
+      mode = optional(string, "DISABLED")
       criteria = optional(list(object({
         providers                     = optional(set(string), [])
         names                         = optional(set(string), [])
@@ -110,8 +110,8 @@ variable "ec2" {
   nullable = false
 
   validation {
-    condition     = contains(["enabled", "audit-mode", "disabled"], var.ec2.allowed_amis.mode)
-    error_message = "Valid values for `ec2.allowed_amis.mode` are `enabled`, `audit-mode`, `disabled`."
+    condition     = contains(["ENABLED", "AUDIT", "DISABLED"], var.ec2.allowed_amis.mode)
+    error_message = "Valid values for `ec2.allowed_amis.mode` are `ENABLED`, `AUDIT`, `DISABLED`."
   }
   validation {
     condition     = contains(["block-new-sharing", "unblocked"], var.ec2.ami_public_access_mode)

@@ -58,7 +58,10 @@ output "ec2" {
   EOF
   value = {
     allowed_amis = {
-      mode     = coalesce(one(aws_ec2_allowed_images_settings.this[*].state), "disabled")
+      mode = {
+        for k, v in local.ec2_allowed_amis_mode :
+        v => k
+      }[coalesce(one(aws_ec2_allowed_images_settings.this[*].state), "disabled")]
       criteria = var.ec2.allowed_amis.criteria
     }
     ami_public_access_mode = aws_ec2_image_block_public_access.this.state
