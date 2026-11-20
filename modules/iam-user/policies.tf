@@ -32,6 +32,9 @@ resource "aws_iam_user_policy" "inline" {
 resource "aws_iam_user_policies_exclusive" "this" {
   count = var.exclusive_inline_policy_management_enabled ? 1 : 0
 
-  user_name    = aws_iam_user.this.name
-  policy_names = keys(var.inline_policies)
+  user_name = aws_iam_user.this.name
+  policy_names = concat(
+    keys(var.inline_policies),
+    length(var.assumable_roles) > 0 ? ["assume-role"] : [],
+  )
 }
