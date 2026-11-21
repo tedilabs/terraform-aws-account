@@ -120,8 +120,8 @@ variable "signing_certificates" {
     (Required) `certificate` - The contents of the signing certificate in PEM encoded format.
   EOF
   type = list(object({
-    enabled          = optional(bool, true)
-    certificate_body = string
+    enabled     = optional(bool, true)
+    certificate = string
   }))
   default  = []
   nullable = false
