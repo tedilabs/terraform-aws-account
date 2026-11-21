@@ -10,7 +10,7 @@ output "id" {
 
 output "code" {
   description = "The short code of the current region."
-  value       = local.region_codes[data.aws_region.this.id]
+  value       = local.region_codes[local.region]
 }
 
 output "name" {
