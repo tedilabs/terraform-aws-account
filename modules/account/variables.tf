@@ -223,7 +223,7 @@ variable "support_app" {
     (Optional) `account_alias` - An account alias associated with a customer's account.
     (Optional) `slack_workspaces` - A set of team ID for each Slack workspace, which uniquely identifies a workspace.
     (Optional) `slack_channel_configurations` - A list of configurations for each Slack channels. Each block of `slack_channel_configurations` as defined below.
-      (Optional) `name` - The name of the Slack channel configuration.
+      (Required) `name` - The name of the Slack channel configuration.
       (Required) `workspace` - The team ID of the Slack workspace, which uniquely identifies a workspace.
       (Required) `channel` - The ID of the Slack channel.
       (Optional) `permission` - The permission of the default IAM role which created by this module. Valid values are `READ_ONLY` and `FULL_ACCESS`. Defaults to `FULL_ACCESS`.
@@ -237,7 +237,7 @@ variable "support_app" {
     account_alias    = optional(string)
     slack_workspaces = optional(set(string), [])
     slack_channel_configurations = optional(list(object({
-      name      = optional(string)
+      name      = string
       workspace = string
       channel   = string
 
