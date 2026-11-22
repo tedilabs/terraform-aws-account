@@ -98,11 +98,11 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 | <a name="output_exclusive_policy_management_enabled"></a> [exclusive\_policy\_management\_enabled](#output\_exclusive\_policy\_management\_enabled) | Whether exclusive policy management is enabled for the IAM user. |
 | <a name="output_groups"></a> [groups](#output\_groups) | A set of IAM Groups which the user is a member of. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the IAM user. |
-| <a name="output_inline_policies"></a> [inline\_policies](#output\_inline\_policies) | A set of names of inline IAM polices which are attached to IAM user. |
+| <a name="output_inline_policies"></a> [inline\_policies](#output\_inline\_policies) | A set of names of inline IAM policies which are attached to IAM user. |
 | <a name="output_name"></a> [name](#output\_name) | The user's name. |
 | <a name="output_path"></a> [path](#output\_path) | The path of the IAM user. |
 | <a name="output_pgp_key"></a> [pgp\_key](#output\_pgp\_key) | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted). |
-| <a name="output_policies"></a> [policies](#output\_policies) | A set of ARNs of IAM policies which are atached to IAM user. |
+| <a name="output_policies"></a> [policies](#output\_policies) | A set of ARNs of IAM policies which are attached to IAM user. |
 | <a name="output_resource_group"></a> [resource\_group](#output\_resource\_group) | The resource group created to manage resources in this module. |
 | <a name="output_service_credentials"></a> [service\_credentials](#output\_service\_credentials) | The list of service specific credentials for the user. |
 | <a name="output_signing_certificates"></a> [signing\_certificates](#output\_signing\_certificates) | The list of X.509 signing certificates for the user. |

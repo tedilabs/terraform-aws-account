@@ -115,7 +115,7 @@ resource "aws_ec2_instance_metadata_defaults" "this" {
 
 
 ###################################################
-# Serial Consol Access for EC2
+# Serial Console Access for EC2
 ###################################################
 
 resource "aws_ec2_serial_console_access" "this" {

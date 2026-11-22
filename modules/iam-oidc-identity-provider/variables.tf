@@ -4,12 +4,12 @@ variable "url" {
 
   validation {
     condition     = startswith(var.url, "https://")
-    error_message = "The value of `url` must bigin with `https://`."
+    error_message = "The value of `url` must begin with `https://`."
   }
 }
 
 variable "audiences" {
-  description = "(Optional) A list of audiences (also known as client IDs) for the IAM OIDC provider. When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. This is the value that's sent as the `client_id` parameter on OAuth requests. Defaults to STS service(`sts.amazonaws.com`) if not values are provided."
+  description = "(Optional) A list of audiences (also known as client IDs) for the IAM OIDC provider. When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. This is the value that's sent as the `client_id` parameter on OAuth requests. Defaults to STS service(`sts.amazonaws.com`) if no values are provided."
   type        = set(string)
   default     = ["sts.amazonaws.com"]
   nullable    = false

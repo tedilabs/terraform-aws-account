@@ -333,7 +333,7 @@ variable "instance_profile" {
   description = <<EOF
   (Optional) A configuration for instance profile. `instance_profile` is defined below.
     (Optional) `enabled` - Whether to create instance profile. Defaults to `false`.
-    (Optional) `name` - The name of the instance profile. If omitted, Terraform will assign a ame name with the role.
+    (Optional) `name` - The name of the instance profile. If omitted, Terraform will assign the same name as the role.
     (Optional) `path` - The path to the instance profile. Defaults to `/`.
     (Optional) `tags` - A map of tags to add to the instance profile.
   EOF

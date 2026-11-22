@@ -92,7 +92,7 @@ variable "billing_contact" {
   description = <<EOF
   (Optional) The configuration of the billing contact for the AWS Account. `billing_contact` as defined below.
     (Required) `name` - The name of the billing contact.
-    (Optional) `title` - The tile of the billing contact. Defaults to `Billing Manager`.
+    (Optional) `title` - The title of the billing contact. Defaults to `Billing Manager`.
     (Required) `email` - The email address of the billing contact.
     (Required) `phone` - The phone number of the billing contact.
   EOF
@@ -110,7 +110,7 @@ variable "operation_contact" {
   description = <<EOF
   (Optional) The configuration of the operation contact for the AWS Account. `operation_contact` as defined below.
     (Required) `name` - The name of the operation contact.
-    (Optional) `title` - The tile of the operation contact. Defaults to `Operation Manager`.
+    (Optional) `title` - The title of the operation contact. Defaults to `Operation Manager`.
     (Required) `email` - The email address of the operation contact.
     (Required) `phone` - The phone number of the operation contact.
   EOF
@@ -128,7 +128,7 @@ variable "security_contact" {
   description = <<EOF
   (Optional) The configuration of the security contact for the AWS Account. `security_contact` as defined below.
     (Required) `name` - The name of the security contact.
-    (Optional) `title` - The tile of the security contact. Defaults to `Security Manager`.
+    (Optional) `title` - The title of the security contact. Defaults to `Security Manager`.
     (Required) `email` - The email address of the security contact.
     (Required) `phone` - The phone number of the security contact.
   EOF
