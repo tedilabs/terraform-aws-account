@@ -74,7 +74,7 @@ variable "ec2" {
       (Optional) `t8i` - The default credit option for the `t8i` instance family. Defaults to `unlimited`.
     (Optional) `instance_metadata_defaults` - The configuration of the regional instance metadata default settings. `instance_metadata_defaults` as defined below.
       (Optional) `http_enabled` - Whether to enable or disable the HTTP metadata endpoint on your instances. Defaults to `null` (No preference).
-      (Optional) `http_token_required` - Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Defaults to `false`. Defaults to `null` (No preference).
+      (Optional) `http_token_required` - Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Defaults to `null` (No preference).
       (Optional) `http_put_response_hop_limit` - A desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from `1` to `64`. Defaults to `null` (No preference).
       (Optional) `instance_tags_enabled` - Whether to enable the access to instance tags from the instance metadata service. Defaults to `null` (No preference).
     (Optional) `serial_console_enabled` - Whether serial console access is enabled for the current AWS region. Defaults to `false`.
@@ -212,7 +212,7 @@ variable "resource_explorer" {
 
   validation {
     condition     = contains(["AGGREGATOR", "LOCAL"], var.resource_explorer.index_type)
-    error_message = "Valid values for `resource_explorer` are `AGGREGATOR`, `LOCAL`."
+    error_message = "Valid values for `resource_explorer.index_type` are `AGGREGATOR`, `LOCAL`."
   }
   validation {
     condition = alltrue([

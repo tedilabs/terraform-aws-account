@@ -280,7 +280,7 @@ variable "trusted_saml_provider_policies" {
 
 variable "conditions" {
   description = <<EOF
-  (Required) A list of required conditions to assume the role. Each item of `conditions` is defined below.
+  (Optional) A list of required conditions to assume the role. Each item of `conditions` is defined below.
     (Required) `key` - The key to match a condition for when a policy is in effect.
     (Required) `condition` - The condition operator to match the condition keys and values in the policy against keys and values in the request context. Examples: `StringEquals`, `StringLike`.
     (Required) `values` - A list of allowed values of the key to match a condition with condition operator.
@@ -309,7 +309,7 @@ variable "exclusive_policy_management_enabled" {
 }
 
 variable "exclusive_inline_policy_management_enabled" {
-  description = "(Optional) Whether to enable exclusive management for inline IAM policies of the IAM user. This includes removal of inline IAM policies which are not explicitly configured. Defaults to `false`."
+  description = "(Optional) Whether to enable exclusive management for inline IAM policies of the IAM role. This includes removal of inline IAM policies which are not explicitly configured. Defaults to `false`."
   type        = bool
   default     = false
   nullable    = false

@@ -52,7 +52,7 @@ This module creates following resources.
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS for this IAM policy. |
 | <a name="output_description"></a> [description](#output\_description) | The description of the IAM policy. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of this IAM policy. |
-| <a name="output_name"></a> [name](#output\_name) | The URL of the IAM policy. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the IAM policy. |
 | <a name="output_path"></a> [path](#output\_path) | The path of the IAM policy. |
 | <a name="output_resource_group"></a> [resource\_group](#output\_resource\_group) | The resource group created to manage resources in this module. |
 <!-- END_TF_DOCS -->

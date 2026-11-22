@@ -86,7 +86,7 @@ No modules.
 
 | Name | Description |
 | ---- | ----------- |
-| <a name="output_additional_regions"></a> [additional\_regions](#output\_additional\_regions) | A map of additional regions enabled in the account. |
+| <a name="output_additional_regions"></a> [additional\_regions](#output\_additional\_regions) | A set of additional regions enabled in the account. |
 | <a name="output_all_available_regions"></a> [all\_available\_regions](#output\_all\_available\_regions) | A set of all available regions in the account. |
 | <a name="output_billing_contact"></a> [billing\_contact](#output\_billing\_contact) | The billing contact attached to an AWS Account. |
 | <a name="output_cost"></a> [cost](#output\_cost) | The account-level configurations of Cost & Billing Management service.<br/>    `cost_allocation_tags` - A set of the key for the cost allocation tags. |
