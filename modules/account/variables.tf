@@ -198,6 +198,14 @@ variable "ec2_spot_datafeed_subscription" {
   })
   default  = {}
   nullable = false
+
+  validation {
+    condition = anytrue([
+      !var.ec2_spot_datafeed_subscription.enabled,
+      var.ec2_spot_datafeed_subscription.s3_bucket != null && var.ec2_spot_datafeed_subscription.s3_bucket.name != "",
+    ])
+    error_message = "`ec2_spot_datafeed_subscription.s3_bucket.name` is required if `ec2_spot_datafeed_subscription.enabled` is `true`."
+  }
 }
 
 variable "sts_global_endpoint_token_version" {
