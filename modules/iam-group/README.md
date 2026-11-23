@@ -61,9 +61,9 @@ No modules.
 | <a name="output_exclusive_inline_policy_management_enabled"></a> [exclusive\_inline\_policy\_management\_enabled](#output\_exclusive\_inline\_policy\_management\_enabled) | Whether exclusive inline policy management is enabled for the IAM group. |
 | <a name="output_exclusive_policy_management_enabled"></a> [exclusive\_policy\_management\_enabled](#output\_exclusive\_policy\_management\_enabled) | Whether exclusive policy management is enabled for the IAM group. |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the IAM group. |
-| <a name="output_inline_policies"></a> [inline\_policies](#output\_inline\_policies) | A set of names of inline IAM polices which are attached to IAM group. |
+| <a name="output_inline_policies"></a> [inline\_policies](#output\_inline\_policies) | A set of names of inline IAM policies which are attached to IAM group. |
 | <a name="output_name"></a> [name](#output\_name) | The IAM group name. |
 | <a name="output_path"></a> [path](#output\_path) | The path of the IAM group. |
-| <a name="output_policies"></a> [policies](#output\_policies) | A set of ARNs of IAM policies which are atached to IAM group. |
+| <a name="output_policies"></a> [policies](#output\_policies) | A set of ARNs of IAM policies which are attached to IAM group. |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | The unique ID assigned by AWS. |
 <!-- END_TF_DOCS -->

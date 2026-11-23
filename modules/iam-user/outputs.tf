@@ -111,7 +111,7 @@ output "exclusive_inline_policy_management_enabled" {
 }
 
 output "policies" {
-  description = "A set of ARNs of IAM policies which are atached to IAM user."
+  description = "A set of ARNs of IAM policies which are attached to IAM user."
   value = (var.exclusive_policy_management_enabled
     ? toset(aws_iam_user_policy_attachments_exclusive.this[0].policy_arns)
     : toset(values(aws_iam_user_policy_attachment.managed)[*].policy_arn)
@@ -119,7 +119,7 @@ output "policies" {
 }
 
 output "inline_policies" {
-  description = "A set of names of inline IAM polices which are attached to IAM user."
+  description = "A set of names of inline IAM policies which are attached to IAM user."
   value       = toset(keys(var.inline_policies))
 }
 
