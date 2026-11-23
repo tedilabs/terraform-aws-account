@@ -10,7 +10,7 @@ provider "aws" {
 module "account" {
   source = "../../modules/account"
   # source  = "tedilabs/account/aws//modules/account"
-  # version = "~> 0.33.0"
+  # version = "~> 0.35.0"
 
   # This is alias for the AWS account.
   name = "example-210925"

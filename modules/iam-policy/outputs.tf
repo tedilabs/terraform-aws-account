@@ -9,7 +9,7 @@ output "arn" {
 }
 
 output "name" {
-  description = "The URL of the IAM policy."
+  description = "The name of the IAM policy."
   value       = aws_iam_policy.this.name
 }
 

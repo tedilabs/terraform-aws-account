@@ -26,7 +26,7 @@ variable "exclusive_policy_management_enabled" {
 }
 
 variable "exclusive_inline_policy_management_enabled" {
-  description = "(Optional) Whether to enable exclusive management for inline IAM policies of the IAM user. This includes removal of inline IAM policies which are not explicitly configured. Defaults to `false`."
+  description = "(Optional) Whether to enable exclusive management for inline IAM policies of the IAM group. This includes removal of inline IAM policies which are not explicitly configured. Defaults to `false`."
   type        = bool
   default     = false
   nullable    = false
