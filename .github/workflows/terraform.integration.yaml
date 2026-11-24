@@ -41,6 +41,7 @@ jobs:
 
       terraform_docs_enabled: true
       terraform_docs_config_file: .terraform-docs.yml
+      terraform_docs_skip_if_missing_markers: true
 
     secrets:
       terraform_token: ${{ secrets.TERRAFORM_TOKEN }}
