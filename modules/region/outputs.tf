@@ -10,7 +10,7 @@ output "id" {
 
 output "code" {
   description = "The short code of the current region."
-  value       = local.region_codes[local.region]
+  value       = lookup(local.region_codes, local.region, null)
 }
 
 output "name" {
